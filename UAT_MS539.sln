@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAT_MS539", "UAT_MS539\UAT_MS539.csproj", "{5C87DAB0-6B46-406B-AF70-E375551E03C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UAT_MS539.Tests", "UAT_MS539.Tests\UAT_MS539.Tests.csproj", "{8820527B-F434-45D8-9290-9ADB0E2E181E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C87DAB0-6B46-406B-AF70-E375551E03C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C87DAB0-6B46-406B-AF70-E375551E03C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C87DAB0-6B46-406B-AF70-E375551E03C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C87DAB0-6B46-406B-AF70-E375551E03C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8820527B-F434-45D8-9290-9ADB0E2E181E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8820527B-F434-45D8-9290-9ADB0E2E181E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8820527B-F434-45D8-9290-9ADB0E2E181E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8820527B-F434-45D8-9290-9ADB0E2E181E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
