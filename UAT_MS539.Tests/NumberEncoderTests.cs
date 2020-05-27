@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using UAT_MS539.Code;
+using UAT_MS539.Core.Code;
 
 namespace UAT_MS539.Tests
 {

@@ -1,0 +1,104 @@
+{
+  "Tutorial/Corral/1": {
+    "LocId": "Tutorial/Corral/1",
+    "TextByLang": {
+      "en": "Well hey there, you're a new face. What brings you to this old Corral?"
+    }
+  },
+  "Tutorial/Corral/2": {
+    "LocId": "Tutorial/Corral/2",
+    "TextByLang": {
+      "en": "What!? YOU'RE the old shepard's grand-kid? Well it's nice to meet'cha, I wasn't expecting you until tomorrow!"
+    }
+  },
+  "Tutorial/Corral/3": {
+    "LocId": "Tutorial/Corral/3",
+    "TextByLang": {
+      "en": "You'll have a lot to learn if you're gonna become a shepherd on par with your old grandma, she was a mighty fine lady. But here's the breakdown: You adopt 'em, you feed 'em, you train 'em, and then you battle 'em."
+    }
+  },
+  "Tutorial/Corral/4": {
+    "LocId": "Tutorial/Corral/4",
+    "TextByLang": {
+      "en": "Eventually your little fiends, 'Cryptids' they're called, will tire out and you'll need to retire them. It's a sad day for everyone, but they can't stay with us forever..."
+    }
+  },
+  "Tutorial/Corral/5": {
+    "LocId": "Tutorial/Corral/5",
+    "TextByLang": {
+      "en": "Well that's about it! How bout I walk you on over to visit the Nursery and get you your first Cryptid?"
+    }
+  },
+  "Tutorial/LetsGo": {
+    "LocId": "Tutorial/LetsGo",
+    "TextByLang": {
+      "en": "Let's Go!"
+    }
+  },
+  "Tutorial/Nursery/1": {
+    "LocId": "Tutorial/Nursery/1",
+    "TextByLang": {
+      "en": "Hi there, welcome to the Nursery! I'm not very good with faces...do I know you?"
+    }
+  },
+  "Tutorial/Nursery/2": {
+    "LocId": "Tutorial/Nursery/2",
+    "TextByLang": {
+      "en": "Oh! You're the old shepherd's grand-kid! Nice to meet you! Well here at the Nursery we do our best to match you up with a friendly new Cryptid based on a Runic Pattern of your choice."
+    }
+  },
+  "Tutorial/Nursery/3": {
+    "LocId": "Tutorial/Nursery/3",
+    "TextByLang": {
+      "en": "There are only so many Runic Patterns out there, so once you've adopted the Cryptid from one, it'll become deactivated. So how about it, ready to get yourself a Cryptid?"
+    }
+  },
+  "Tutorial/Nursery/4": {
+    "LocId": "Tutorial/Nursery/4",
+    "TextByLang": {
+      "en": "Oooh! You've got yourself a new {cryptidSpecies}! What a sweetie! I'll send it back to the Corral for you. Make sure to take good care of it!"
+    }
+  },
+  "Nursery/SelectRune": {
+    "LocId": "Nursery/SelectRune",
+    "TextByLang": {
+      "en": "Take your pick from these Runic Patterns we have available and we'll get you a new Cryptid to take home with you today."
+    }
+  },
+  "Button/Next": {
+    "LocId": "Button/Next",
+    "TextByLang": {
+      "en": "Next"
+    }
+  },
+  "Button/Nursery/Adopt": {
+    "LocId": "Button/Nursery/Adopt",
+    "TextByLang": {
+      "en": "Adopt"
+    }
+  },
+  "Button/Town/GoHome": {
+    "LocId": "Button/Town/GoHome",
+    "TextByLang": {
+      "en": "Go Home"
+    }
+  },
+  "Cryptid/Borkin": {
+    "LocId": "Cryptid/Borkin",
+    "TextByLang": {
+      "en": "Borkin"
+    }
+  },
+  "Pattern/Nil": {
+    "LocId": "Pattern/Nil",
+    "TextByLang": {
+      "en": "Default"
+    }
+  },
+  "Color/Nil": {
+    "LocId": "Color/Nil",
+    "TextByLang": {
+      "en": "Default"
+    }
+  }
+}

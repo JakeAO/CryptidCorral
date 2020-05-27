@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\UAT_MS539\UAT_MS539.csproj" />
+      <ProjectReference Include="..\UAT_MS539.App.WPF\UAT_MS539.App.WPF.csproj" />
     </ItemGroup>
 
 </Project>
