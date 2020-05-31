@@ -7,16 +7,16 @@ namespace UAT_MS539.Core.Code.Cryptid
         public Food.Food Food = null;
         public uint[] Points = new uint[(int) EPrimaryStat._Count];
 
-        public uint[] CalculateStatIncreases()
+        public void CalculateExpIncreases(out uint[] primaryStatIncreases, out uint moraleIncrease)
         {
-            uint[] statIncreases = new uint[(int) EPrimaryStat._Count];
+            var expIncreases = new uint[(int) EPrimaryStat._Count];
 
-            for (int i = 0; i < Points.Length; i++)
+            for (var i = 0; i < Points.Length; i++)
             {
-                EPrimaryStat stat = (EPrimaryStat) i;
+                var stat = (EPrimaryStat) i;
 
                 uint boost = 0;
-                float multiplier = 1f;
+                var multiplier = 1f;
 
                 if (Food != null)
                 {
@@ -24,10 +24,11 @@ namespace UAT_MS539.Core.Code.Cryptid
                     Food.MultipliersByStat.TryGetValue(stat, out multiplier);
                 }
 
-                statIncreases[i] = (uint) Math.Round(Points[i] * multiplier + boost);
+                expIncreases[i] = (uint) Math.Round(Points[i] * multiplier + boost);
             }
 
-            return statIncreases;
+            primaryStatIncreases = expIncreases;
+            moraleIncrease = Food?.MoraleBoost ?? 0;
         }
     }
 }

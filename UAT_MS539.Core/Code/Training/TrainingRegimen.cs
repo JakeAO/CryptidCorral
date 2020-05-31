@@ -8,13 +8,20 @@ namespace UAT_MS539.Core.Code.Training
     {
         public string TrainingId;
         public string NameId;
+        
+        public uint StaminaCost;
+        
         public Dictionary<EPrimaryStat, uint> GuaranteedStatIncrease;
         public Dictionary<EPrimaryStat, DropCalculation<uint>> RandomStatIncreases;
 
         public TrainingRegimen(
+            string trainingId, string nameId, uint staminaCost,
             Dictionary<EPrimaryStat, uint> guaranteedStatIncrease,
             Dictionary<EPrimaryStat, DropCalculation<uint>> randomStatIncreases)
         {
+            TrainingId = trainingId;
+            NameId = nameId;
+            StaminaCost = staminaCost;
             GuaranteedStatIncrease = guaranteedStatIncrease;
             RandomStatIncreases = randomStatIncreases;
         }

@@ -1,0 +1,22 @@
+{
+  "meatLow": {
+    "FoodId": "meatLow",
+    "NameId": "Food/Meat",
+    "ArtId": "/Source/Art/Food/Meat.png",
+    "Category": 0,
+    "StatGrowthBoosts": {
+      "Strength": {
+        "Points": [
+          {            "Value": 10,            "Weight": 1          }
+        ]
+      }
+    },
+    "StatGrowthMultipliers": {
+      "Strength": {
+        "Points": [
+          {            "Value": 1.25,            "Weight": 1          }
+        ]
+      }
+    }
+  }
+}

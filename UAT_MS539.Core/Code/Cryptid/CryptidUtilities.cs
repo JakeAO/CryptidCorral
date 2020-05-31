@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using UAT_MS539.Core.Code.Extensions;
 using UAT_MS539.Core.Code.Utility;
 
@@ -10,75 +8,6 @@ namespace UAT_MS539.Core.Code.Cryptid
     public static class CryptidUtilities
     {
         private const float MAX_VAL = 575f;
-     
-        public static CryptidDnaSample CreateDnaSample(
-            string runicHash,
-            SpeciesDatabase speciesDatabase,
-            PatternDatabase patternDatabase,
-            ColorDatabase colorDatabase)
-        {
-            Debug.Assert(runicHash.Length == 20);
-
-            long speciesKey = NumberEncoder.Decode(runicHash.Substring(0, 2), NumberEncoder.Base24Encoding);
-            string speciesId = speciesDatabase.OrderedIds[(int) (speciesKey % speciesDatabase.OrderedIds.Count)];
-
-            long patternKey = NumberEncoder.Decode(runicHash.Substring(2, 2), NumberEncoder.Base24Encoding);
-            string patternId = patternDatabase.OrderedIds[(int) (patternKey % patternDatabase.OrderedIds.Count)];
-
-            long colorKey = NumberEncoder.Decode(runicHash.Substring(4, 2), NumberEncoder.Base24Encoding);
-            string colorId = colorDatabase.OrderedIds[(int) (colorKey % colorDatabase.OrderedIds.Count)];
-
-            uint[] primaryStats = new uint[(int) EPrimaryStat._Count];
-            for (int i = 0; i < primaryStats.Length; i++)
-            {
-                int startIdx = 6 + i * 2;
-                long statKey = NumberEncoder.Decode(runicHash.Substring(startIdx, 2), NumberEncoder.Base24Encoding);
-                primaryStats[i] = (uint) statKey;
-            }
-
-            uint renownKey = (uint) NumberEncoder.Decode(runicHash.Substring(18, 2), NumberEncoder.Base24Encoding);
-
-            return new CryptidDnaSample(speciesId, patternId, colorId, primaryStats, renownKey);
-        }
-
-        public static CryptidDnaSample CreateDnaSample(Cryptid cryptid)
-        {
-            return new CryptidDnaSample(
-                cryptid.Species.SpeciesId,
-                cryptid.Pattern.PatternId,
-                cryptid.Color.ColorId,
-                cryptid.PrimaryStats.ToArray(),
-                cryptid.SecondaryStats[(int) ESecondaryStat.Renown]);
-        }
-
-        public static string CreateRunicHash(
-            CryptidDnaSample dnaSample,
-            SpeciesDatabase speciesDatabase,
-            PatternDatabase patternDatabase,
-            ColorDatabase colorDatabase)
-        {
-            StringBuilder sb = new StringBuilder(20);
-
-            string speciesKey = NumberEncoder.Encode(speciesDatabase.OrderedIds.ToList().IndexOf(dnaSample.SpeciesId), NumberEncoder.Base24Encoding);
-            sb.Append(speciesKey.PadLeft(2, '0'));
-            string patternKey = NumberEncoder.Encode(patternDatabase.OrderedIds.ToList().IndexOf(dnaSample.PatternId), NumberEncoder.Base24Encoding);
-            sb.Append(patternKey.PadLeft(2, '0'));
-            string colorKey = NumberEncoder.Encode(colorDatabase.OrderedIds.ToList().IndexOf(dnaSample.ColorId), NumberEncoder.Base24Encoding);
-            sb.Append(colorKey.PadLeft(2, '0'));
-
-            for (int i = 0; i < dnaSample.PrimaryStats.Length; i++)
-            {
-                string statKey = NumberEncoder.Encode(dnaSample.PrimaryStats[i], NumberEncoder.Base24Encoding);
-                sb.Append(statKey.PadLeft(2, '0'));
-            }
-
-            string renownKey = NumberEncoder.Encode(dnaSample.Renown, NumberEncoder.Base24Encoding);
-            sb.Append(renownKey.PadLeft(2, '0'));
-
-            Debug.Assert(sb.Length == 20);
-
-            return sb.ToString();
-        }
 
         public static Cryptid CreateCryptid(
             string runicHash,
@@ -89,58 +18,63 @@ namespace UAT_MS539.Core.Code.Cryptid
             Debug.Assert(runicHash.Length == 18);
 
             // Calculate Species
-            string speciesSubstring = runicHash.Substring(0, 2);
-            long speciesKey = NumberEncoder.Decode(speciesSubstring, NumberEncoder.Base24Encoding);
-            float speciesPercent = speciesKey / MAX_VAL;
-            string speciesId = speciesDatabase.DropCalculation.Evaluate(speciesPercent);
-            if (!speciesDatabase.SpeciesById.TryGetValue(speciesId, out SpeciesDefinition species))
+            var speciesSubstring = runicHash.Substring(0, 2);
+            var speciesKey = NumberEncoder.Decode(speciesSubstring, NumberEncoder.Base24Encoding);
+            var speciesPercent = speciesKey / MAX_VAL;
+            var speciesId = speciesDatabase.DropCalculation.Evaluate(speciesPercent);
+            if (!speciesDatabase.SpeciesById.TryGetValue(speciesId, out var species))
                 throw new InvalidOperationException($"SpeciesId \"{speciesId}\" ({speciesKey}) did not exist in SpeciesDatabase.");
 
             // Calculate Pattern
-            string patternSubstring = runicHash.Substring(2, 2);
-            long patternKey = NumberEncoder.Decode(patternSubstring, NumberEncoder.Base24Encoding);
-            float patternPercent = patternKey / MAX_VAL;
-            string patternId = species.PatternFormula.Evaluate(patternPercent);
-            if (!patternDatabase.PatternById.TryGetValue(patternId, out PatternDefinition pattern))
+            var patternSubstring = runicHash.Substring(2, 2);
+            var patternKey = NumberEncoder.Decode(patternSubstring, NumberEncoder.Base24Encoding);
+            var patternPercent = patternKey / MAX_VAL;
+            var patternId = species.PatternFormula.Evaluate(patternPercent);
+            if (!patternDatabase.PatternById.TryGetValue(patternId, out var pattern))
                 throw new InvalidOperationException($"PatternId \"{patternId}\" ({patternKey}) did not exist in PatternDatabase.");
 
             // Calculate Color
-            string colorSubstring = runicHash.Substring(4, 2);
-            long colorKey = NumberEncoder.Decode(colorSubstring, NumberEncoder.Base24Encoding);
-            float colorPercent = colorKey / MAX_VAL;
-            string colorId = species.ColorFormula.Evaluate(colorPercent);
-            if (!colorDatabase.ColorById.TryGetValue(colorId, out ColorDefinition color))
+            var colorSubstring = runicHash.Substring(4, 2);
+            var colorKey = NumberEncoder.Decode(colorSubstring, NumberEncoder.Base24Encoding);
+            var colorPercent = colorKey / MAX_VAL;
+            var colorId = species.ColorFormula.Evaluate(colorPercent);
+            if (!colorDatabase.ColorById.TryGetValue(colorId, out var color))
                 throw new InvalidOperationException($"ColorId \"{colorId}\" ({colorKey}) did not exist in ColorDatabase");
 
             // Calculate Primary Stats
-            uint[] primaryStats = new uint[(int) EPrimaryStat._Count];
-            for (int i = 0; i < primaryStats.Length; i++)
+            var primaryStats = new uint[(int) EPrimaryStat._Count];
+            for (var i = 0; i < primaryStats.Length; i++)
             {
-                int startIdx = 6 + i * 2;
-                string statSubstring = runicHash.Substring(startIdx, 2);
-                long statKey = NumberEncoder.Decode(statSubstring, NumberEncoder.Base24Encoding);
-                float statPercent = statKey / MAX_VAL;
+                var startIdx = 6 + i * 2;
+                var statSubstring = runicHash.Substring(startIdx, 2);
+                var statKey = NumberEncoder.Decode(statSubstring, NumberEncoder.Base24Encoding);
+                var statPercent = statKey / MAX_VAL;
                 primaryStats[i] = species.StartingStatFormulas[(EPrimaryStat) i].Evaluate(statPercent);
             }
 
-            uint[] secondaryStats = new uint[(int) ESecondaryStat._Count];
+            var secondaryStats = new uint[(int) ESecondaryStat._Count];
 
             // Calculate Secondary Stat (Health)
-            string healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[^1]);
+            var healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[^1]);
             secondaryStats[(int) ESecondaryStat.Health] = CalculateHealth(primaryStats[(int) EPrimaryStat.Vitality], healthSubstring);
 
             // Calculate Secondary Stat (Renown)
             secondaryStats[(int) ESecondaryStat.Renown] = 0u;
 
-            // Calculate Secondary Stat (Morale)
-            string moraleSubstring = string.Join(string.Empty, runicHash[1], runicHash[^2]);
-            secondaryStats[(int) ESecondaryStat.Morale] = CalculateMoral(moraleSubstring);
+            // Calculate Secondary Stat (Stamina)
+            secondaryStats[(int) ESecondaryStat.Stamina] = 2u;
 
-            // Calculate Secondary Stat (Lifespan)
-            string lifespanSubstring = string.Join(string.Empty, runicHash[2], runicHash[^3]);
-            secondaryStats[(int) ESecondaryStat.Lifespan] = CalculateLifespan(lifespanSubstring);
+            var hiddenStats = new uint[(int) EHiddenStat._Count];
 
-            return new Cryptid(species, pattern, color, primaryStats, secondaryStats);
+            // Calculate Hidden Stat (Morale)
+            var moraleSubstring = string.Join(string.Empty, runicHash[1], runicHash[^2]);
+            hiddenStats[(int) EHiddenStat.Morale] = CalculateMoral(moraleSubstring);
+
+            // Calculate Hidden Stat (Lifespan) (days)
+            var lifespanSubstring = string.Join(string.Empty, runicHash[2], runicHash[^3]);
+            hiddenStats[(int) EHiddenStat.Lifespan] = CalculateLifespan(lifespanSubstring);
+
+            return new Cryptid(runicHash, species, pattern, color, primaryStats, secondaryStats, hiddenStats);
         }
 
         public static Cryptid CreateCryptid(
@@ -150,13 +84,13 @@ namespace UAT_MS539.Core.Code.Cryptid
             PatternDatabase patternDatabase,
             ColorDatabase colorDatabase)
         {
-            // Starting Stats are based on Generation + 20% of Parent Average
-            const float ROLLOVER_MULTIPLIER = 0.2f;
+            // Starting Stats are based on Generation + 15% of Parent Average
+            const float ROLLOVER_MULTIPLIER = 0.15f;
 
-            string hashA = CreateRunicHash(sampleA, speciesDatabase, patternDatabase, colorDatabase);
-            string hashB = CreateRunicHash(sampleB, speciesDatabase, patternDatabase, colorDatabase);
+            var hashA = sampleA.Cryptid.RunicHash;
+            var hashB = sampleB.Cryptid.RunicHash;
 
-            string newHash = string.Join(string.Empty,
+            var newHash = string.Join(string.Empty,
                 hashA[0], hashB[1],
                 hashA[2], hashB[3],
                 hashA[4], hashB[5],
@@ -167,15 +101,19 @@ namespace UAT_MS539.Core.Code.Cryptid
                 hashA[14], hashB[15],
                 hashA[16], hashB[17]);
 
-            Cryptid newCryptid = CreateCryptid(newHash, speciesDatabase, patternDatabase, colorDatabase);
+            var newCryptid = CreateCryptid(newHash, speciesDatabase, patternDatabase, colorDatabase);
 
-            for (int i = 0; i < (int) EPrimaryStat._Count; i++)
+            for (var i = 0; i < (int) EPrimaryStat._Count; i++)
             {
-                float sampleAverage = (sampleA.PrimaryStats[i] + sampleB.PrimaryStats[i]) / 2f;
+                var sampleAverage = (sampleA.Cryptid.PrimaryStats[i] + sampleB.Cryptid.PrimaryStats[i]) / 2f;
                 newCryptid.PrimaryStats[i] += (uint) Math.Round(sampleAverage * ROLLOVER_MULTIPLIER);
             }
 
-            newCryptid.SecondaryStats[(int) ESecondaryStat.Renown] = (uint) Math.Round((sampleA.Renown + sampleB.Renown) / 2f * ROLLOVER_MULTIPLIER);
+            var averageRenown = (sampleA.Cryptid.SecondaryStats[(int) ESecondaryStat.Renown] + sampleB.Cryptid.SecondaryStats[(int) ESecondaryStat.Renown]) / 2f;
+            newCryptid.SecondaryStats[(int) ESecondaryStat.Renown] = (uint) Math.Round(averageRenown * ROLLOVER_MULTIPLIER);
+
+            var averageAge = (sampleA.Cryptid.AgeInDays + sampleB.Cryptid.AgeInDays) / 2f;
+            newCryptid.HiddenStats[(int) EHiddenStat.Lifespan] += (uint) Math.Round(averageAge * ROLLOVER_MULTIPLIER);
 
             return newCryptid;
         }
@@ -188,9 +126,9 @@ namespace UAT_MS539.Core.Code.Cryptid
             Debug.Assert(vitalityStat > 0);
             Debug.Assert(healthMultiplierHash.Length == 2);
 
-            long healthMultiplierKey = NumberEncoder.Decode(healthMultiplierHash, NumberEncoder.Base24Encoding);
-            float healthMultiplierPercent = healthMultiplierKey / MAX_VAL;
-            float healthMultiplier = healthMultiplierPercent.Remap(0f, 1f, MIN_HEALTH_MULTIPLIER, MAX_HEALTH_MULTIPLIER);
+            var healthMultiplierKey = NumberEncoder.Decode(healthMultiplierHash, NumberEncoder.Base24Encoding);
+            var healthMultiplierPercent = healthMultiplierKey / MAX_VAL;
+            var healthMultiplier = healthMultiplierPercent.Remap(0f, 1f, MIN_HEALTH_MULTIPLIER, MAX_HEALTH_MULTIPLIER);
             return (uint) Math.Round(vitalityStat * healthMultiplier);
         }
 
@@ -201,21 +139,21 @@ namespace UAT_MS539.Core.Code.Cryptid
 
             Debug.Assert(moraleHash.Length == 2);
 
-            long moraleKey = NumberEncoder.Decode(moraleHash, NumberEncoder.Base24Encoding);
-            float moralePercent = moraleKey / MAX_VAL;
+            var moraleKey = NumberEncoder.Decode(moraleHash, NumberEncoder.Base24Encoding);
+            var moralePercent = moraleKey / MAX_VAL;
             return (uint) Math.Round(moralePercent.Remap(0f, 1f, MIN_MORALE, MAX_MORALE));
         }
 
         private static uint CalculateLifespan(string lifespanHash)
         {
-            const float MIN_LIFESPAN_WEEKS = 5f;
-            const float MAX_LIFESPAN_WEEKS = 15f;
+            const float MIN_LIFESPAN_DAYS = 5f * 7f;
+            const float MAX_LIFESPAN_DAYS = 15f * 7f;
 
             Debug.Assert(lifespanHash.Length == 2);
 
-            long lifespanKey = NumberEncoder.Decode(lifespanHash, NumberEncoder.Base24Encoding);
-            float lifespanPercent = lifespanKey / MAX_VAL;
-            return (uint) Math.Round(lifespanPercent.Remap(0f, 1f, MIN_LIFESPAN_WEEKS, MAX_LIFESPAN_WEEKS));
+            var lifespanKey = NumberEncoder.Decode(lifespanHash, NumberEncoder.Base24Encoding);
+            var lifespanPercent = lifespanKey / MAX_VAL;
+            return (uint) Math.Round(lifespanPercent.Remap(0f, 1f, MIN_LIFESPAN_DAYS, MAX_LIFESPAN_DAYS));
         }
     }
 }

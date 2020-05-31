@@ -8,6 +8,6 @@
         Title="Cryptid Corral" Height="640" Width="820"
         ResizeMode="NoResize">
     <StackPanel>
-        <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="800" Height="600"/>
+        <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="800" Height="600" />
     </StackPanel>
 </Window>

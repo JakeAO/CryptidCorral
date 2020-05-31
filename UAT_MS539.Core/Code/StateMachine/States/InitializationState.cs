@@ -8,12 +8,12 @@ namespace UAT_MS539.Core.Code.StateMachine.States
     public class InitializationState : IState
     {
         /// <summary>
-        /// Load all the databases and setup signals, then transition to the splash screen.
+        ///     Load all the databases and setup signals, then transition to the splash screen.
         /// </summary>
         public void PerformContent(Context context)
         {
             context.Set(new InteractionEventRaised(), false);
-            
+
             context.Set(new LocDatabase("/Source/locDatabase.json"));
             context.Set(new RuneDatabase("/Source/runeDatabase.json"));
             context.Set(new SpeciesDatabase("/Source/speciesDatabase.json", "/Source/speciesDropTable.json"));
@@ -22,6 +22,11 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             context.Set(new FoodDatabase("/Source/foodDatabase.json"));
             context.Set(new TrainingDatabase("/Source/trainingDatabase.json"));
             context.Set(new RunePatternDatabase());
+            context.Set(new PlayerDataUtility(
+                context.Get<FoodDatabase>(),
+                context.Get<SpeciesDatabase>(),
+                context.Get<PatternDatabase>(),
+                context.Get<ColorDatabase>()));
 
             context.Get<StateMachine>().ChangeState<SplashState>();
         }

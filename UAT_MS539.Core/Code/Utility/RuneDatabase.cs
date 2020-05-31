@@ -13,11 +13,8 @@ namespace UAT_MS539.Core.Code.Utility
 
         public RuneDatabase(params RuneDefinition[] runeDefinitions)
         {
-            Dictionary<uint, RuneDefinition> entryDict = new Dictionary<uint, RuneDefinition>();
-            foreach (RuneDefinition runeDefinition in runeDefinitions)
-            {
-                entryDict[runeDefinition.RuneId] = runeDefinition;
-            }
+            var entryDict = new Dictionary<uint, RuneDefinition>();
+            foreach (var runeDefinition in runeDefinitions) entryDict[runeDefinition.RuneId] = runeDefinition;
 
             RuneById = entryDict;
             OrderedIds = RuneById.Keys.OrderBy(x => x).ToList();
@@ -25,11 +22,11 @@ namespace UAT_MS539.Core.Code.Utility
 
         public RuneDatabase(string jsonDataPath)
         {
-            string filePath = Path.IsPathFullyQualified(jsonDataPath)
+            var filePath = Path.IsPathFullyQualified(jsonDataPath)
                 ? jsonDataPath
                 : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
-            string jsonText = File.ReadAllText(filePath);
-            
+            var jsonText = File.ReadAllText(filePath);
+
             RuneById = JsonConvert.DeserializeObject<Dictionary<uint, RuneDefinition>>(jsonText, JsonExtensions.DefaultSettings);
             OrderedIds = RuneById.Keys.OrderBy(x => x).ToList();
         }

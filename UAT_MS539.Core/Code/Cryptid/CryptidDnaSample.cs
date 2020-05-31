@@ -2,20 +2,11 @@
 {
     public class CryptidDnaSample
     {
-        public string SpeciesId;
-        public string PatternId;
-        public string ColorId;
+        public Cryptid Cryptid;
 
-        public uint[] PrimaryStats;
-        public uint Renown;
-
-        public CryptidDnaSample(string speciesId, string patternId, string colorId, uint[] primaryStats, uint renown)
+        public CryptidDnaSample(Cryptid cryptid)
         {
-            SpeciesId = speciesId;
-            PatternId = patternId;
-            ColorId = colorId;
-            PrimaryStats = primaryStats;
-            Renown = renown;
+            Cryptid = cryptid;
         }
     }
 }

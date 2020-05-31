@@ -9,10 +9,7 @@ namespace UAT_MS539.Core.Code.StateMachine
 
         public Context(params object[] initialData)
         {
-            foreach (object o in initialData)
-            {
-                _data[o.GetType()] = o;
-            }
+            foreach (var o in initialData) _data[o.GetType()] = o;
         }
 
         public T Get<T>()
@@ -36,7 +33,7 @@ namespace UAT_MS539.Core.Code.StateMachine
 
         public void Set<T>(T value, bool overwrite = true)
         {
-            if (overwrite || !_data.TryGetValue(typeof(T), out object existingValue) || existingValue == default)
+            if (overwrite || !_data.TryGetValue(typeof(T), out var existingValue) || existingValue == default)
                 _data[typeof(T)] = value;
         }
 

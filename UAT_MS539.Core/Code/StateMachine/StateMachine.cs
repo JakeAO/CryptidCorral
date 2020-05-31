@@ -5,9 +5,9 @@ namespace UAT_MS539.Core.Code.StateMachine
 {
     public class StateMachine
     {
-        public IState CurrentState { get; private set; } = new NilState();
         public Context SharedContext { get; }
-
+        public IState CurrentState { get; private set; } = new NilState();
+        
         public StateMachine(Context sharedContext)
         {
             SharedContext = sharedContext;

@@ -1,9 +1,8 @@
-﻿
-namespace UAT_MS539.ConsoleApp
+﻿namespace UAT_MS539.ConsoleApp
 {
-    static class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             new MainClass();
         }

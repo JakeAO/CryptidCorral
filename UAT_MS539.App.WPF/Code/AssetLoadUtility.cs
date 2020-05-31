@@ -16,10 +16,11 @@ namespace UAT_MS539.Code
         {
             Debug.Assert(value < NumberEncoder.Base24Encoding.Length);
 
-            char runeCode = NumberEncoder.Base24Encoding[(int)value];
+            var runeCode = NumberEncoder.Base24Encoding[(int) value];
 
             return $"icon_rune_{runeCode}.png";
         }
+
         private static string GetCryptidName(uint value)
         {
             Debug.Assert(value < 100);
@@ -29,14 +30,15 @@ namespace UAT_MS539.Code
 
         public static BitmapImage LoadRune(uint value)
         {
-            string path = Path.Combine(RUNE_PATH, GetRuneName(value));
-            Uri pathUri = new Uri(path, UriKind.Relative);
+            var path = Path.Combine(RUNE_PATH, GetRuneName(value));
+            var pathUri = new Uri(path, UriKind.Relative);
             return new BitmapImage(pathUri);
         }
+
         public static BitmapImage LoadCryptid(uint value)
         {
-            string path = Path.Combine(CRYPTID_PATH, GetCryptidName(value));
-            Uri pathUri = new Uri(path, UriKind.Relative);
+            var path = Path.Combine(CRYPTID_PATH, GetCryptidName(value));
+            var pathUri = new Uri(path, UriKind.Relative);
             return new BitmapImage(pathUri);
         }
     }

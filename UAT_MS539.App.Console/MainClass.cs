@@ -5,6 +5,7 @@ using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.StateMachine;
 using UAT_MS539.Core.Code.StateMachine.Interactions;
 using UAT_MS539.Core.Code.StateMachine.Signals;
+using UAT_MS539.Core.Code.StateMachine.States;
 using UAT_MS539.Core.Code.Utility;
 
 namespace UAT_MS539.ConsoleApp
@@ -16,10 +17,10 @@ namespace UAT_MS539.ConsoleApp
 
         public MainClass()
         {
-            StateChanged stateChangedSignal = new StateChanged();
+            var stateChangedSignal = new StateChanged();
             stateChangedSignal.Listen(OnStateChanged);
 
-            InteractionEventRaised interactionEventRaisedSignal = new InteractionEventRaised();
+            var interactionEventRaisedSignal = new InteractionEventRaised();
             interactionEventRaisedSignal.Listen(OnInteractionEventRaised);
 
             _sharedContext = new Context(stateChangedSignal, interactionEventRaisedSignal);
@@ -28,17 +29,16 @@ namespace UAT_MS539.ConsoleApp
 
         private void OnStateChanged(IState state)
         {
-            Console.WriteLine($"[State Changed] {state.GetType()}");
-            Console.WriteLine();
+            Console.WriteLine($"[State Changed] {state.GetType().Name}");
+            if (state is CorralMorningState) Console.WriteLine($"========== Day {_sharedContext.Get<PlayerData>().Day} Start ==========");
         }
 
         private void OnInteractionEventRaised(IReadOnlyCollection<IInteraction> interactions)
         {
-            LocDatabase locDatabase = _sharedContext.Get<LocDatabase>();
+            var locDatabase = _sharedContext.Get<LocDatabase>();
 
-            List<(string, Action)> userPrompts = new List<(string, Action)>(5);
-            foreach (IInteraction interaction in interactions)
-            {
+            var userPrompts = new List<(string, Action)>(5);
+            foreach (var interaction in interactions)
                 switch (interaction)
                 {
                     case Dialog dialog:
@@ -53,57 +53,86 @@ namespace UAT_MS539.ConsoleApp
                     }
                     case DisplayCryptid displayCryptid:
                     {
-                        Cryptid cryptid = displayCryptid.Cryptid;
+                        var cryptid = displayCryptid.Cryptid;
 
-                        StringBuilder sb = new StringBuilder(100);
+                        var sb = new StringBuilder(100);
                         sb.AppendLine("[Cryptid] = = = = = = = =");
                         sb.AppendLine($"   Species: {locDatabase.Localize(cryptid.Species.NameId)}");
                         sb.AppendLine($"   Pattern: {locDatabase.Localize(cryptid.Pattern.NameId)}");
                         sb.AppendLine($"   Color: {locDatabase.Localize(cryptid.Color.NameId)}");
                         sb.AppendLine("   Stats:");
-                        for (int i = 0; i < (int) EPrimaryStat._Count; i++)
-                        {
-                            sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
-                        }
-
+                        for (var i = 0; i < (int) EPrimaryStat._Count; i++) sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
                         sb.AppendLine("   Secondary Stats:");
-                        for (int i = 0; i < (int) ESecondaryStat._Count; i++)
-                        {
-                            sb.AppendLine($"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
-                        }
-
-                        sb.AppendLine("= = = = = = = = =");
+                        for (var i = 0; i < (int) ESecondaryStat._Count; i++) sb.AppendLine($"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
+                        sb.AppendLine("= = = = = = = = = = = = =");
 
                         Console.WriteLine(sb);
                         break;
                     }
-                    case ListOption listOption:
+                    case RunePatternSelection runePatternSelection:
                     {
-                        foreach (string option in listOption.Options)
+                        foreach (var option in runePatternSelection.Options) userPrompts.Add((option, () => runePatternSelection.OptionSelectedHandler(option)));
+
+                        break;
+                    }
+                    case FoodSelection foodSelection:
+                    {
+                        foreach (var food in foodSelection.Options)
                         {
-                            userPrompts.Add((option, () => listOption.OptionSelectedHandler(option)));
+                            var sb = new StringBuilder(50);
+                            sb.Append(locDatabase.Localize(food.Definition.NameId));
+                            for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                            {
+                                var hasMult = food.MultipliersByStat.TryGetValue((EPrimaryStat) i, out var statMultiplier) && statMultiplier != 0f;
+                                var hasBoost = food.BoostsByStat.TryGetValue((EPrimaryStat) i, out var statBoost) && statBoost > 0;
+
+                                if (hasMult || hasBoost) sb.Append($", {(EPrimaryStat) i}");
+
+                                if (hasMult) sb.Append($" x{statMultiplier:P0}");
+
+                                if (hasBoost) sb.Append($" +{statBoost}");
+                            }
+
+                            if (food.MoraleBoost != 0) sb.Append($", Morale +{food.MoraleBoost}");
+
+                            userPrompts.Add((sb.ToString(), () => foodSelection.OptionSelectedHandler(food)));
                         }
 
                         break;
                     }
-                }
-            }
+                    case DisplayCryptidAdvancement cryptidAdvancement:
+                    {
+                        var cryptid = cryptidAdvancement.Cryptid;
 
-            Console.WriteLine();
+                        var sb = new StringBuilder(100);
+                        sb.AppendLine("[Cryptid Growth] = = = = = = =");
+                        for (var i = 0; i < (int) ESecondaryStat._Count; i++)
+                            sb.AppendLine(
+                                cryptidAdvancement.SecondaryStatChanges[i] > 0
+                                    ? $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i] - cryptidAdvancement.SecondaryStatChanges[i]} +{cryptidAdvancement.SecondaryStatChanges[i]}"
+                                    : $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
+                        for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                            sb.AppendLine(
+                                cryptidAdvancement.PrimaryStatChanges[i] > 0
+                                    ? $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i] - cryptidAdvancement.PrimaryStatChanges[i]} +{cryptidAdvancement.PrimaryStatChanges[i]}"
+                                    : $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]}");
+                        sb.AppendLine("= = = = = = = = = = = = = = = =");
+
+                        Console.WriteLine(sb.ToString());
+                        break;
+                    }
+                }
 
             if (userPrompts.Count > 0)
             {
                 Console.WriteLine("<< Select Option by Id >>");
-                for (int i = 0; i < userPrompts.Count; i++)
-                {
-                    Console.WriteLine($"[{i}] {userPrompts[i].Item1}");
-                }
+                for (var i = 0; i < userPrompts.Count; i++) Console.WriteLine($"[{i}] {userPrompts[i].Item1}");
 
-                int selectedOptionIndex = -1;
+                var selectedOptionIndex = -1;
                 do
                 {
-                    string readLine = Console.ReadLine();
-                    if (!int.TryParse(readLine, out int potentialOptionIndex))
+                    var readLine = Console.ReadLine();
+                    if (!int.TryParse(readLine, out var potentialOptionIndex))
                         continue;
                     if (potentialOptionIndex < 0 || potentialOptionIndex >= userPrompts.Count)
                         continue;
@@ -111,7 +140,7 @@ namespace UAT_MS539.ConsoleApp
                 } while (selectedOptionIndex < 0);
 
                 Console.WriteLine();
-                
+
                 userPrompts[selectedOptionIndex].Item2.Invoke();
             }
         }

@@ -18,9 +18,9 @@ namespace UAT_MS539.Core.Code
             if (encoding.Contains(' '))
                 throw new ArgumentException($"Provided encoding \"{encoding}\" is invalid because it contains a space.");
 
-            uint eLength = (uint) encoding.Length;
+            var eLength = (uint) encoding.Length;
 
-            List<char> encodedChars = new List<char>(10);
+            var encodedChars = new List<char>(10);
             long rem = 0;
             do
             {
@@ -55,17 +55,17 @@ namespace UAT_MS539.Core.Code
             if (encoding.Contains(' '))
                 throw new ArgumentException($"Provided encoding \"{encoding}\" is invalid because it contains a space.");
 
-            uint eLength = (uint) encoding.Length;
+            var eLength = (uint) encoding.Length;
 
             long result = 0;
-            for (int i = 0; i < number.Length; i++)
+            for (var i = 0; i < number.Length; i++)
             {
-                char encodedChar = number[number.Length - i - 1];
-                int charIndex = encoding.IndexOf(encodedChar);
+                var encodedChar = number[number.Length - i - 1];
+                var charIndex = encoding.IndexOf(encodedChar);
                 if (charIndex < 0)
                     throw new ArgumentException($"Character '{encodedChar}' does not appear in the given encoding \"{encoding}\".");
 
-                uint charValue = (uint) encoding.IndexOf(encodedChar);
+                var charValue = (uint) encoding.IndexOf(encodedChar);
                 result += charValue * (long) Math.Pow(eLength, i);
             }
 

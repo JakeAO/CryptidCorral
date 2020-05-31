@@ -1,0 +1,73 @@
+{
+  "Species1": {
+    "SpeciesId": "Species1",
+    "NameId": "Cryptid/Borkin",
+    "ArtId": "/Source/Art/Cryptid/Borking.png",
+    "StartingStatFormulas": {
+      "Strength": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      },
+      "Speed": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      },
+      "Vitality": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      },
+      "Smarts": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      },
+      "Skill": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      },
+      "Luck": {
+        "Points": [
+          {            "Value": 3,            "Weight": 1          },
+          {            "Value": 4,            "Weight": 2          },
+          {            "Value": 5,            "Weight": 3          },
+          {            "Value": 6,            "Weight": 2          },
+          {            "Value": 7,            "Weight": 1          }
+        ]
+      }
+    },
+    "PatternFormula": {
+      "Points": [
+        {          "Value": "nil",          "Weight": 10        }
+      ]
+    },
+    "ColorFormula": {
+      "Points": [
+        {          "Value": "nil",          "Weight": 10        }
+      ]
+    }
+  }
+}

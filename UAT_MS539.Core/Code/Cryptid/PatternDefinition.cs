@@ -3,7 +3,7 @@
     public class PatternDefinition
     {
         public static readonly PatternDefinition Nil = new PatternDefinition("Nil", "Default", string.Empty);
-
+        
         public string PatternId;
         public string NameId;
         public string ArtId;

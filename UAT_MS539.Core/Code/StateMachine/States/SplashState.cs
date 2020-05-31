@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-using UAT_MS539.Core.Code.Extensions;
+﻿using UAT_MS539.Core.Code.Utility;
 
 namespace UAT_MS539.Core.Code.StateMachine.States
 {
@@ -9,7 +6,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
     {
         private Context _sharedContext;
 
-        public bool SaveFound { get; private set; } = false;
+        public bool SaveFound { get; private set; }
 
         public void PerformSetup(Context context, IState previousState)
         {
@@ -18,35 +15,21 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         public void PerformContent(Context context)
         {
-            PlayerData saveData = null;
-            try
-            {
-                string saveJson = File.ReadAllText(PlayerData.SavePath);
-                saveData = JsonConvert.DeserializeObject<PlayerData>(saveJson, JsonExtensions.DefaultSettings);
-                SaveFound = true;
-            }
-            catch (Exception e)
-            {
-                saveData = new PlayerData();
-                SaveFound = false;
-            }
-            finally
-            {
-                context.Set(saveData);
-                Continue();
-            }
+            SaveFound = context.Get<PlayerDataUtility>().TryLoad(out var playerData);
+
+            if (!SaveFound)
+                playerData = new PlayerData();
+
+            context.Set(playerData);
+            Continue();
         }
 
         public void Continue()
         {
             if (SaveFound)
-            {
-                _sharedContext.Get<StateMachine>().ChangeState<ReturningPlayerState>();
-            }
+                _sharedContext.Get<StateMachine>().ChangeState<CorralMorningState>();
             else
-            {
                 _sharedContext.Get<StateMachine>().ChangeState<TutorialCorral>();
-            }
         }
     }
 }

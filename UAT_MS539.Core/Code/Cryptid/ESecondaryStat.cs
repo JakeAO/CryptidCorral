@@ -4,8 +4,7 @@
     {
         Health = 0,
         Renown = 1,
-        Morale = 2,
-        Lifespan = 3,
+        Stamina = 2,
 
         _Count
     }

@@ -8,6 +8,7 @@ namespace UAT_MS539.Core.Code.Utility
         void Listen(Action<T> callback);
         void Unlisten(Action<T> callback);
     }
+
     public interface ISignal<T, TU>
     {
         void Fire(T value1, TU value2);

@@ -14,11 +14,8 @@ namespace UAT_MS539.Core.Code.Utility
 
         public PatternDatabase(params PatternDefinition[] patternDefinitions)
         {
-            Dictionary<string, PatternDefinition> entryDict = new Dictionary<string, PatternDefinition>(patternDefinitions.Length);
-            foreach (PatternDefinition patternDefinition in patternDefinitions)
-            {
-                entryDict[patternDefinition.PatternId] = patternDefinition;
-            }
+            var entryDict = new Dictionary<string, PatternDefinition>(patternDefinitions.Length);
+            foreach (var patternDefinition in patternDefinitions) entryDict[patternDefinition.PatternId] = patternDefinition;
 
             PatternById = entryDict;
             OrderedIds = PatternById.Keys.OrderBy(x => x).ToList();
@@ -26,11 +23,11 @@ namespace UAT_MS539.Core.Code.Utility
 
         public PatternDatabase(string jsonDataPath)
         {
-            string filePath = Path.IsPathFullyQualified(jsonDataPath)
+            var filePath = Path.IsPathFullyQualified(jsonDataPath)
                 ? jsonDataPath
                 : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
-            string jsonText = File.ReadAllText(filePath);
-            
+            var jsonText = File.ReadAllText(filePath);
+
             PatternById = JsonConvert.DeserializeObject<Dictionary<string, PatternDefinition>>(jsonText, JsonExtensions.DefaultSettings);
             OrderedIds = PatternById.Keys.OrderBy(x => x).ToList();
         }
