@@ -8,6 +8,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class CorralNightState : IState
     {
+        public string LocationLocId => "Location/Corral";
+        public string TimeLocId => "Time/Evening";
+
         private Context _sharedContext;
         private Cryptid.Cryptid _activeCryptid;
         private InteractionEventRaised _interactionSignal;
@@ -25,7 +28,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         public void PerformContent(Context context)
         {
-            var endDayOption = new Option("Button/Corral/EndDay", OnEndDaySelected);
+            var endDayOption = new Option("Button/EndDay", OnEndDaySelected);
             if (_activeCryptid != null)
                 _interactionSignal.Fire(new IInteraction[]
                 {
@@ -68,6 +71,14 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                     _activeCryptid.CurrentHealth += (uint) Math.Round(maxHealth * 0.1f);
                     _activeCryptid.CurrentHealth = Math.Min(playerData.ActiveCryptid.CurrentHealth, maxHealth);
                 }
+
+                // Restore (up to) 3 Stamina
+                var maxStamina = _activeCryptid.SecondaryStats[(int) ESecondaryStat.Stamina];
+                if (_activeCryptid.CurrentStamina < maxStamina)
+                {
+                    _activeCryptid.CurrentStamina += 3u;
+                    _activeCryptid.CurrentStamina = Math.Min(playerData.ActiveCryptid.CurrentStamina, maxStamina);
+                }
             }
 
             context.Get<PlayerDataUtility>().TrySave(playerData);
@@ -101,7 +112,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
                 new DisplayCryptidAdvancement(_activeCryptid, primaryStatIncreases, secondaryStatIncreases),
-                new Option("Button/Corral/EndDay", OnEndDaySelected)
+                new Option("Button/EndDay", OnEndDaySelected)
             });
         }
 

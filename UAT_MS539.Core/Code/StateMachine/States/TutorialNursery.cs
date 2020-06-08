@@ -11,6 +11,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class TutorialNursery : IState
     {
+        public string LocationLocId => "Location/Town/Nursery";
+        public string TimeLocId => "Time/Day";
+
         private Context _sharedContext;
         
         private IReadOnlyList<IReadOnlyCollection<IInteraction>> _dialogMap;
@@ -34,6 +37,10 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             OnDialogAcknowledged();
         }
 
+        public void PerformTeardown(Context context, IState nextState)
+        {
+        }
+
         private void OnDialogAcknowledged()
         {
             _interactionIndex++;
@@ -43,24 +50,32 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         private void OnAdoptChosen()
         {
+            Random rand = new Random();
+
+            List<RunePattern> selectableRunePatterns = new List<RunePattern>(5);
+            var knownRunePatterns = _sharedContext.Get<RunePatternDatabase>().KnownRunePatterns;
+            for (int i = 0; i < selectableRunePatterns.Capacity; i++)
+            {
+                selectableRunePatterns.Add(knownRunePatterns[rand.Next(knownRunePatterns.Count)]);
+            }
+
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
                 new Dialog("Nursery/SelectRune"),
-                new RunePatternSelection(_sharedContext.Get<RunePatternDatabase>().OrderedIds.Take(10).ToList(), OnAdoptRuneSelected)
+                new RunePatternSelection(selectableRunePatterns, OnAdoptRuneSelected)
             });
         }
 
-        private void OnAdoptRuneSelected(string runicHash)
+        private void OnAdoptRuneSelected(RunePattern runePattern)
         {
             var newCryptid = CryptidUtilities.CreateCryptid(
-                runicHash,
+                runePattern.RunicHash,
                 _sharedContext.Get<SpeciesDatabase>(),
-                _sharedContext.Get<PatternDatabase>(),
                 _sharedContext.Get<ColorDatabase>());
 
             var playerData = _sharedContext.Get<PlayerData>();
             playerData.ActiveCryptid = newCryptid;
-            playerData.ConsumedRunePatterns.Add(runicHash);
+            playerData.ConsumedRunePatterns.Add(runePattern.RunicHash);
 
             var foodDatabase = _sharedContext.Get<FoodDatabase>();
             var random = new Random();

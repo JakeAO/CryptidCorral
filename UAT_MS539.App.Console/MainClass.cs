@@ -30,7 +30,8 @@ namespace UAT_MS539.ConsoleApp
         private void OnStateChanged(IState state)
         {
             Console.WriteLine($"[State Changed] {state.GetType().Name}");
-            if (state is CorralMorningState) Console.WriteLine($"========== Day {_sharedContext.Get<PlayerData>().Day} Start ==========");
+            if (state is CorralMorningState) 
+                Console.WriteLine($"========== Day {_sharedContext.Get<PlayerData>().Day} Start ==========");
         }
 
         private void OnInteractionEventRaised(IReadOnlyCollection<IInteraction> interactions)
@@ -58,7 +59,6 @@ namespace UAT_MS539.ConsoleApp
                         var sb = new StringBuilder(100);
                         sb.AppendLine("[Cryptid] = = = = = = = =");
                         sb.AppendLine($"   Species: {locDatabase.Localize(cryptid.Species.NameId)}");
-                        sb.AppendLine($"   Pattern: {locDatabase.Localize(cryptid.Pattern.NameId)}");
                         sb.AppendLine($"   Color: {locDatabase.Localize(cryptid.Color.NameId)}");
                         sb.AppendLine("   Stats:");
                         for (var i = 0; i < (int) EPrimaryStat._Count; i++) sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
@@ -71,7 +71,10 @@ namespace UAT_MS539.ConsoleApp
                     }
                     case RunePatternSelection runePatternSelection:
                     {
-                        foreach (var option in runePatternSelection.Options) userPrompts.Add((option, () => runePatternSelection.OptionSelectedHandler(option)));
+                        foreach (var option in runePatternSelection.Options)
+                        {
+                            userPrompts.Add((option.RunicHash, () => runePatternSelection.OptionSelectedHandler(option)));
+                        }
 
                         break;
                     }

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="UAT_MS539.Components.CryptidDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="250">
+    <Canvas x:Name="_mainCanvas" Width="250" Height="250" RenderTransformOrigin="0.5,0.5">
+        <Canvas.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform x:Name="_cryptidScale" ScaleX="-1"/>
+            </TransformGroup>
+        </Canvas.RenderTransform>
+        <Rectangle Width="{Binding Width, ElementName=_mainCanvas}" Height="{Binding Height, ElementName=_mainCanvas}" Panel.ZIndex="1">
+            <Rectangle.Effect>
+                <DropShadowEffect/>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush x:Name="_baseFill" ImageSource="/UAT_MS539.App.WPF;component/Assets/Cryptids/cryptid_00.png" Stretch="Uniform" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Width="{Binding Width, ElementName=_mainCanvas}" Height="{Binding Height, ElementName=_mainCanvas}" Panel.ZIndex="2">
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="_colorFill" Color="#7F781A1A"/>
+            </Rectangle.Fill>
+            <Rectangle.OpacityMask>
+                <ImageBrush x:Name="_colorOpacity" ImageSource="/UAT_MS539.App.WPF;component/Assets/Cryptids/cryptid_00.png" Stretch="Uniform" />
+            </Rectangle.OpacityMask>
+        </Rectangle>
+    </Canvas>
+</UserControl>

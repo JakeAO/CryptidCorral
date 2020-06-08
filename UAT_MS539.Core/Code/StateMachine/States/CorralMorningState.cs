@@ -9,6 +9,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class CorralMorningState : IState
     {
+        public string LocationLocId => "Location/Corral";
+        public string TimeLocId => "Time/Morning";
+
         private Context _sharedContext;
 
         public void PerformSetup(Context context, IState previousState)
@@ -20,14 +23,20 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             var playerData = context.Get<PlayerData>();
 
+            string speciesName = context.Get<LocDatabase>().Localize(playerData.ActiveCryptid.Species.NameId);
+
             var finalFoodList = new List<Food.Food>(playerData.FoodInventory);
             finalFoodList.Add(FoodUtilities.CreateBasicRation());
 
             context.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("Corral/Morning/FeedingPrompt"),
+                new Dialog("Corral/Morning/FeedingPrompt", new KeyValuePair<string, string>("{species}", speciesName)),
                 new FoodSelection(finalFoodList, OnFoodSelected)
             });
+        }
+
+        public void PerformTeardown(Context context, IState nextState)
+        {
         }
 
         private void OnFoodSelected(Food.Food food)
@@ -42,12 +51,12 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             var interactions = new List<IInteraction>
             {
                 new Dialog("Corral/Morning/ActivityPrompt"),
-                new Option("Corral/Morning/Activity/Town", OnTownSelected)
+                new Option("Button/ToTown", OnTownSelected)
             };
 
-            if (playerData.ActiveCryptid != null) interactions.Add(new Option("Corral/Morning/Activity/Training", OnTrainingSelected));
+            if (playerData.ActiveCryptid != null) interactions.Add(new Option("Button/Train", OnTrainingSelected));
 
-            if (playerData.Day % 7 == 0) interactions.Add(new Option("Corral/Morning/Activity/Coliseum", OnColiseumSelected));
+            if (playerData.Day % 7 == 6) interactions.Add(new Option("Button/ToColiseum", OnColiseumSelected));
 
             _sharedContext.Get<InteractionEventRaised>().Fire(interactions);
         }

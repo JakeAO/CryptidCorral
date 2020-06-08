@@ -15,7 +15,7 @@ namespace UAT_MS539.Core.Code
         {
             if (string.IsNullOrWhiteSpace(encoding))
                 throw new ArgumentNullException($"Provided encoding \"{encoding}\" is invalid because it is null or empty.");
-            if (encoding.Contains(' '))
+            if (encoding.Contains(" "))
                 throw new ArgumentException($"Provided encoding \"{encoding}\" is invalid because it contains a space.");
 
             var eLength = (uint) encoding.Length;
@@ -52,7 +52,7 @@ namespace UAT_MS539.Core.Code
         {
             if (string.IsNullOrWhiteSpace(encoding))
                 throw new ArgumentNullException($"Provided encoding \"{encoding}\" is invalid because it is null or empty.");
-            if (encoding.Contains(' '))
+            if (encoding.Contains(" "))
                 throw new ArgumentException($"Provided encoding \"{encoding}\" is invalid because it contains a space.");
 
             var eLength = (uint) encoding.Length;

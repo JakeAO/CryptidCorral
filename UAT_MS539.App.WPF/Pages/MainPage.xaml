@@ -1,0 +1,34 @@
+﻿<UserControl xmlns:Components="clr-namespace:UAT_MS539.Components" x:Class="UAT_MS539.Pages.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Canvas Height="600" Width="800">
+        <Image x:Name="_backgroundImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/Backgrounds/bg_corral.jpg" Stretch="Uniform" DockPanel.Dock="Left" Width="800" Height="600" Panel.ZIndex="-5" />
+        <Components:CryptidDisplay x:Name="_cryptidDisplay" Width="250" Height="250" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="350" Canvas.Top="250" RenderTransformOrigin="0.5,0.5" Visibility="Visible" />
+        <DockPanel Width="800" Height="600" Panel.ZIndex="5">
+            <Canvas x:Name="_timeDayLocationDock" DockPanel.Dock="Top" Background="#7F323232" Width="800" Height="50">
+                <Canvas.Effect>
+                    <DropShadowEffect/>
+                </Canvas.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Canvas.Left="350">
+                    <Image HorizontalAlignment="Right" Source="pack://siteoforigin:,,,/Assets/UI/icon_coin.png" StretchDirection="DownOnly" Height="30" Width="30" />
+                    <Label x:Name="_currencyLabel" Content="999" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="Black" Foreground="White" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="22" />
+                </StackPanel>
+                <DockPanel Width="800" Height="50">
+                    <Label x:Name="_locationLabel" BorderBrush="Black" Foreground="White" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Content="[Location]" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <Label x:Name="_timeLabel" BorderBrush="Black" Foreground="White" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Content="[Time]" FontSize="22" VerticalAlignment="Center" DockPanel.Dock="Right" HorizontalAlignment="Right" />
+                    <Label x:Name="_dayLabel" BorderBrush="Black" Foreground="White" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Content="[Day]" FontSize="22" VerticalAlignment="Center" DockPanel.Dock="Right" HorizontalAlignment="Right" />
+                </DockPanel>
+            </Canvas>
+            <DockPanel Width="590" Height="150" VerticalAlignment="Bottom" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <Components:DialogBox x:Name="_dialogBox" Margin="10,0,0,0" Height="120" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Padding="0" Width="590" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden" />
+            </DockPanel>
+            <DockPanel Width="200" Height="500" VerticalAlignment="Bottom" ScrollViewer.VerticalScrollBarVisibility="Disabled" DockPanel.Dock="Right">
+                <Components:OptionsList x:Name="_optionsList" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="180" Height="500" DockPanel.Dock="Right" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </DockPanel>
+        </DockPanel>
+    </Canvas>
+</UserControl>

@@ -25,9 +25,7 @@ namespace UAT_MS539.Core.Code.Food
 
         public FoodDatabase(string jsonDataPath)
         {
-            var filePath = Path.IsPathFullyQualified(jsonDataPath)
-                ? jsonDataPath
-                : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
+            var filePath = Path.GetFullPath(jsonDataPath);
             var jsonText = File.ReadAllText(filePath);
 
             FoodById = JsonConvert.DeserializeObject<Dictionary<string, FoodDefinition>>(jsonText, JsonExtensions.DefaultSettings);

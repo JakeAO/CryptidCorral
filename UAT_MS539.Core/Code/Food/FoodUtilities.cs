@@ -10,7 +10,7 @@ namespace UAT_MS539.Core.Code.Food
         private static readonly Random _random = new Random();
 
         private static readonly FoodDefinition _basicRationDefinition = new FoodDefinition(
-            "BasicRation", "Food/BasicRation", "/Assets/Foods/food_basic.png", 0,
+            "BasicRation", "Food/BasicRation", "/Assets/Food/food_basic.png", 0,
             new Dictionary<EPrimaryStat, DropCalculation<uint>>(),
             new Dictionary<EPrimaryStat, DropCalculation<float>>
             {

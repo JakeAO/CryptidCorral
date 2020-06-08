@@ -2,7 +2,15 @@
 {
     public class NilState : IState
     {
+        public string LocationLocId => string.Empty;
+        public string TimeLocId => string.Empty;
+
         public void PerformSetup(Context context, IState previousState)
+        {
+            // Intentionally left blank
+        }
+
+        public void PerformContent(Context context)
         {
             // Intentionally left blank
         }

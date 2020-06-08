@@ -1,0 +1,15 @@
+﻿<UserControl x:Name="userControl" x:Class="UAT_MS539.Components.DefaultButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="180">
+    <StackPanel x:Name="stackPanel">
+        <Button Width="{Binding Width, ElementName=userControl}" Height="{Binding Height, ElementName=userControl}" Click="OnClick">
+            <Viewbox Margin="2" MaxWidth="180" MaxHeight="32">
+                <TextBlock x:Name="_label" FontSize="20" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Text="[Button Text]" />
+            </Viewbox>
+        </Button>
+    </StackPanel>
+</UserControl>

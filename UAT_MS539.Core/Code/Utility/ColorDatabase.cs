@@ -23,9 +23,7 @@ namespace UAT_MS539.Core.Code.Utility
 
         public ColorDatabase(string jsonDataPath)
         {
-            var filePath = Path.IsPathFullyQualified(jsonDataPath)
-                ? jsonDataPath
-                : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
+            var filePath = Path.GetFullPath(jsonDataPath);
             var jsonText = File.ReadAllText(filePath);
 
             ColorById = JsonConvert.DeserializeObject<Dictionary<string, ColorDefinition>>(jsonText, JsonExtensions.DefaultSettings);

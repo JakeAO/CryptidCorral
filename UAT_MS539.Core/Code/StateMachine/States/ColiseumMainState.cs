@@ -5,6 +5,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class ColiseumMainState : IState
     {
+        public string LocationLocId => "Location/Coliseum";
+        public string TimeLocId => "Time/Day";
+
         private Context _sharedContext;
 
         public void PerformSetup(Context context, IState previousState)
@@ -16,10 +19,14 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             context.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("[TEMP] Coliseum welcome, prompt for input."),
+                new Dialog("Coliseum/Welcome"),
                 //new OpponentSelection(listOfOpponents),
                 new Option("Button/GoHome", OnGoHomeSelected)
             });
+        }
+
+        public void PerformTeardown(Context context, IState nextState)
+        {
         }
 
         private void OnOpponentSelected()

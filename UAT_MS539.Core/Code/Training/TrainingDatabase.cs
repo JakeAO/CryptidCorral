@@ -22,9 +22,7 @@ namespace UAT_MS539.Core.Code.Training
 
         public TrainingDatabase(string jsonDataPath)
         {
-            var filePath = Path.IsPathFullyQualified(jsonDataPath)
-                ? jsonDataPath
-                : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
+            var filePath = Path.GetFullPath(jsonDataPath);
             var jsonText = File.ReadAllText(filePath);
 
             TrainingById = JsonConvert.DeserializeObject<Dictionary<string, TrainingRegimen>>(jsonText, JsonExtensions.DefaultSettings);

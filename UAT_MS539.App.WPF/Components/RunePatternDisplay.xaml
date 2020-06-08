@@ -1,0 +1,21 @@
+﻿<UserControl xmlns:Components="clr-namespace:UAT_MS539.Components"  x:Class="UAT_MS539.Components.RunePatternDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="180">
+    <Button Click="OnClick" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+        <StackPanel Width="180" Height="30" MinWidth="180" MinHeight="30" Orientation="Horizontal" Margin="-2">
+            <Components:RuneDisplay x:Name="_rune0" />
+            <Components:RuneDisplay x:Name="_rune1" />
+            <Components:RuneDisplay x:Name="_rune2" />
+            <Components:RuneDisplay x:Name="_rune3" />
+            <Components:RuneDisplay x:Name="_rune4" />
+            <Components:RuneDisplay x:Name="_rune5" />
+            <Components:RuneDisplay x:Name="_rune6" />
+            <Components:RuneDisplay x:Name="_rune7" />
+            <Components:RuneDisplay x:Name="_rune8" />
+        </StackPanel>
+    </Button>
+</UserControl>

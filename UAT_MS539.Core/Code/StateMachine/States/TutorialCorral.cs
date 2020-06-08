@@ -6,6 +6,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class TutorialCorral : IState
     {
+        public string LocationLocId => "Location/Corral";
+        public string TimeLocId => "Time/Morning";
+
         private Context _sharedContext;
 
         private IReadOnlyList<IReadOnlyCollection<IInteraction>> _introductionDialogEvents;
@@ -32,6 +35,10 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         public void PerformContent(Context context)
         {
             OnDialogAcknowledged();
+        }
+
+        public void PerformTeardown(Context context, IState nextState)
+        {
         }
 
         private void OnDialogAcknowledged()

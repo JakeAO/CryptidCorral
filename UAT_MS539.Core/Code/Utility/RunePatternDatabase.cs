@@ -1,101 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace UAT_MS539.Core.Code.Utility
 {
     public class RunePatternDatabase
     {
+        private const string SEARCH_PATTERN = "*.exe";
+
         public readonly IReadOnlyList<RunePattern> KnownRunePatterns;
         public readonly IReadOnlyList<string> OrderedIds;
 
         public RunePatternDatabase()
         {
-            const string searchPattern = "*.exe";
 
-            var runePatterns = new List<RunePattern>(100);
+            var runePatterns = new List<RunePattern>(1000);
 
-            var baseDirectory64 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var exeFiles64 = Directory.GetFiles(baseDirectory64, searchPattern, new EnumerationOptions
-            {
-                IgnoreInaccessible = true,
-                MatchType = MatchType.Simple,
-                RecurseSubdirectories = true
-            });
-            CalculateRunePatterns(exeFiles64, runePatterns);
-
-            // string baseDirectory86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            // string[] exeFiles86 = Directory.GetFiles(baseDirectory86, searchPattern,  new EnumerationOptions()
-            // {
-            //     IgnoreInaccessible = true,
-            //     MatchType = MatchType.Simple,
-            //     RecurseSubdirectories = true
-            // });
-            // CalculateRunePatterns(exeFiles86, runePatterns);
+            Task.WaitAll(
+                Task.Run(() => FindExeRecursive(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)), runePatterns)),
+                Task.Run(() => FindExeRecursive(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)), runePatterns)));
 
             KnownRunePatterns = runePatterns;
             OrderedIds = runePatterns.Select(x => x.RunicHash).OrderBy(x => x).ToList();
         }
 
-        private void CalculateRunePatterns(string[] filePaths, List<RunePattern> patternList)
+        private void FindExeRecursive(DirectoryInfo directoryInfo, List<RunePattern> runePatterns)
         {
-            foreach (var filePath in filePaths)
-                try
+            try
+            {
+                if (directoryInfo.Exists)
                 {
-                    var fi = new FileInfo(filePath);
-                    if (!fi.Exists)
-                        continue;
-
-                    var md5Precursor = new StringBuilder();
-                    md5Precursor.AppendLine(fi.Name);
-                    md5Precursor.AppendLine(fi.CreationTimeUtc.ToLongDateString());
-                    md5Precursor.AppendLine(fi.CreationTimeUtc.ToLongTimeString());
-                    md5Precursor.AppendLine(fi.Length.ToString());
-                    var precursorBytes = Encoding.Unicode.GetBytes(md5Precursor.ToString());
-
-                    using var cryptoProvider = new MD5CryptoServiceProvider();
-                    var md5HashBytes = cryptoProvider.ComputeHash(precursorBytes);
-
-                    var md5Hash = string.Concat(md5HashBytes.Select(x => x.ToString("X2"))).ToUpper();
-                    var paddedMd5Hash = md5Hash + md5Hash.Substring(0, 4); // Pad out to 36 characters so we can convert 2 base-16 values into 1 base-24 value.
-
-                    var runicPrecursor = new StringBuilder();
-                    for (var i = 0; i < paddedMd5Hash.Length; i += 2)
+                    foreach (FileInfo fi in directoryInfo.EnumerateFiles(SEARCH_PATTERN))
                     {
-                        var twoDigitBase16 = paddedMd5Hash.Substring(i, 2);
-                        var base16Value = NumberEncoder.Decode(twoDigitBase16, NumberEncoder.Base16Encoding);
-                        base16Value %= 24; // Wrap around the 1-digit max for base-24
-                        var oneDigitBase24 = NumberEncoder.Encode(base16Value, NumberEncoder.Base24Encoding);
-                        runicPrecursor.Append(oneDigitBase24);
+                        if (TryCalculateRunePattern(fi, out RunePattern runePattern))
+                        {
+                            // Just grab the first .exe in each folder, otherwise we get multiple-thousands of runePatterns in the end.
+                            runePatterns.Add(runePattern);
+                            break;
+                        }
                     }
 
-                    var runicHash = runicPrecursor.ToString();
-
-                    patternList.Add(new RunePattern(
-                        fi.FullName,
-                        paddedMd5Hash,
-                        runicHash));
+                    foreach (DirectoryInfo di in directoryInfo.EnumerateDirectories())
+                    {
+                        FindExeRecursive(di, runePatterns);
+                    }
                 }
-                catch
-                {
-                    // Ignore
-                }
+            }
+            catch
+            {
+                // Ignore
+                // Near-impossible to prevent IO errors, especially UnauthorizedAccessExceptions, and it doesn't really matter for the purposes of this method.
+            }
         }
 
-        public readonly struct RunePattern
+        private bool TryCalculateRunePattern(FileInfo fileInfo, out RunePattern runePattern)
         {
-            public readonly string FilePath;
-            public readonly string Md5;
-            public readonly string RunicHash;
-
-            public RunePattern(string filePath, string md5, string runicHash)
+            runePattern = default;
+            try
             {
-                FilePath = filePath;
-                Md5 = md5;
-                RunicHash = runicHash;
+                if (!fileInfo.Exists)
+                    return false;
+
+                var md5Precursor = new StringBuilder();
+                md5Precursor.AppendLine(fileInfo.Name);
+                md5Precursor.AppendLine(fileInfo.CreationTimeUtc.ToLongDateString());
+                md5Precursor.AppendLine(fileInfo.CreationTimeUtc.ToLongTimeString());
+                md5Precursor.AppendLine(fileInfo.Length.ToString());
+                var precursorBytes = Encoding.Unicode.GetBytes(md5Precursor.ToString());
+
+                using var cryptoProvider = new MD5CryptoServiceProvider();
+                var md5HashBytes = cryptoProvider.ComputeHash(precursorBytes);
+
+                var md5Hash = string.Concat(md5HashBytes.Select(x => x.ToString("X2"))).ToUpper();
+
+                var runicPrecursor = new StringBuilder();
+                for (var i = 0; i < md5Hash.Length; i += 2)
+                {
+                    var twoDigitBase16 = md5Hash.Substring(i, 2);
+                    var base16Value = NumberEncoder.Decode(twoDigitBase16, NumberEncoder.Base16Encoding);
+                    base16Value %= 24; // Wrap around the 1-digit max for base-24
+                    var oneDigitBase24 = NumberEncoder.Encode(base16Value, NumberEncoder.Base24Encoding);
+                    runicPrecursor.Append(oneDigitBase24);
+                }
+
+                var runicHash = runicPrecursor.ToString();
+
+                runePattern = new RunePattern(
+                    fileInfo.FullName,
+                    md5Hash,
+                    runicHash);
+                return true;
+            }
+            catch
+            {
+                // Ignore
+                return false;
             }
         }
     }

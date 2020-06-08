@@ -5,6 +5,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class TownMainState : IState
     {
+        public string LocationLocId => "Location/Town";
+        public string TimeLocId => "Time/Day";
+
         private Context _sharedContext;
 
         public void PerformSetup(Context context, IState previousState)
@@ -17,11 +20,15 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             MainPrompt();
         }
 
+        public void PerformTeardown(Context context, IState nextState)
+        {
+        }
+
         private void MainPrompt()
         {
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("[TEMP] Town welcome, prompt for input."),
+                new Dialog("Town/Welcome"),
                 new Option("Button/Market", OnMarketSelected),
                 new Option("Button/Laboratory", OnLabSelected),
                 new Option("Button/Nursery", OnNurserySelected),

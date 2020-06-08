@@ -41,9 +41,7 @@ namespace UAT_MS539.Core.Code.Utility
 
         public LocDatabase(string jsonDataPath)
         {
-            var filePath = Path.IsPathFullyQualified(jsonDataPath)
-                ? jsonDataPath
-                : Path.Join(Directory.GetCurrentDirectory(), jsonDataPath);
+            var filePath = Path.GetFullPath(jsonDataPath);
             var jsonText = File.ReadAllText(filePath);
             LocEntryById = JsonConvert.DeserializeObject<Dictionary<string, LocEntry>>(jsonText, JsonExtensions.DefaultSettings);
 

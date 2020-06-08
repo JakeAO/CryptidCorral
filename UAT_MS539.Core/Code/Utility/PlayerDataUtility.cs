@@ -13,7 +13,7 @@ namespace UAT_MS539.Core.Code.Utility
         
         private readonly JsonSerializerSettings _jsonSettings;
 
-        public PlayerDataUtility(FoodDatabase foodDatabase, SpeciesDatabase speciesDatabase, PatternDatabase patternDatabase, ColorDatabase colorDatabase)
+        public PlayerDataUtility(FoodDatabase foodDatabase, SpeciesDatabase speciesDatabase, ColorDatabase colorDatabase)
         {
             _jsonSettings = new JsonSerializerSettings
             {
@@ -21,7 +21,7 @@ namespace UAT_MS539.Core.Code.Utility
                 Converters = new List<JsonConverter>
                 {
                     new FoodConverter(foodDatabase),
-                    new CryptidConverter(speciesDatabase, patternDatabase, colorDatabase)
+                    new CryptidConverter(speciesDatabase, colorDatabase)
                 }
             };
         }
@@ -99,13 +99,11 @@ namespace UAT_MS539.Core.Code.Utility
         private class CryptidConverter : JsonConverter<Cryptid.Cryptid>
         {
             private readonly ColorDatabase _colorDatabase;
-            private readonly PatternDatabase _patternDatabase;
             private readonly SpeciesDatabase _speciesDatabase;
 
-            public CryptidConverter(SpeciesDatabase speciesDatabase, PatternDatabase patternDatabase, ColorDatabase colorDatabase)
+            public CryptidConverter(SpeciesDatabase speciesDatabase, ColorDatabase colorDatabase)
             {
                 _speciesDatabase = speciesDatabase;
-                _patternDatabase = patternDatabase;
                 _colorDatabase = colorDatabase;
             }
 
@@ -113,7 +111,6 @@ namespace UAT_MS539.Core.Code.Utility
             {
                 var originalJson = JObject.FromObject(value);
                 originalJson["Species"] = new JValue(value.Species.SpeciesId);
-                originalJson["Pattern"] = new JValue(value.Pattern.PatternId);
                 originalJson["Color"] = new JValue(value.Color.ColorId);
                 serializer.Serialize(writer, originalJson);
             }
@@ -122,16 +119,13 @@ namespace UAT_MS539.Core.Code.Utility
             {
                 var originalJson = JObject.Load(reader);
                 var speciesId = originalJson["Species"].Value<string>();
-                var patternId = originalJson["Pattern"].Value<string>();
                 var colorId = originalJson["Color"].Value<string>();
 
                 originalJson.Remove("Species");
-                originalJson.Remove("Pattern");
                 originalJson.Remove("Color");
 
                 var cryptid = JsonConvert.DeserializeObject<Cryptid.Cryptid>(originalJson.ToString());
                 cryptid.Species = _speciesDatabase.SpeciesById[speciesId];
-                cryptid.Pattern = _patternDatabase.PatternById[patternId];
                 cryptid.Color = _colorDatabase.ColorById[colorId];
                 return cryptid;
             }

@@ -9,8 +9,14 @@ namespace UAT_MS539.Core.Code.StateMachine.Interactions
 
         public Dialog(string locId, params KeyValuePair<string, string>[] locParams)
         {
+            Dictionary<string, string> newDict = new Dictionary<string, string>();
+            foreach (var keyValuePair in locParams)
+            {
+                newDict[keyValuePair.Key] = keyValuePair.Value;
+            }
+
             LocId = locId;
-            LocParams = new Dictionary<string, string>(locParams);
+            LocParams = newDict;
         }
     }
 }

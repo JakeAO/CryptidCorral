@@ -12,10 +12,9 @@ namespace UAT_MS539.Core.Code.Cryptid
         public static Cryptid CreateCryptid(
             string runicHash,
             SpeciesDatabase speciesDatabase,
-            PatternDatabase patternDatabase,
             ColorDatabase colorDatabase)
         {
-            Debug.Assert(runicHash.Length == 18);
+            Debug.Assert(runicHash.Length == 16);
 
             // Calculate Species
             var speciesSubstring = runicHash.Substring(0, 2);
@@ -25,16 +24,8 @@ namespace UAT_MS539.Core.Code.Cryptid
             if (!speciesDatabase.SpeciesById.TryGetValue(speciesId, out var species))
                 throw new InvalidOperationException($"SpeciesId \"{speciesId}\" ({speciesKey}) did not exist in SpeciesDatabase.");
 
-            // Calculate Pattern
-            var patternSubstring = runicHash.Substring(2, 2);
-            var patternKey = NumberEncoder.Decode(patternSubstring, NumberEncoder.Base24Encoding);
-            var patternPercent = patternKey / MAX_VAL;
-            var patternId = species.PatternFormula.Evaluate(patternPercent);
-            if (!patternDatabase.PatternById.TryGetValue(patternId, out var pattern))
-                throw new InvalidOperationException($"PatternId \"{patternId}\" ({patternKey}) did not exist in PatternDatabase.");
-
             // Calculate Color
-            var colorSubstring = runicHash.Substring(4, 2);
+            var colorSubstring = runicHash.Substring(2, 2);
             var colorKey = NumberEncoder.Decode(colorSubstring, NumberEncoder.Base24Encoding);
             var colorPercent = colorKey / MAX_VAL;
             var colorId = species.ColorFormula.Evaluate(colorPercent);
@@ -45,7 +36,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             var primaryStats = new uint[(int) EPrimaryStat._Count];
             for (var i = 0; i < primaryStats.Length; i++)
             {
-                var startIdx = 6 + i * 2;
+                var startIdx = 4 + i * 2;
                 var statSubstring = runicHash.Substring(startIdx, 2);
                 var statKey = NumberEncoder.Decode(statSubstring, NumberEncoder.Base24Encoding);
                 var statPercent = statKey / MAX_VAL;
@@ -55,7 +46,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             var secondaryStats = new uint[(int) ESecondaryStat._Count];
 
             // Calculate Secondary Stat (Health)
-            var healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[^1]);
+            var healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[15]);
             secondaryStats[(int) ESecondaryStat.Health] = CalculateHealth(primaryStats[(int) EPrimaryStat.Vitality], healthSubstring);
 
             // Calculate Secondary Stat (Renown)
@@ -67,21 +58,20 @@ namespace UAT_MS539.Core.Code.Cryptid
             var hiddenStats = new uint[(int) EHiddenStat._Count];
 
             // Calculate Hidden Stat (Morale)
-            var moraleSubstring = string.Join(string.Empty, runicHash[1], runicHash[^2]);
+            var moraleSubstring = string.Join(string.Empty, runicHash[1], runicHash[14]);
             hiddenStats[(int) EHiddenStat.Morale] = CalculateMoral(moraleSubstring);
 
             // Calculate Hidden Stat (Lifespan) (days)
-            var lifespanSubstring = string.Join(string.Empty, runicHash[2], runicHash[^3]);
+            var lifespanSubstring = string.Join(string.Empty, runicHash[2], runicHash[13]);
             hiddenStats[(int) EHiddenStat.Lifespan] = CalculateLifespan(lifespanSubstring);
 
-            return new Cryptid(runicHash, species, pattern, color, primaryStats, secondaryStats, hiddenStats);
+            return new Cryptid(runicHash, species, color, primaryStats, secondaryStats, hiddenStats);
         }
 
         public static Cryptid CreateCryptid(
             CryptidDnaSample sampleA,
             CryptidDnaSample sampleB,
             SpeciesDatabase speciesDatabase,
-            PatternDatabase patternDatabase,
             ColorDatabase colorDatabase)
         {
             // Starting Stats are based on Generation + 15% of Parent Average
@@ -98,10 +88,9 @@ namespace UAT_MS539.Core.Code.Cryptid
                 hashA[8], hashB[9],
                 hashA[10], hashB[11],
                 hashA[12], hashB[13],
-                hashA[14], hashB[15],
-                hashA[16], hashB[17]);
+                hashA[14], hashB[15]);
 
-            var newCryptid = CreateCryptid(newHash, speciesDatabase, patternDatabase, colorDatabase);
+            var newCryptid = CreateCryptid(newHash, speciesDatabase, colorDatabase);
 
             for (var i = 0; i < (int) EPrimaryStat._Count; i++)
             {

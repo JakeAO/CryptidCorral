@@ -6,6 +6,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class ColiseumResultsState : IState
     {
+        public string LocationLocId => "Location/Coliseum";
+        public string TimeLocId => "Time/Day";
+
         private Context _sharedContext;
 
         public void PerformSetup(Context context, IState previousState)
@@ -24,8 +27,12 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             {
                 new Dialog("[TEMP] Your Cryptid did good/bad, here are the results."),
                 //new DisplayColiseumResults(playerCryptid, opponentCryptid, playerDidWin, expGained),
-                new Option("[TEMP] Back to Coliseum main page", OnBackSelected)
+                new Option("Button/Back", OnBackSelected)
             });
+        }
+
+        public void PerformTeardown(Context context, IState nextState)
+        {
         }
 
         private void OnBackSelected()

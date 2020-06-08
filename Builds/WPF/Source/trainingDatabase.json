@@ -1,0 +1,19 @@
+﻿{
+  "trainingA": {
+    "TrainingId": "trainingA",
+    "NameId": "Training/A",
+    "GuaranteedStatIncrease": {
+      "Strength": 5
+    },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {            "Value": 1,            "Weight": 4          },
+          {            "Value": 2,            "Weight": 3          },
+          {            "Value": 3,            "Weight": 2          },
+          {            "Value": 4,            "Weight": 1          }
+        ]
+      }
+    }
+  }
+}

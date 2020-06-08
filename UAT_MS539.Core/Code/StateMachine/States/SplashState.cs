@@ -1,9 +1,14 @@
-﻿using UAT_MS539.Core.Code.Utility;
+﻿using UAT_MS539.Core.Code.StateMachine.Interactions;
+using UAT_MS539.Core.Code.StateMachine.Signals;
+using UAT_MS539.Core.Code.Utility;
 
 namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class SplashState : IState
     {
+        public string LocationLocId => string.Empty;
+        public string TimeLocId => string.Empty;
+
         private Context _sharedContext;
 
         public bool SaveFound { get; private set; }
@@ -21,10 +26,18 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                 playerData = new PlayerData();
 
             context.Set(playerData);
-            Continue();
+
+            context.Get<InteractionEventRaised>().Fire(new IInteraction[]
+            {
+                new Option("Button/Play", Continue),
+            });
         }
 
-        public void Continue()
+        public void PerformTeardown(Context context, IState nextState)
+        {
+        }
+
+        private void Continue()
         {
             if (SaveFound)
                 _sharedContext.Get<StateMachine>().ChangeState<CorralMorningState>();

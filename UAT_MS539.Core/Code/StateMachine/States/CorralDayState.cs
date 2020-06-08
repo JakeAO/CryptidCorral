@@ -10,6 +10,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 {
     public class CorralDayState : IState
     {
+        public string LocationLocId => "Location/Corral";
+        public string TimeLocId => "Time/Day";
+
         private readonly Random _random = null;
 
         private Context _sharedContext;
@@ -32,17 +35,21 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             context.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("[TEMP] Training day welcome, prompt for input."),
+                new Dialog("Corral/Day/Welcome"),
                 new Option("Button/Train", PromptForTraining),
                 new Option("Button/Rest", OnRestSelected)
             });
+        }
+
+        public void PerformTeardown(Context context, IState nextState)
+        {
         }
 
         private void PromptForTraining()
         {
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("[TEMP] Select a training regimen."),
+                new Dialog("Corral/Day/TrainingPrompt"),
                 //new TrainingSelection(_availableRegimens, OnTrainingSelected),
                 new Option("Button/AllDone", OnAllDoneSelected)
             });
@@ -80,7 +87,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("[TEMP] Your Cryptid got some rest, it's happier now."),
+                new Dialog("Corral/Day/RestResult"),
                 new Option("Button/AllDone", OnAllDoneSelected)
             });
         }
