@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.StateMachine.Interactions;
 using UAT_MS539.Core.Code.StateMachine.Signals;
@@ -30,18 +31,22 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             var endDayOption = new Option("Button/EndDay", OnEndDaySelected);
             if (_activeCryptid != null)
+            {
                 _interactionSignal.Fire(new IInteraction[]
                 {
                     GetAgeWarning(),
                     GetMoraleWarning(),
                     _trainingData != null ? new Option("Button/Next", OnNextSelected) : endDayOption
                 });
+            }
             else
+            {
                 _interactionSignal.Fire(new IInteraction[]
                 {
                     new Dialog("Corral/Night/Default"),
                     endDayOption
                 });
+            }
         }
 
         public void PerformTeardown(Context context, IState nextState)
@@ -123,28 +128,34 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         private Dialog GetAgeWarning()
         {
+            LocDatabase locDatabase = _sharedContext.Get<LocDatabase>();
+            var speciesFormatter = new KeyValuePair<string, string>("{species}", locDatabase.Localize(_playerData.ActiveCryptid.Species.NameId));
+
             var remainingLife = _activeCryptid.HiddenStats[(int) EHiddenStat.Lifespan] - _activeCryptid.AgeInDays;
-            if (remainingLife < 1) return new Dialog("Corral/Night/AgeWarning/FinalDay");
+            if (remainingLife < 1) return new Dialog("Corral/Night/AgeWarning/FinalDay", speciesFormatter);
 
-            if (remainingLife < 3) return new Dialog("Corral/Night/AgeWarning/FinalDays");
+            if (remainingLife < 3) return new Dialog("Corral/Night/AgeWarning/FinalDays", speciesFormatter);
 
-            if (remainingLife < 7) return new Dialog("Corral/Night/AgeWarning/FinalWeek");
+            if (remainingLife < 7) return new Dialog("Corral/Night/AgeWarning/FinalWeek", speciesFormatter);
 
-            if (remainingLife < 14) return new Dialog("Corral/Night/AgeWarning/FinalFortnight");
+            if (remainingLife < 14) return new Dialog("Corral/Night/AgeWarning/FinalFortnight", speciesFormatter);
 
-            return new Dialog("Corral/Night/AgeWarning/Healthy");
+            return new Dialog("Corral/Night/AgeWarning/Healthy", speciesFormatter);
         }
 
         private Dialog GetMoraleWarning()
         {
+            LocDatabase locDatabase = _sharedContext.Get<LocDatabase>();
+            var speciesFormatter = new KeyValuePair<string, string>("{species}", locDatabase.Localize(_playerData.ActiveCryptid.Species.NameId));
+
             var morale = _activeCryptid.HiddenStats[(int) EHiddenStat.Morale];
-            if (morale < 10) return new Dialog("Corral/Night/MoraleWarning/Tenth");
+            if (morale < 10) return new Dialog("Corral/Night/MoraleWarning/Tenth", speciesFormatter);
 
-            if (morale < 25) return new Dialog("Corral/Night/MoraleWarning/Quarter");
+            if (morale < 25) return new Dialog("Corral/Night/MoraleWarning/Quarter", speciesFormatter);
 
-            if (morale < 50) return new Dialog("Corral/Night/MoraleWarning/Half");
+            if (morale < 50) return new Dialog("Corral/Night/MoraleWarning/Half", speciesFormatter);
 
-            return new Dialog("Corral/Night/MoraleWarning/Happy");
+            return new Dialog("Corral/Night/MoraleWarning/Happy", speciesFormatter);
         }
     }
 }

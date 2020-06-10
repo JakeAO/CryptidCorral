@@ -77,47 +77,94 @@ namespace UAT_MS539.Pages
             {
                 switch (interaction)
                 {
-                    case Option option:
-                        {
-                            _optionsList.AddButton(
-                                locDatabase.Localize(option.LocId),
-                                () =>
-                                {
-                                    EndInteraction();
-                                    option.ActionHandler?.Invoke();
-                                });
-                            break;
-                        }
                     case Dialog dialog:
-                        {
-                            _dialogBox.SetLabel(locDatabase.Localize(dialog.LocId, dialog.LocParams));
-                            _dialogBox.Visibility = System.Windows.Visibility.Visible;
-                            break;
-                        }
+                    {
+                        _dialogBox.SetLabel(locDatabase.Localize(dialog.LocId, dialog.LocParams));
+                        _dialogBox.Visibility = System.Windows.Visibility.Visible;
+                        break;
+                    }
+                    case DisplayCoins displayCoins:
+                    {
+                        _currencyLabel.Content = displayCoins.Coins.ToString();
+                        break;
+                    }
+                    case DisplayCryptid displayCryptid:
+                    {
+                        _cryptidDisplay.SetCryptid(displayCryptid.Cryptid);
+                        break;
+                    }
+                    case Option option:
+                    {
+                        _optionsList.AddButton(
+                            locDatabase.Localize(option.LocId),
+                            () =>
+                            {
+                                EndInteraction();
+                                option.ActionHandler?.Invoke();
+                            });
+                        break;
+                    }
                     case RunePatternSelection runePatternSelection:
-                        {
-                            _optionsList.AddRuneSelection(
-                                runePatternSelection.Options,
-                                _sharedContext.Get<RuneDatabase>(),
-                                (selectedOption) =>
-                                {
-                                    EndInteraction();
-                                    runePatternSelection.OptionSelectedHandler?.Invoke(selectedOption);
-                                });
-                            break;
-                        }
+                    {
+                        _optionsList.AddRuneSelection(
+                            runePatternSelection.Options,
+                            _sharedContext.Get<RuneDatabase>(),
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                runePatternSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
                     case FoodSelection foodSelection:
-                        {
-                            _optionsList.AddFoodSelection(
-                                foodSelection.Options,
-                                _sharedContext.Get<LocDatabase>(),
-                                (selectedOption) =>
-                                {
-                                    EndInteraction();
-                                    foodSelection.OptionSelectedHandler?.Invoke(selectedOption);
-                                });
-                            break;
-                        }
+                    {
+                        _optionsList.AddFoodSelection(
+                            foodSelection.Options,
+                            _sharedContext.Get<LocDatabase>(),
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                foodSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
+                    case BuySellSelection buySellSelection:
+                    {
+                        _optionsList.AddBuySellSelection(
+                            buySellSelection.Options,
+                            _sharedContext.Get<LocDatabase>(),
+                            _sharedContext.Get<PlayerData>().Coins,
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                buySellSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
+                    case CryptidSelection cryptidSelection:
+                    {
+                        _optionsList.AddCryptidSelection(
+                            cryptidSelection.Options,
+                            _sharedContext.Get<LocDatabase>(),
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                cryptidSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
+                    case DnaSampleSelection dnaSampleSelection:
+                    {
+                        _optionsList.AddDnaSampleSelection(
+                            dnaSampleSelection.Options,
+                            _sharedContext.Get<LocDatabase>(),
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                dnaSampleSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
                 }
             }
         }

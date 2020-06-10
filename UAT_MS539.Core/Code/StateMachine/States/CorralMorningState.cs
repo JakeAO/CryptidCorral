@@ -13,26 +13,37 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         public string TimeLocId => "Time/Morning";
 
         private Context _sharedContext;
+        private PlayerData _playerData;
 
         public void PerformSetup(Context context, IState previousState)
         {
             _sharedContext = context;
+            _playerData = context.Get<PlayerData>();
         }
 
         public void PerformContent(Context context)
         {
-            var playerData = context.Get<PlayerData>();
-
-            string speciesName = context.Get<LocDatabase>().Localize(playerData.ActiveCryptid.Species.NameId);
-
-            var finalFoodList = new List<Food.Food>(playerData.FoodInventory);
-            finalFoodList.Add(FoodUtilities.CreateBasicRation());
-
-            context.Get<InteractionEventRaised>().Fire(new IInteraction[]
+            if (_playerData.ActiveCryptid != null)
             {
-                new Dialog("Corral/Morning/FeedingPrompt", new KeyValuePair<string, string>("{species}", speciesName)),
-                new FoodSelection(finalFoodList, OnFoodSelected)
-            });
+                string speciesName = context.Get<LocDatabase>().Localize(_playerData.ActiveCryptid.Species.NameId);
+
+                var finalFoodList = new List<Food.Food>(_playerData.FoodInventory);
+                finalFoodList.Add(FoodUtilities.CreateBasicRation());
+
+                context.Get<InteractionEventRaised>().Fire(new IInteraction[]
+                {
+                    new Dialog("Corral/Morning/FeedingPrompt", new KeyValuePair<string, string>("{species}", speciesName)),
+                    new FoodSelection(finalFoodList, OnFoodSelected)
+                });
+            }
+            else
+            {
+                context.Get<InteractionEventRaised>().Fire(new IInteraction[]
+                {
+                    new Dialog("Corral/Morning/NoCryptid"),
+                    new Option("Button/Next", ActivityPrompt),
+                });
+            }
         }
 
         public void PerformTeardown(Context context, IState nextState)
@@ -41,22 +52,26 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         private void OnFoodSelected(Food.Food food)
         {
-            var playerData = _sharedContext.Get<PlayerData>();
             var trainingData = new DailyTrainingData();
             _sharedContext.Set(trainingData);
 
-            playerData.FoodInventory.Remove(food);
+            _playerData.FoodInventory.Remove(food);
             trainingData.Food = food;
 
+            ActivityPrompt();
+        }
+
+        private void ActivityPrompt()
+        {
             var interactions = new List<IInteraction>
             {
                 new Dialog("Corral/Morning/ActivityPrompt"),
                 new Option("Button/ToTown", OnTownSelected)
             };
 
-            if (playerData.ActiveCryptid != null) interactions.Add(new Option("Button/Train", OnTrainingSelected));
+            if (_playerData.ActiveCryptid != null) interactions.Add(new Option("Button/Train", OnTrainingSelected));
 
-            if (playerData.Day % 7 == 6) interactions.Add(new Option("Button/ToColiseum", OnColiseumSelected));
+            if (_playerData.Day % 7 == 6) interactions.Add(new Option("Button/ToColiseum", OnColiseumSelected));
 
             _sharedContext.Get<InteractionEventRaised>().Fire(interactions);
         }

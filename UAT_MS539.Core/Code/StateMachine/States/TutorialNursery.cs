@@ -61,7 +61,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new Dialog("Nursery/SelectRune"),
+                new Dialog("Town/Nursery/SelectRune"),
                 new RunePatternSelection(selectableRunePatterns, OnAdoptRuneSelected)
             });
         }

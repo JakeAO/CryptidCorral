@@ -24,7 +24,7 @@ namespace UAT_MS539.Core.Code.Food
             MoraleBoost = moraleBoost;
 
             // TotalFoodQuality is used for internal purposes to compare Food instances against each other
-            TotalFoodQuality = 0f;
+            TotalFoodQuality = 10;
             foreach (var boostValue in boostsByStat.Values) TotalFoodQuality += boostValue;
             foreach (var multiplierValue in multipliersByStat.Values) TotalFoodQuality *= multiplierValue;
             TotalFoodQuality += moraleBoost * 2.5f;

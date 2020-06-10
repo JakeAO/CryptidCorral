@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UAT_MS539.Core.Code.Cryptid;
+using UAT_MS539.Core.Code.Food;
 using UAT_MS539.Core.Code.StateMachine;
 using UAT_MS539.Core.Code.StateMachine.Interactions;
 using UAT_MS539.Core.Code.StateMachine.Signals;
@@ -30,7 +31,7 @@ namespace UAT_MS539.ConsoleApp
         private void OnStateChanged(IState state)
         {
             Console.WriteLine($"[State Changed] {state.GetType().Name}");
-            if (state is CorralMorningState) 
+            if (state is CorralMorningState)
                 Console.WriteLine($"========== Day {_sharedContext.Get<PlayerData>().Day} Start ==========");
         }
 
@@ -52,21 +53,34 @@ namespace UAT_MS539.ConsoleApp
                         userPrompts.Add((locDatabase.Localize(option.LocId), option.ActionHandler));
                         break;
                     }
+                    case DisplayCoins displayCoins:
+                    {
+                        Console.WriteLine($"[Coins] {displayCoins.Coins}");
+                        break;
+                    }
                     case DisplayCryptid displayCryptid:
                     {
                         var cryptid = displayCryptid.Cryptid;
 
-                        var sb = new StringBuilder(100);
-                        sb.AppendLine("[Cryptid] = = = = = = = =");
-                        sb.AppendLine($"   Species: {locDatabase.Localize(cryptid.Species.NameId)}");
-                        sb.AppendLine($"   Color: {locDatabase.Localize(cryptid.Color.NameId)}");
-                        sb.AppendLine("   Stats:");
-                        for (var i = 0; i < (int) EPrimaryStat._Count; i++) sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
-                        sb.AppendLine("   Secondary Stats:");
-                        for (var i = 0; i < (int) ESecondaryStat._Count; i++) sb.AppendLine($"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
-                        sb.AppendLine("= = = = = = = = = = = = =");
+                        if (cryptid != null)
+                        {
+                            var sb = new StringBuilder(100);
+                            sb.AppendLine("[Cryptid] = = = = = = = =");
+                            sb.AppendLine($"   Species: {locDatabase.Localize(cryptid.Species.NameId)}");
+                            sb.AppendLine($"   Color: {locDatabase.Localize(cryptid.Color.NameId)}");
+                            sb.AppendLine("   Stats:");
+                            for (var i = 0; i < (int) EPrimaryStat._Count; i++) sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
+                            sb.AppendLine("   Secondary Stats:");
+                            for (var i = 0; i < (int) ESecondaryStat._Count; i++) sb.AppendLine($"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
+                            sb.AppendLine("= = = = = = = = = = = = =");
 
-                        Console.WriteLine(sb);
+                            Console.WriteLine(sb);
+                        }
+                        else
+                        {
+                            Console.WriteLine("[Cryptid] None Active");
+                        }
+
                         break;
                     }
                     case RunePatternSelection runePatternSelection:
@@ -122,6 +136,65 @@ namespace UAT_MS539.ConsoleApp
                         sb.AppendLine("= = = = = = = = = = = = = = = =");
 
                         Console.WriteLine(sb.ToString());
+                        break;
+                    }
+                    case BuySellSelection buySellSelection:
+                    {
+                        foreach (var foodCostPair in buySellSelection.Options)
+                        {
+                            Food food = foodCostPair.Item1;
+                            uint cost = foodCostPair.Item2;
+
+                            var sb = new StringBuilder(50);
+                            sb.Append($"{cost} coins -> ");
+                            sb.Append(locDatabase.Localize(food.Definition.NameId));
+                            for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                            {
+                                var hasMult = food.MultipliersByStat.TryGetValue((EPrimaryStat) i, out var statMultiplier) && statMultiplier != 0f;
+                                var hasBoost = food.BoostsByStat.TryGetValue((EPrimaryStat) i, out var statBoost) && statBoost > 0;
+
+                                if (hasMult || hasBoost) sb.Append($", {(EPrimaryStat) i}");
+
+                                if (hasMult) sb.Append($" x{statMultiplier:P0}");
+
+                                if (hasBoost) sb.Append($" +{statBoost}");
+                            }
+
+                            if (food.MoraleBoost != 0) sb.Append($", Morale +{food.MoraleBoost}");
+
+                            userPrompts.Add((sb.ToString(), () => buySellSelection.OptionSelectedHandler(food)));
+                        }
+
+                        break;
+                    }
+                    case CryptidSelection cryptidSelection:
+                    {
+                        foreach (var cryptid in cryptidSelection.Options)
+                        {
+                            var sb = new StringBuilder(50);
+                            sb.Append(locDatabase.Localize(cryptid.Species.NameId));
+                            sb.Append($" P[{string.Join(", ", cryptid.PrimaryStats)}]");
+                            sb.Append($" S[{string.Join(", ", cryptid.SecondaryStats)}]");
+                            sb.Append($" Age: {cryptid.AgeInDays}");
+
+                            userPrompts.Add((sb.ToString(), () => cryptidSelection.OptionSelectedHandler(cryptid)));
+                        }
+
+                        break;
+                    }
+                    case DnaSampleSelection dnaSampleSelection:
+                    {
+                        foreach (var dnaSample in dnaSampleSelection.Options)
+                        {
+                            var sb = new StringBuilder(50);
+                            sb.Append(locDatabase.Localize(dnaSample.Cryptid.Species.NameId));
+                            sb.Append($" P[{string.Join(", ", dnaSample.Cryptid.PrimaryStats)}]");
+                            sb.Append($" S[{string.Join(", ", dnaSample.Cryptid.SecondaryStats)}]");
+                            sb.Append($" Hash: {dnaSample.Cryptid.RunicHash}");
+
+                            userPrompts.Add((sb.ToString(), () => dnaSampleSelection.OptionSelectedHandler(dnaSample)));
+                        }
+
                         break;
                     }
                 }

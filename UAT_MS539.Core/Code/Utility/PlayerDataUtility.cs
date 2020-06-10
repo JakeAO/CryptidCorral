@@ -117,6 +117,9 @@ namespace UAT_MS539.Core.Code.Utility
 
             public override Cryptid.Cryptid ReadJson(JsonReader reader, Type objectType, Cryptid.Cryptid existingValue, bool hasExistingValue, JsonSerializer serializer)
             {
+                if (reader.TokenType != JsonToken.StartObject)
+                    return null;
+                
                 var originalJson = JObject.Load(reader);
                 var speciesId = originalJson["Species"].Value<string>();
                 var colorId = originalJson["Color"].Value<string>();

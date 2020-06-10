@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.Food;
 using UAT_MS539.Core.Code.Utility;
 
@@ -43,8 +44,65 @@ namespace UAT_MS539.Components
             {
                 Food food = options[i];
 
+                // TODO Special Tooltip
                 ButtonWithIcon newButton = new ButtonWithIcon();
                 newButton.Setup(food.Definition.ArtId, locDatabase.Localize(food.Definition.NameId), () => callback(food));
+
+                newSelectionList.AddSelectable(newButton);
+            }
+            _stackPanel.Children.Add(newSelectionList);
+        }
+
+        public void AddBuySellSelection(IReadOnlyList<(Food, uint)> options, LocDatabase locDatabase, uint currentCoins, Action<Food> callback)
+        {
+            SelectionList newSelectionList = new SelectionList();
+            for (int i = 0; i < options.Count; i++)
+            {
+                Food food = options[i].Item1;
+                uint cost = options[i].Item2;
+
+                // TODO Special Tooltip
+                ButtonWithIcon newButton = new ButtonWithIcon();
+                newButton.Setup(
+                    food.Definition.ArtId,
+                    $"{locDatabase.Localize(food.Definition.NameId)} ({cost})",
+                    () => callback(food));
+
+                newSelectionList.AddSelectable(newButton);
+            }
+            _stackPanel.Children.Add(newSelectionList);
+        }
+
+        public void AddCryptidSelection(IReadOnlyList<Cryptid> options, LocDatabase locDatabase, Action<Cryptid> callback)
+        {
+            SelectionList newSelectionList = new SelectionList();
+            for (int i = 0; i < options.Count; i++)
+            {
+                Cryptid cryptid = options[i];
+
+                // TODO Special Tooltip
+                DefaultButton newButton = new DefaultButton();
+                newButton.Setup(
+                    $"{locDatabase.Localize(cryptid.Species.NameId)} (Age: {cryptid.AgeInDays})",
+                    () => callback(cryptid));
+
+                newSelectionList.AddSelectable(newButton);
+            }
+            _stackPanel.Children.Add(newSelectionList);
+        }
+        
+        public void AddDnaSampleSelection(IReadOnlyList<CryptidDnaSample> options, LocDatabase locDatabase, Action<CryptidDnaSample> callback)
+        {
+            SelectionList newSelectionList = new SelectionList();
+            for (int i = 0; i < options.Count; i++)
+            {
+                CryptidDnaSample dnaSample = options[i];
+
+                // TODO Special Tooltip
+                DefaultButton newButton = new DefaultButton();
+                newButton.Setup(
+                    $"{locDatabase.Localize(dnaSample.Cryptid.Species.NameId)} (Age: {dnaSample.Cryptid.AgeInDays})",
+                    () => callback(dnaSample));
 
                 newSelectionList.AddSelectable(newButton);
             }

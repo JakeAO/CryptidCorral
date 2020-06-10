@@ -71,6 +71,12 @@
       "en": "The sun is high on another day at the Corral. What should we do today?"
     }
   },
+  "Corral/Morning/NoCryptid": {
+    "LocId": "Corral/Morning/NoCryptid",
+    "TextByLang": {
+      "en": "It's too quiet here with no cryptid to train. Maybe we should head into town today."
+    }
+  },
   "Corral/Day/Welcome": {
     "LocId": "Corral/Day/Welcome",
     "TextByLang": {
@@ -162,9 +168,21 @@
     }
   },
   "Town/Nursery/SelectRune": {
-    "LocId": "Nursery/SelectRune",
+    "LocId": "Town/Nursery/SelectRune",
     "TextByLang": {
       "en": "Take your pick from these Runic Patterns we have available and we'll get you a new Cryptid to take home with you today."
+    }
+  },
+  "Town/Nursery/FullCorral": {
+    "LocId": "Town/Nursery/FullCorral",
+    "TextByLang": {
+      "en": "Oops, looks like your Corral is already full. You'll have to get rid of your current cryptid in order to adopt a new one."
+    }
+  },
+  "Town/Nursery/AdoptResult": {
+    "LocId": "Town/Nursery/AdoptResult",
+    "TextByLang": {
+      "en": "Nice, a new {cryptidSpecies}! It looks healthy, I'll send it back to your corral for you."
     }
   },
   "Town/Market/Welcome": {
@@ -173,10 +191,100 @@
       "en": "We get new stock everyday, so check in often."
     }
   },
+  "Town/Market/BuyPrompt": {
+    "LocId": "Town/Market/BuyPrompt",
+    "TextByLang": {
+      "en": "What're ya buyin?"
+    }
+  },
+  "Town/Market/SellPrompt": {
+    "LocId": "Town/Market/SellPrompt",
+    "TextByLang": {
+      "en": "Whadda ya got?"
+    }
+  },
   "Town/Lab/Welcome": {
     "LocId": "Town/Lab/Welcome",
     "TextByLang": {
       "en": "Welcome to the laboratory, what kind of science can we do for you today?"
+    }
+  },
+  "Town/Lab/FreezeResult": {
+    "LocId": "Town/Lab/FreezeResult",
+    "TextByLang": {
+      "en": "Your {species} has been frozen. They'll be safe here until you're ready to retrieve them."
+    }
+  },
+  "Town/Lab/FreezeFail": {
+    "LocId": "Town/Lab/FreezeFail",
+    "TextByLang": {
+      "en": "It doesn't looks like you have a cryptid in your corral. I can't freeze nothing."
+    }
+  },
+  "Town/Lab/ThawPrompt": {
+    "LocId": "Town/Lab/ThawPrompt",
+    "TextByLang": {
+      "en": "Select one of your frozen cryptids to thaw back out."
+    }
+  },
+  "Town/Lab/ThawResult": {
+    "LocId": "Town/Lab/ThawResult",
+    "TextByLang": {
+      "en": "Your {species} has been thawed. I'll send them on down to the corral for you."
+    }
+  },
+  "Town/Lab/ThawFail": {
+    "LocId": "Town/Lab/ThawFail",
+    "TextByLang": {
+      "en": "Doesn't looks like there's enough room at your corral to thaw out a cryptid, you'll have to freeze your companion to make room."
+    }
+  },
+  "Town/Lab/RetirePrompt": {
+    "LocId": "Town/Lab/RetirePrompt",
+    "TextByLang": {
+      "en": "The conversion process is irreversible, are you really sure you want to do this?"
+    }
+  },
+  "Town/Lab/RetireFail": {
+    "LocId": "Town/Lab/RetireFail",
+    "TextByLang": {
+      "en": "There's no cryptid in your corral, what are you trying to do here?"
+    }
+  },
+  "Town/Lab/RetireResult": {
+    "LocId": "Town/Lab/RetireResult",
+    "TextByLang": {
+      "en": "Your cryptid's been converted into a DNA sample. Don't worry, they'll live on in the future generations of fused cryptids you make."
+    }
+  },
+  "Town/Lab/FusePrompt1": {
+    "LocId": "Town/Lab/FusePrompt1",
+    "TextByLang": {
+      "en": "By fusing two DNA samples from retired cryptids you can create a new, more powerful one. Select a DNA sample to begin the fusion."
+    }
+  },
+  "Town/Lab/FusePrompt2": {
+    "LocId": "Town/Lab/FusePrompt2",
+    "TextByLang": {
+      "en": "Select a second DNA sample for the fusion."
+    }
+  },
+  "Town/Lab/FuseResult": {
+    "LocId": "Town/Lab/FuseResult",
+    "TextByLang": {
+      "en": "Your fusion resulted in a brand new {species}, how interesting. I'll send it along to the corral for you."
+    }
+  },
+  "Town/Lab/FuseFailCorralFull": {
+    "LocId": "Town/Lab/FuseFailCorralFull",
+    "TextByLang": {
+      "en": "You could perform a fusion, but there's no room on your corral for your new companion."
+    }
+  },
+  "Town/Lab/FuseFailTooFewSamples": {
+    "LocId": "Town/Lab/FuseFailTooFewSamples",
+    "TextByLang": {
+      "en": "You need at least two cryptid DNA samples to perform a fusion, but it doesn't look like you have enough."
     }
   },
   "Coliseum/Welcome": {
@@ -233,10 +341,28 @@
       "en": "Next"
     }
   },
+  "Button/Okay": {
+    "LocId": "Button/Okay",
+    "TextByLang": {
+      "en": "Okay"
+    }
+  },
   "Button/Back": {
     "LocId": "Button/Back",
     "TextByLang": {
       "en": "Back"
+    }
+  },
+  "Button/Cancel": {
+    "LocId": "Button/Cancel",
+    "TextByLang": {
+      "en": "Cancel"
+    }
+  },
+  "Button/Confirm": {
+    "LocId": "Button/Confirm",
+    "TextByLang": {
+      "en": "Confirm"
     }
   },
   "Button/Train": {
@@ -261,6 +387,12 @@
     "LocId": "Button/Rest",
     "TextByLang": {
       "en": "Rest"
+    }
+  },
+  "Button/Fuse": {
+    "LocId": "Button/Fuse",
+    "TextByLang": {
+      "en": "Fuse"
     }
   },
   "Button/Buy": {
