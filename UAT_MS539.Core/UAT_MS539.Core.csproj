@@ -22,9 +22,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Source\patternDatabase.json" />
-      <EmbeddedResource Include="Source\patternDatabase.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
       <None Remove="Source\foodDatabase.json" />
       <EmbeddedResource Include="Source\foodDatabase.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>

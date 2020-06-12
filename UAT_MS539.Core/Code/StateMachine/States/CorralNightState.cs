@@ -93,6 +93,15 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             _trainingData.CalculateExpIncreases(out var expIncreases, out var moraleIncrease);
 
+            uint staminaIncrease = 0;
+            int skillIndex = (int) EPrimaryStat.Skill;
+            if ((_activeCryptid.PrimaryStats[skillIndex] % 100) > ((_activeCryptid.PrimaryStats[skillIndex] + expIncreases[skillIndex]) % 100))
+            {
+                staminaIncrease = 1;
+                _activeCryptid.SecondaryStats[skillIndex]++;
+                _activeCryptid.CurrentStamina++;
+            }
+
             var primaryStatIncreases = new uint[(int) EPrimaryStat._Count];
             for (var i = 0; i < (int) EPrimaryStat._Count; i++)
             {
@@ -110,6 +119,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             var secondaryStatIncreases = new uint[(int) ESecondaryStat._Count];
             secondaryStatIncreases[(int) ESecondaryStat.Health] = healthIncrease;
+            secondaryStatIncreases[(int) ESecondaryStat.Stamina] = staminaIncrease;
 
             _activeCryptid.CurrentMorale += moraleIncrease;
 

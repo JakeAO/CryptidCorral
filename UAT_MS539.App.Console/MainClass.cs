@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.Food;
@@ -83,6 +84,43 @@ namespace UAT_MS539.ConsoleApp
 
                         break;
                     }
+                    case DisplayCryptidAdvancement cryptidAdvancement:
+                    {
+                        var cryptid = cryptidAdvancement.Cryptid;
+
+                        var sb = new StringBuilder(100);
+                        sb.AppendLine("[Cryptid Growth] = = = = = = =");
+                        for (var i = 0; i < (int) ESecondaryStat._Count; i++)
+                            sb.AppendLine(
+                                cryptidAdvancement.SecondaryStatChanges[i] > 0
+                                    ? $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i] - cryptidAdvancement.SecondaryStatChanges[i]} +{cryptidAdvancement.SecondaryStatChanges[i]}"
+                                    : $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
+                        for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                            sb.AppendLine(
+                                cryptidAdvancement.PrimaryStatChanges[i] > 0
+                                    ? $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i] - cryptidAdvancement.PrimaryStatChanges[i]} +{cryptidAdvancement.PrimaryStatChanges[i]}"
+                                    : $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]}");
+                        sb.AppendLine("= = = = = = = = = = = = = = = =");
+
+                        Console.WriteLine(sb.ToString());
+                        break;
+                    }
+                    case DisplayTrainingResults trainingResults:
+                    {
+                        var sb = new StringBuilder(100);
+                        sb.AppendLine("[Training Results] = = = = = = =");
+                        for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                        {
+                            if (trainingResults.TrainingPoints[i] > 0)
+                            {
+                                sb.AppendLine($"   {(EPrimaryStat) i}: +{trainingResults.TrainingPoints[i]} exp");
+                            }
+                        }
+                        sb.AppendLine("= = = = = = = = = = = = = = = =");
+                        
+                        Console.WriteLine(sb.ToString());
+                        break;
+                    }
                     case RunePatternSelection runePatternSelection:
                     {
                         foreach (var option in runePatternSelection.Options)
@@ -117,27 +155,6 @@ namespace UAT_MS539.ConsoleApp
 
                         break;
                     }
-                    case DisplayCryptidAdvancement cryptidAdvancement:
-                    {
-                        var cryptid = cryptidAdvancement.Cryptid;
-
-                        var sb = new StringBuilder(100);
-                        sb.AppendLine("[Cryptid Growth] = = = = = = =");
-                        for (var i = 0; i < (int) ESecondaryStat._Count; i++)
-                            sb.AppendLine(
-                                cryptidAdvancement.SecondaryStatChanges[i] > 0
-                                    ? $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i] - cryptidAdvancement.SecondaryStatChanges[i]} +{cryptidAdvancement.SecondaryStatChanges[i]}"
-                                    : $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
-                        for (var i = 0; i < (int) EPrimaryStat._Count; i++)
-                            sb.AppendLine(
-                                cryptidAdvancement.PrimaryStatChanges[i] > 0
-                                    ? $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i] - cryptidAdvancement.PrimaryStatChanges[i]} +{cryptidAdvancement.PrimaryStatChanges[i]}"
-                                    : $"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]}");
-                        sb.AppendLine("= = = = = = = = = = = = = = = =");
-
-                        Console.WriteLine(sb.ToString());
-                        break;
-                    }
                     case BuySellSelection buySellSelection:
                     {
                         foreach (var foodCostPair in buySellSelection.Options)
@@ -162,7 +179,7 @@ namespace UAT_MS539.ConsoleApp
 
                             if (food.MoraleBoost != 0) sb.Append($", Morale +{food.MoraleBoost}");
 
-                            userPrompts.Add((sb.ToString(), () => buySellSelection.OptionSelectedHandler(food)));
+                            userPrompts.Add((sb.ToString(), () => buySellSelection.OptionSelectedHandler(foodCostPair)));
                         }
 
                         break;
@@ -193,6 +210,44 @@ namespace UAT_MS539.ConsoleApp
                             sb.Append($" Hash: {dnaSample.Cryptid.RunicHash}");
 
                             userPrompts.Add((sb.ToString(), () => dnaSampleSelection.OptionSelectedHandler(dnaSample)));
+                        }
+
+                        break;
+                    }
+                    case TrainingSelection trainingSelection:
+                    {
+                        foreach (var trainingRegimen in trainingSelection.Options)
+                        {
+                            var sb = new StringBuilder(50);
+                            sb.Append($"{trainingRegimen.StaminaCost} stamina -> ");
+                            sb.Append(locDatabase.Localize(trainingRegimen.NameId));
+                            for (var i = 0; i < (int) EPrimaryStat._Count; i++)
+                            {
+                                uint minPoints = 0, maxPoints = 0;
+
+                                if (trainingRegimen.RandomStatIncreases.TryGetValue((EPrimaryStat) i, out var statBoost))
+                                {
+                                    minPoints = statBoost.Points.Min(x => x.Value);
+                                    maxPoints = statBoost.Points.Max(x => x.Value);
+                                }
+
+                                if (trainingRegimen.GuaranteedStatIncrease.TryGetValue((EPrimaryStat) i, out var guaranteedPoints))
+                                {
+                                    minPoints += guaranteedPoints;
+                                    maxPoints += guaranteedPoints;
+                                }
+
+                                if (minPoints != maxPoints)
+                                {
+                                    sb.Append($", {(EPrimaryStat) i} +{minPoints}-{maxPoints} exp");
+                                }
+                                else if (minPoints != 0)
+                                {
+                                    sb.Append($", {(EPrimaryStat) i} +{minPoints} exp");
+                                }
+                            }
+
+                            userPrompts.Add((sb.ToString(), () => trainingSelection.OptionSelectedHandler(trainingRegimen)));
                         }
 
                         break;

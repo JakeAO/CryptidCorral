@@ -6,5 +6,149 @@
     "G": 255,
     "B": 255,
     "A": 0 
+  },
+  "red": {
+    "ColorId": "red",
+    "NameId": "Color/Red",
+    "R": 255,
+    "G": 64,
+    "B": 64,
+    "A": 64
+  },
+  "lightRed": {
+    "ColorId": "lightRed",
+    "NameId": "Color/Red",
+    "R": 255,
+    "G": 128,
+    "B": 128,
+    "A": 64
+  },
+  "darkRed": {
+    "ColorId": "darkRed",
+    "NameId": "Color/Red",
+    "R": 128,
+    "G": 32,
+    "B": 32,
+    "A": 64
+  },
+  "green": {
+    "ColorId": "green",
+    "NameId": "Color/Green",
+    "R": 64,
+    "G": 255,
+    "B": 64,
+    "A": 64
+  },
+  "lightGreen": {
+    "ColorId": "lightGreen",
+    "NameId": "Color/Green",
+    "R": 128,
+    "G": 255,
+    "B": 128,
+    "A": 64
+  },
+  "darkGreen": {
+    "ColorId": "darkGreen",
+    "NameId": "Color/Green",
+    "R": 32,
+    "G": 128,
+    "B": 32,
+    "A": 64
+  },
+  "blue": {
+    "ColorId": "blue",
+    "NameId": "Color/Blue",
+    "R": 64,
+    "G": 64,
+    "B": 255,
+    "A": 64
+  },
+  "lightBlue": {
+    "ColorId": "lightBlue",
+    "NameId": "Color/Blue",
+    "R": 128,
+    "G": 128,
+    "B": 255,
+    "A": 64
+  },
+  "darkBlue": {
+    "ColorId": "darkBlue",
+    "NameId": "Color/Blue",
+    "R": 32,
+    "G": 32,
+    "B": 128,
+    "A": 64
+  },
+  "purple": {
+    "ColorId": "purple",
+    "NameId": "Color/Purple",
+    "R": 255,
+    "G": 64,
+    "B": 255,
+    "A": 64
+  },
+  "lightPurple": {
+    "ColorId": "lightPurple",
+    "NameId": "Color/Purple",
+    "R": 255,
+    "G": 128,
+    "B": 255,
+    "A": 64
+  },
+  "darkPurple": {
+    "ColorId": "darkPurple",
+    "NameId": "Color/Purple",
+    "R": 128,
+    "G": 32,
+    "B": 128,
+    "A": 64
+  },
+  "orange": {
+    "ColorId": "orange",
+    "NameId": "Color/Orange",
+    "R": 255,
+    "G": 255,
+    "B": 64,
+    "A": 64
+  },
+  "lightOrange": {
+    "ColorId": "lightOrange",
+    "NameId": "Color/Orange",
+    "R": 255,
+    "G": 255,
+    "B": 128,
+    "A": 64
+  },
+  "darkOrange": {
+    "ColorId": "darkOrange",
+    "NameId": "Color/Orange",
+    "R": 128,
+    "G": 128,
+    "B": 32,
+    "A": 64
+  },
+  "white": {
+    "ColorId": "white",
+    "NameId": "Color/White",
+    "R": 255,
+    "G": 255,
+    "B": 255,
+    "A": 64
+  },
+  "grey": {
+    "ColorId": "grey",
+    "NameId": "Color/Grey",
+    "R": 128,
+    "G": 128,
+    "B": 128,
+    "A": 64
+  },
+  "black": {
+    "ColorId": "black",
+    "NameId": "Color/Black",
+    "R": 32,
+    "G": 32,
+    "B": 32,
+    "A": 128
   }
 }

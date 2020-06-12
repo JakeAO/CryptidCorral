@@ -10,10 +10,11 @@ namespace UAT_MS539.Core.Code.Training
         public string NameId;
         
         public uint StaminaCost;
+        public uint SpawnRate = 1;
         
         public Dictionary<EPrimaryStat, uint> GuaranteedStatIncrease;
         public Dictionary<EPrimaryStat, DropCalculation<uint>> RandomStatIncreases;
-
+        
         public TrainingRegimen(
             string trainingId, string nameId, uint staminaCost,
             Dictionary<EPrimaryStat, uint> guaranteedStatIncrease,

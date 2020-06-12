@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="UAT_MS539.Components.CryptidTooltip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="228" d:DesignWidth="203">
+    <Canvas Background="#FF9E9E9E" Width="203" Height="228">
+        <StackPanel Margin="3">
+            <Label x:Name="_speciesLabel" Content="Species" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="22" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" />
+            <GroupBox Header="Status" FontSize="12">
+                <StackPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Health" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_currentHealthLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                        <Label Content="/" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" Height="15" />
+                        <Label x:Name="_maxHealthLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Stamina" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_currentStaminaLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                        <Label Content="/" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" Height="15" />
+                        <Label x:Name="_maxStaminaLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Renown" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_renownLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Age" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_ageLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" HorizontalAlignment="Left" />
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Attributes" FontSize="12">
+                <StackPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Strength" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_strengthLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_strengthProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Speed" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_speedLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_speedProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Vitals" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_vitalityLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_vitalityProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Skill" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_skillLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_skillProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Smarts" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_smartsLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_smartsProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Height="15" Content="Luck" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Sketch 3D" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="65" />
+                        <Label x:Name="_luckLabel" Height="15" Content="999" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" Padding="0" Width="30" />
+                        <ProgressBar x:Name="_luckProgress" DockPanel.Dock="Right" Height="10" Width="90" HorizontalAlignment="Right" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}" Margin="0,0,0,-4" BorderThickness="1" Value="13" />
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Canvas>
+</UserControl>

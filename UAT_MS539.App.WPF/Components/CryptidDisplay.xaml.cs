@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using UAT_MS539.Core.Code.Cryptid;
+using UAT_MS539.Core.Code.Utility;
 
 namespace UAT_MS539.Components
 {
@@ -15,7 +16,7 @@ namespace UAT_MS539.Components
             InitializeComponent();
         }
 
-        public void SetCryptid(Cryptid cryptid)
+        public void SetCryptid(Cryptid cryptid, LocDatabase locDatabase)
         {
             if (cryptid != null)
             {
@@ -30,6 +31,8 @@ namespace UAT_MS539.Components
 
                 ColorDefinition colorDef = cryptid.Color;
                 _colorFill.Color = Color.FromArgb(colorDef.A, colorDef.R, colorDef.G, colorDef.B);
+
+                _tooltipPanel.SetCryptid(cryptid, locDatabase);
 
                 _cryptidScale.ScaleX = 1; // TODO: Flip horizontally once in a while?
 

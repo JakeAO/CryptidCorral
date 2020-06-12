@@ -30,7 +30,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                 FoodDatabase foodDatabase = context.Get<FoodDatabase>();
 
                 _selectionForDay = (_playerData.Day, new List<(Food.Food, uint)>(10));
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < _selectionForDay.Item2.Capacity; i++)
                 {
                     float randPerc = (float) random.NextDouble();
                     string foodId = foodDatabase.FoodSpawnRate.Evaluate(randPerc);
@@ -75,9 +75,8 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             });
         }
 
-        private void OnBuySelected_FoodSelected(Food.Food food)
+        private void OnBuySelected_FoodSelected((Food.Food, uint) foodCostPair)
         {
-            var foodCostPair = _selectionForDay.Item2.Find(x => x.Item1 == food);
             if (foodCostPair != default &&
                 foodCostPair.Item2 <= _playerData.Coins)
             {
@@ -104,10 +103,10 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             });
         }
 
-        private void OnSellSelected_FoodSelected(Food.Food food)
+        private void OnSellSelected_FoodSelected((Food.Food, uint) foodCostPair)
         {
-            _playerData.FoodInventory.Remove(food);
-            _playerData.Coins += GetFoodSellCost(food);
+            _playerData.FoodInventory.Remove(foodCostPair.Item1);
+            _playerData.Coins += foodCostPair.Item2;
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[] {new DisplayCoins(_playerData.Coins)});
 

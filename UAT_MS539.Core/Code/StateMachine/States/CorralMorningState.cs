@@ -66,7 +66,8 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             var interactions = new List<IInteraction>
             {
                 new Dialog("Corral/Morning/ActivityPrompt"),
-                new Option("Button/ToTown", OnTownSelected)
+                new Option("Button/Rest", OnRestSelected),
+                new Option("Button/ToTown", OnTownSelected),
             };
 
             if (_playerData.ActiveCryptid != null) interactions.Add(new Option("Button/Train", OnTrainingSelected));
@@ -76,11 +77,40 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _sharedContext.Get<InteractionEventRaised>().Fire(interactions);
         }
 
+        private void OnRestSelected()
+        {
+            void OnNextSelected()
+            {
+                _sharedContext.Get<StateMachine>().ChangeState<CorralNightState>();
+            }
+
+            if (_playerData.ActiveCryptid != null)
+            {
+                // TODO REST STUFF
+                // INCREASE MORALE SOME?
+                // RESTORE HEALTH SOME?
+
+                _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
+                {
+                    new Dialog("Corral/Day/RestResult"),
+                    new Option("Button/Next", OnNextSelected)
+                });
+            }
+            else
+            {
+                _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
+                {
+                    new Dialog("Corral/Day/RestResultNoCryptid"),
+                    new Option("Button/Next", OnNextSelected)
+                });
+            }
+        }
+
         private void OnTrainingSelected()
         {
             _sharedContext.Get<StateMachine>().ChangeState<CorralDayState>();
         }
-
+        
         private void OnTownSelected()
         {
             _sharedContext.Get<StateMachine>().ChangeState<TownMainState>();

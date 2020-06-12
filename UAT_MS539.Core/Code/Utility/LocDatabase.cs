@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Newtonsoft.Json;
@@ -62,6 +63,11 @@ namespace UAT_MS539.Core.Code.Utility
                     return;
                 _currentLangId = value;
             }
+        }
+
+        public string Localize<T>(T value) where T : Enum
+        {
+            return Localize($"{typeof(T).Name}/{value}");
         }
 
         public string Localize(string locId, IReadOnlyDictionary<string, string> locParams = null)

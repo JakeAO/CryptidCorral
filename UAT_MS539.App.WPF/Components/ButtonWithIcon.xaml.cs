@@ -14,19 +14,22 @@ namespace UAT_MS539.Components
             InitializeComponent();
         }
 
-        public void Setup(BitmapImage iconImage, string localizedText, Action callback)
+        public void Setup(BitmapImage iconImage, string localizedText, Action callback, string tooltipContent = null)
         {
             _callback = callback;
             _icon.Source = iconImage;
             _label.Text = localizedText;
+            _tooltipLabel.Content = tooltipContent;
+            if (string.IsNullOrWhiteSpace(tooltipContent))
+                _button.ToolTip = null;
         }
 
-        public void Setup(string iconPath, string localizedText, Action callback)
+        public void Setup(string iconPath, string localizedText, Action callback, string tooltipContent = null)
         {
             Uri uri = new Uri(iconPath, UriKind.Relative);
             BitmapImage iconImage = new BitmapImage(uri);
 
-            Setup(iconImage, localizedText, callback);
+            Setup(iconImage, localizedText, callback, tooltipContent);
         }
 
         private void OnClick(object sender, RoutedEventArgs e)

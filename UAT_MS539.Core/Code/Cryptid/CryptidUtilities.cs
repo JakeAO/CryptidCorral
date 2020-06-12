@@ -7,7 +7,7 @@ namespace UAT_MS539.Core.Code.Cryptid
 {
     public static class CryptidUtilities
     {
-        private const float MAX_VAL = 575f;
+        public const float MAX_STAT_VAL = 575f;
 
         public static Cryptid CreateCryptid(
             string runicHash,
@@ -19,7 +19,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             // Calculate Species
             var speciesSubstring = runicHash.Substring(0, 2);
             var speciesKey = NumberEncoder.Decode(speciesSubstring, NumberEncoder.Base24Encoding);
-            var speciesPercent = speciesKey / MAX_VAL;
+            var speciesPercent = speciesKey / MAX_STAT_VAL;
             var speciesId = speciesDatabase.DropCalculation.Evaluate(speciesPercent);
             if (!speciesDatabase.SpeciesById.TryGetValue(speciesId, out var species))
                 throw new InvalidOperationException($"SpeciesId \"{speciesId}\" ({speciesKey}) did not exist in SpeciesDatabase.");
@@ -27,7 +27,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             // Calculate Color
             var colorSubstring = runicHash.Substring(2, 2);
             var colorKey = NumberEncoder.Decode(colorSubstring, NumberEncoder.Base24Encoding);
-            var colorPercent = colorKey / MAX_VAL;
+            var colorPercent = colorKey / MAX_STAT_VAL;
             var colorId = species.ColorFormula.Evaluate(colorPercent);
             if (!colorDatabase.ColorById.TryGetValue(colorId, out var color))
                 throw new InvalidOperationException($"ColorId \"{colorId}\" ({colorKey}) did not exist in ColorDatabase");
@@ -39,7 +39,7 @@ namespace UAT_MS539.Core.Code.Cryptid
                 var startIdx = 4 + i * 2;
                 var statSubstring = runicHash.Substring(startIdx, 2);
                 var statKey = NumberEncoder.Decode(statSubstring, NumberEncoder.Base24Encoding);
-                var statPercent = statKey / MAX_VAL;
+                var statPercent = statKey / MAX_STAT_VAL;
                 primaryStats[i] = species.StartingStatFormulas[(EPrimaryStat) i].Evaluate(statPercent);
             }
 
@@ -116,7 +116,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             Debug.Assert(healthMultiplierHash.Length == 2);
 
             var healthMultiplierKey = NumberEncoder.Decode(healthMultiplierHash, NumberEncoder.Base24Encoding);
-            var healthMultiplierPercent = healthMultiplierKey / MAX_VAL;
+            var healthMultiplierPercent = healthMultiplierKey / MAX_STAT_VAL;
             var healthMultiplier = healthMultiplierPercent.Remap(0f, 1f, MIN_HEALTH_MULTIPLIER, MAX_HEALTH_MULTIPLIER);
             return (uint) Math.Round(vitalityStat * healthMultiplier);
         }
@@ -129,7 +129,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             Debug.Assert(moraleHash.Length == 2);
 
             var moraleKey = NumberEncoder.Decode(moraleHash, NumberEncoder.Base24Encoding);
-            var moralePercent = moraleKey / MAX_VAL;
+            var moralePercent = moraleKey / MAX_STAT_VAL;
             return (uint) Math.Round(moralePercent.Remap(0f, 1f, MIN_MORALE, MAX_MORALE));
         }
 
@@ -141,7 +141,7 @@ namespace UAT_MS539.Core.Code.Cryptid
             Debug.Assert(lifespanHash.Length == 2);
 
             var lifespanKey = NumberEncoder.Decode(lifespanHash, NumberEncoder.Base24Encoding);
-            var lifespanPercent = lifespanKey / MAX_VAL;
+            var lifespanPercent = lifespanKey / MAX_STAT_VAL;
             return (uint) Math.Round(lifespanPercent.Remap(0f, 1f, MIN_LIFESPAN_DAYS, MAX_LIFESPAN_DAYS));
         }
     }

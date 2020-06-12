@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.Utility;
 
@@ -16,37 +17,37 @@ namespace UAT_MS539.Core.Code.Food
             {
                 {
                     EPrimaryStat.Strength, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 },
                 {
                     EPrimaryStat.Vitality, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 },
                 {
                     EPrimaryStat.Speed, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 },
                 {
                     EPrimaryStat.Smarts, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 },
                 {
                     EPrimaryStat.Skill, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 },
                 {
                     EPrimaryStat.Luck, new DropCalculation<float>(
-                        new DropCalculation<float>.Point(1f, 10),
+                        new DropCalculation<float>.Point(1f, 6),
                         new DropCalculation<float>.Point(1.1f, 3),
                         new DropCalculation<float>.Point(1.2f, 1))
                 }
@@ -55,7 +56,13 @@ namespace UAT_MS539.Core.Code.Food
 
         public static Food CreateBasicRation()
         {
-            return CreateFood(_basicRationDefinition);
+            Food newFood;
+            do
+            {
+                newFood = CreateFood(_basicRationDefinition);
+            } while (newFood.MultipliersByStat.Values.All(x => x == 1f));
+
+            return newFood;
         }
 
         public static Food CreateFood(FoodDefinition definition)

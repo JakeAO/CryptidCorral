@@ -6,10 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="180">
     <StackPanel x:Name="stackPanel">
-        <Button Width="{Binding Width, ElementName=userControl}" Height="{Binding Height, ElementName=userControl}" Click="OnClick">
+        <Button x:Name="_button" Width="{Binding Width, ElementName=userControl}" Height="{Binding Height, ElementName=userControl}" Click="OnClick">
             <Viewbox Margin="2" MaxWidth="180" MaxHeight="32">
                 <TextBlock x:Name="_label" FontSize="20" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Text="[Button Text]" />
             </Viewbox>
+            <Button.ToolTip>
+                <Label x:Name="_tooltipLabel" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" />
+            </Button.ToolTip>
         </Button>
     </StackPanel>
 </UserControl>

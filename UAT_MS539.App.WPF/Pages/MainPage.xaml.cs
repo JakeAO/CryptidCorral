@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using UAT_MS539.Code;
+using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.StateMachine;
 using UAT_MS539.Core.Code.StateMachine.Interactions;
 using UAT_MS539.Core.Code.StateMachine.States;
@@ -50,7 +51,7 @@ namespace UAT_MS539.Pages
             _locationLabel.Content = _locDatabase.Localize(state.LocationLocId);
             _currencyLabel.Content = playerData.Coins.ToString();
 
-            _cryptidDisplay.SetCryptid(playerData.ActiveCryptid);
+            _cryptidDisplay.SetCryptid(playerData.ActiveCryptid, _locDatabase);
 
             if (_backgroundPathByStateType.TryGetValue(state.GetType(), out string bgImagePath))
             {
@@ -71,16 +72,43 @@ namespace UAT_MS539.Pages
                 _dialogBox.Visibility = System.Windows.Visibility.Hidden;
             }
 
-            LocDatabase locDatabase = _sharedContext.Get<LocDatabase>();
-
+            List<string> dialogLines = new List<string>(5);
             foreach (IInteraction interaction in interactions)
             {
                 switch (interaction)
                 {
                     case Dialog dialog:
                     {
-                        _dialogBox.SetLabel(locDatabase.Localize(dialog.LocId, dialog.LocParams));
-                        _dialogBox.Visibility = System.Windows.Visibility.Visible;
+                        dialogLines.Add(_locDatabase.Localize(dialog.LocId, dialog.LocParams));
+                        break;
+                    }
+                    case DisplayTrainingResults displayTrainingResults:
+                    {
+                        for (int i = 0; i < (int) EPrimaryStat._Count; i++)
+                        {
+                            if (displayTrainingResults.TrainingPoints[i] > 0)
+                            {
+                                dialogLines.Add(_locDatabase.Localize($"{nameof(EPrimaryStat)}/{(EPrimaryStat) i}") + $" +{displayTrainingResults.TrainingPoints[i]} exp");
+                            }
+                        }
+                        break;
+                    }
+                    case DisplayCryptidAdvancement displayCryptidAdvancement:
+                    {
+                        for (int i = 0; i < (int) ESecondaryStat._Count; i++)
+                        {
+                            if (displayCryptidAdvancement.SecondaryStatChanges[i] > 0)
+                            {
+                                dialogLines.Add(_locDatabase.Localize($"{nameof(ESecondaryStat)}/{(ESecondaryStat) i}") + $" +{displayCryptidAdvancement.SecondaryStatChanges[i]}");
+                            }
+                        }
+                        for (int i = 0; i < (int) EPrimaryStat._Count; i++)
+                        {
+                            if (displayCryptidAdvancement.PrimaryStatChanges[i] > 0)
+                            {
+                                dialogLines.Add(_locDatabase.Localize($"{nameof(EPrimaryStat)}/{(EPrimaryStat) i}") + $" +{displayCryptidAdvancement.PrimaryStatChanges[i]}");
+                            }
+                        }
                         break;
                     }
                     case DisplayCoins displayCoins:
@@ -90,13 +118,13 @@ namespace UAT_MS539.Pages
                     }
                     case DisplayCryptid displayCryptid:
                     {
-                        _cryptidDisplay.SetCryptid(displayCryptid.Cryptid);
+                        _cryptidDisplay.SetCryptid(displayCryptid.Cryptid, _locDatabase);
                         break;
                     }
                     case Option option:
                     {
                         _optionsList.AddButton(
-                            locDatabase.Localize(option.LocId),
+                            _locDatabase.Localize(option.LocId),
                             () =>
                             {
                                 EndInteraction();
@@ -120,7 +148,7 @@ namespace UAT_MS539.Pages
                     {
                         _optionsList.AddFoodSelection(
                             foodSelection.Options,
-                            _sharedContext.Get<LocDatabase>(),
+                            _locDatabase,
                             (selectedOption) =>
                             {
                                 EndInteraction();
@@ -132,7 +160,7 @@ namespace UAT_MS539.Pages
                     {
                         _optionsList.AddBuySellSelection(
                             buySellSelection.Options,
-                            _sharedContext.Get<LocDatabase>(),
+                            _locDatabase,
                             _sharedContext.Get<PlayerData>().Coins,
                             (selectedOption) =>
                             {
@@ -145,7 +173,7 @@ namespace UAT_MS539.Pages
                     {
                         _optionsList.AddCryptidSelection(
                             cryptidSelection.Options,
-                            _sharedContext.Get<LocDatabase>(),
+                            _locDatabase,
                             (selectedOption) =>
                             {
                                 EndInteraction();
@@ -157,7 +185,7 @@ namespace UAT_MS539.Pages
                     {
                         _optionsList.AddDnaSampleSelection(
                             dnaSampleSelection.Options,
-                            _sharedContext.Get<LocDatabase>(),
+                            _locDatabase,
                             (selectedOption) =>
                             {
                                 EndInteraction();
@@ -165,7 +193,25 @@ namespace UAT_MS539.Pages
                             });
                         break;
                     }
+                    case TrainingSelection trainingSelection:
+                    {
+                        _optionsList.AddTrainingSelection(
+                            trainingSelection.Options,
+                            _locDatabase,
+                            (selectedOption) =>
+                            {
+                                EndInteraction();
+                                trainingSelection.OptionSelectedHandler?.Invoke(selectedOption);
+                            });
+                        break;
+                    }
                 }
+            }
+
+            if (dialogLines.Count > 0)
+            {
+                _dialogBox.SetLabel(string.Join(Environment.NewLine, dialogLines));
+                _dialogBox.Visibility = System.Windows.Visibility.Visible;
             }
         }
     }

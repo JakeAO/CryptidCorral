@@ -89,6 +89,18 @@
       "en": "Which training regimen should we go with?"
     }
   },
+  "Corral/Day/TrainingPromptTooTired": {
+    "LocId": "Corral/Day/TrainingPromptTooTired",
+    "TextByLang": {
+      "en": "Your cryptid is too tired for that training regimen."
+    }
+  },
+  "Corral/Day/RemainingStamina": {
+    "LocId": "Corral/Day/RemainingStamina",
+    "TextByLang": {
+      "en": "(Current Stamina: {stamina})"
+    }
+  },
   "Corral/Day/RestResult": {
     "LocId": "Corral/Day/RestResult",
     "TextByLang": {
@@ -473,16 +485,676 @@
       "en": "Nursery"
     }
   },
-  "Cryptid/Borkin": {
-    "LocId": "Cryptid/Borkin",
+  "Tooltip/TrainingBonus": {
+    "LocId": "Tooltip/TrainingBonus",
+    "TextByLang": {
+      "en": "Training Bonus"
+    }
+  },
+  "Tooltip/TrainingMultiplier": {
+    "LocId": "Tooltip/TrainingMultiplier",
+    "TextByLang": {
+      "en": "Training Multiplier"
+    }
+  },
+  "Tooltip/TrainingNoBonus": {
+    "LocId": "Tooltip/TrainingNoBonus",
+    "TextByLang": {
+      "en": "No Training Bonus"
+    }
+  },
+  "Cryptid/00": {
+    "LocId": "Cryptid/00",
+    "TextByLang": {
+      "en": "Orpus"
+    }
+  },
+  "Cryptid/01": {
+    "LocId": "Cryptid/01",
+    "TextByLang": {
+      "en": "Chippin"
+    }
+  },
+  "Cryptid/02": {
+    "LocId": "Cryptid/02",
+    "TextByLang": {
+      "en": "Blep"
+    }
+  },
+  "Cryptid/03": {
+    "LocId": "Cryptid/03",
+    "TextByLang": {
+      "en": "Turfle"
+    }
+  },
+  "Cryptid/04": {
+    "LocId": "Cryptid/04",
+    "TextByLang": {
+      "en": "Aeee"
+    }
+  },
+  "Cryptid/05": {
+    "LocId": "Cryptid/05",
+    "TextByLang": {
+      "en": "Owl"
+    }
+  },
+  "Cryptid/06": {
+    "LocId": "Cryptid/06",
+    "TextByLang": {
+      "en": "Gront"
+    }
+  },
+  "Cryptid/07": {
+    "LocId": "Cryptid/07",
+    "TextByLang": {
+      "en": "Sprid"
+    }
+  },
+  "Cryptid/08": {
+    "LocId": "Cryptid/08",
+    "TextByLang": {
+      "en": "Durdol"
+    }
+  },
+  "Cryptid/09": {
+    "LocId": "Cryptid/09",
+    "TextByLang": {
+      "en": "Leerch"
+    }
+  },
+  "Cryptid/10": {
+    "LocId": "Cryptid/10",
+    "TextByLang": {
+      "en": "Battak"
+    }
+  },
+  "Cryptid/11": {
+    "LocId": "Cryptid/11",
+    "TextByLang": {
+      "en": "Bri'an"
+    }
+  },
+  "Cryptid/12": {
+    "LocId": "Cryptid/12",
+    "TextByLang": {
+      "en": "Hodge"
+    }
+  },
+  "Cryptid/13": {
+    "LocId": "Cryptid/13",
+    "TextByLang": {
+      "en": "Snorph"
+    }
+  },
+  "Cryptid/14": {
+    "LocId": "Cryptid/14",
+    "TextByLang": {
+      "en": "Strider"
+    }
+  },
+  "Cryptid/15": {
+    "LocId": "Cryptid/15",
+    "TextByLang": {
+      "en": "Molly"
+    }
+  },
+  "Cryptid/16": {
+    "LocId": "Cryptid/16",
+    "TextByLang": {
+      "en": "Kreech"
+    }
+  },
+  "Cryptid/17": {
+    "LocId": "Cryptid/17",
+    "TextByLang": {
+      "en": "Ravi"
+    }
+  },
+  "Cryptid/18": {
+    "LocId": "Cryptid/18",
+    "TextByLang": {
+      "en": "Bepebe"
+    }
+  },
+  "Cryptid/19": {
+    "LocId": "Cryptid/19",
+    "TextByLang": {
+      "en": "Elman"
+    }
+  },
+  "Cryptid/20": {
+    "LocId": "Cryptid/20",
+    "TextByLang": {
+      "en": "Eynop"
+    }
+  },
+  "Cryptid/21": {
+    "LocId": "Cryptid/21",
+    "TextByLang": {
+      "en": "Fluttre"
+    }
+  },
+  "Cryptid/22": {
+    "LocId": "Cryptid/22",
+    "TextByLang": {
+      "en": "Shelder"
+    }
+  },
+  "Cryptid/23": {
+    "LocId": "Cryptid/23",
+    "TextByLang": {
+      "en": "Chamelo"
+    }
+  },
+  "Cryptid/24": {
+    "LocId": "Cryptid/24",
+    "TextByLang": {
+      "en": "Scyrab"
+    }
+  },
+  "Cryptid/25": {
+    "LocId": "Cryptid/25",
+    "TextByLang": {
+      "en": "Domomon"
+    }
+  },
+  "Cryptid/26": {
+    "LocId": "Cryptid/26",
+    "TextByLang": {
+      "en": "Blech"
+    }
+  },
+  "Cryptid/27": {
+    "LocId": "Cryptid/27",
+    "TextByLang": {
+      "en": "Slidler"
+    }
+  },
+  "Cryptid/28": {
+    "LocId": "Cryptid/28",
+    "TextByLang": {
+      "en": "Skorpix"
+    }
+  },
+  "Cryptid/29": {
+    "LocId": "Cryptid/29",
+    "TextByLang": {
+      "en": "Fungeoni"
+    }
+  },
+  "Cryptid/30": {
+    "LocId": "Cryptid/30",
+    "TextByLang": {
+      "en": "Screamdee"
+    }
+  },
+  "Cryptid/31": {
+    "LocId": "Cryptid/31",
+    "TextByLang": {
+      "en": "Oxon"
+    }
+  },
+  "Cryptid/32": {
+    "LocId": "Cryptid/32",
+    "TextByLang": {
+      "en": "Q'ik Ik"
+    }
+  },
+  "Cryptid/33": {
+    "LocId": "Cryptid/33",
+    "TextByLang": {
+      "en": "Laliana"
+    }
+  },
+  "Cryptid/34": {
+    "LocId": "Cryptid/34",
+    "TextByLang": {
+      "en": "Bercha"
+    }
+  },
+  "Cryptid/35": {
+    "LocId": "Cryptid/35",
+    "TextByLang": {
+      "en": "Goblii"
+    }
+  },
+  "Cryptid/36": {
+    "LocId": "Cryptid/36",
+    "TextByLang": {
+      "en": "Slumbero"
+    }
+  },
+  "Cryptid/37": {
+    "LocId": "Cryptid/37",
+    "TextByLang": {
+      "en": "Bathul"
+    }
+  },
+  "Cryptid/38": {
+    "LocId": "Cryptid/38",
+    "TextByLang": {
+      "en": "Lobtobsa"
+    }
+  },
+  "Cryptid/39": {
+    "LocId": "Cryptid/39",
+    "TextByLang": {
+      "en": "Gary"
+    }
+  },
+  "Cryptid/40": {
+    "LocId": "Cryptid/40",
+    "TextByLang": {
+      "en": "Derp"
+    }
+  },
+  "Cryptid/41": {
+    "LocId": "Cryptid/41",
+    "TextByLang": {
+      "en": "Frankly"
+    }
+  },
+  "Cryptid/42": {
+    "LocId": "Cryptid/42",
+    "TextByLang": {
+      "en": "Snalem"
+    }
+  },
+  "Cryptid/43": {
+    "LocId": "Cryptid/43",
+    "TextByLang": {
+      "en": "Raventa"
+    }
+  },
+  "Cryptid/44": {
+    "LocId": "Cryptid/44",
+    "TextByLang": {
+      "en": "Squiddan"
+    }
+  },
+  "Cryptid/45": {
+    "LocId": "Cryptid/45",
+    "TextByLang": {
+      "en": "Mowglom"
+    }
+  },
+  "Cryptid/46": {
+    "LocId": "Cryptid/46",
+    "TextByLang": {
+      "en": "Greacher"
+    }
+  },
+  "Cryptid/47": {
+    "LocId": "Cryptid/47",
+    "TextByLang": {
+      "en": "Monkiki"
+    }
+  },
+  "Cryptid/48": {
+    "LocId": "Cryptid/48",
+    "TextByLang": {
+      "en": "Moldovar"
+    }
+  },
+  "Cryptid/49": {
+    "LocId": "Cryptid/49",
+    "TextByLang": {
+      "en": "Jawmjaw"
+    }
+  },
+  "Cryptid/50": {
+    "LocId": "Cryptid/50",
+    "TextByLang": {
+      "en": "Seabrine"
+    }
+  },
+  "Cryptid/51": {
+    "LocId": "Cryptid/51",
+    "TextByLang": {
+      "en": "Siltner"
+    }
+  },
+  "Cryptid/52": {
+    "LocId": "Cryptid/52",
+    "TextByLang": {
+      "en": "Snekesnek"
+    }
+  },
+  "Cryptid/53": {
+    "LocId": "Cryptid/53",
+    "TextByLang": {
+      "en": "Borborigga"
+    }
+  },
+  "Cryptid/54": {
+    "LocId": "Cryptid/54",
+    "TextByLang": {
+      "en": "Spinedor"
+    }
+  },
+  "Cryptid/55": {
+    "LocId": "Cryptid/55",
+    "TextByLang": {
+      "en": "Stitch"
+    }
+  },
+  "Cryptid/56": {
+    "LocId": "Cryptid/56",
+    "TextByLang": {
+      "en": "Rastafrog"
+    }
+  },
+  "Cryptid/57": {
+    "LocId": "Cryptid/57",
+    "TextByLang": {
+      "en": "Aishavit"
+    }
+  },
+  "Cryptid/58": {
+    "LocId": "Cryptid/58",
+    "TextByLang": {
+      "en": "Fluttony"
+    }
+  },
+  "Cryptid/59": {
+    "LocId": "Cryptid/59",
+    "TextByLang": {
+      "en": "Larvello"
+    }
+  },
+  "Cryptid/60": {
+    "LocId": "Cryptid/60",
+    "TextByLang": {
+      "en": "Asblasta"
+    }
+  },
+  "Cryptid/61": {
+    "LocId": "Cryptid/61",
+    "TextByLang": {
+      "en": "D'omdapunch"
+    }
+  },
+  "Cryptid/62": {
+    "LocId": "Cryptid/62",
+    "TextByLang": {
+      "en": "Mibaby"
+    }
+  },
+  "Cryptid/63": {
+    "LocId": "Cryptid/63",
+    "TextByLang": {
+      "en": "Lemurrne"
+    }
+  },
+  "Cryptid/64": {
+    "LocId": "Cryptid/64",
+    "TextByLang": {
+      "en": "Beholdus"
+    }
+  },
+  "Cryptid/65": {
+    "LocId": "Cryptid/65",
+    "TextByLang": {
+      "en": "Listika"
+    }
+  },
+  "Cryptid/66": {
+    "LocId": "Cryptid/66",
+    "TextByLang": {
+      "en": "Angler"
+    }
+  },
+  "Cryptid/67": {
+    "LocId": "Cryptid/67",
     "TextByLang": {
       "en": "Borkin"
+    }
+  },
+  "Cryptid/68": {
+    "LocId": "Cryptid/68",
+    "TextByLang": {
+      "en": "Linus"
+    }
+  },
+  "Cryptid/69": {
+    "LocId": "Cryptid/69",
+    "TextByLang": {
+      "en": "Scornorus"
+    }
+  },
+  "Cryptid/70": {
+    "LocId": "Cryptid/70",
+    "TextByLang": {
+      "en": "Elderbon"
+    }
+  },
+  "Cryptid/71": {
+    "LocId": "Cryptid/71",
+    "TextByLang": {
+      "en": "Fiddler"
+    }
+  },
+  "Cryptid/72": {
+    "LocId": "Cryptid/72",
+    "TextByLang": {
+      "en": "Spidin"
+    }
+  },
+  "Cryptid/73": {
+    "LocId": "Cryptid/73",
+    "TextByLang": {
+      "en": "Jelle"
+    }
+  },
+  "Cryptid/74": {
+    "LocId": "Cryptid/74",
+    "TextByLang": {
+      "en": "Snopdor"
+    }
+  },
+  "Cryptid/75": {
+    "LocId": "Cryptid/75",
+    "TextByLang": {
+      "en": "Chikbobo"
+    }
+  },
+  "Cryptid/76": {
+    "LocId": "Cryptid/76",
+    "TextByLang": {
+      "en": "Cacti"
+    }
+  },
+  "Cryptid/77": {
+    "LocId": "Cryptid/77",
+    "TextByLang": {
+      "en": "Xelmas"
+    }
+  },
+  "Cryptid/78": {
+    "LocId": "Cryptid/78",
+    "TextByLang": {
+      "en": "Browdin"
+    }
+  },
+  "Cryptid/79": {
+    "LocId": "Cryptid/79",
+    "TextByLang": {
+      "en": "Botflid"
+    }
+  },
+  "Cryptid/80": {
+    "LocId": "Cryptid/80",
+    "TextByLang": {
+      "en": "Quidless"
+    }
+  },
+  "Cryptid/81": {
+    "LocId": "Cryptid/81",
+    "TextByLang": {
+      "en": "Mossgo"
+    }
+  },
+  "Cryptid/82": {
+    "LocId": "Cryptid/82",
+    "TextByLang": {
+      "en": "Tortoisse"
+    }
+  },
+  "Cryptid/83": {
+    "LocId": "Cryptid/83",
+    "TextByLang": {
+      "en": "Carl"
+    }
+  },
+  "Cryptid/84": {
+    "LocId": "Cryptid/84",
+    "TextByLang": {
+      "en": "Cryptos"
+    }
+  },
+  "Cryptid/85": {
+    "LocId": "Cryptid/85",
+    "TextByLang": {
+      "en": "Piglin"
+    }
+  },
+  "Cryptid/86": {
+    "LocId": "Cryptid/86",
+    "TextByLang": {
+      "en": "Cheepche"
+    }
+  },
+  "Cryptid/87": {
+    "LocId": "Cryptid/87",
+    "TextByLang": {
+      "en": "Lovcraf"
+    }
+  },
+  "Cryptid/88": {
+    "LocId": "Cryptid/88",
+    "TextByLang": {
+      "en": "Cthuck"
+    }
+  },
+  "Cryptid/89": {
+    "LocId": "Cryptid/89",
+    "TextByLang": {
+      "en": "Dryang"
+    }
+  },
+  "Cryptid/90": {
+    "LocId": "Cryptid/90",
+    "TextByLang": {
+      "en": "Shardog"
+    }
+  },
+  "Cryptid/91": {
+    "LocId": "Cryptid/91",
+    "TextByLang": {
+      "en": "Squirren"
+    }
+  },
+  "Cryptid/92": {
+    "LocId": "Cryptid/92",
+    "TextByLang": {
+      "en": "Slymeo"
+    }
+  },
+  "Cryptid/93": {
+    "LocId": "Cryptid/93",
+    "TextByLang": {
+      "en": "Suckler"
+    }
+  },
+  "Cryptid/94": {
+    "LocId": "Cryptid/94",
+    "TextByLang": {
+      "en": "Roldy"
+    }
+  },
+  "Cryptid/95": {
+    "LocId": "Cryptid/95",
+    "TextByLang": {
+      "en": "Poldy"
+    }
+  },
+  "Cryptid/96": {
+    "LocId": "Cryptid/96",
+    "TextByLang": {
+      "en": "Moter"
+    }
+  },
+  "Cryptid/97": {
+    "LocId": "Cryptid/97",
+    "TextByLang": {
+      "en": "Slizem"
+    }
+  },
+  "Cryptid/98": {
+    "LocId": "Cryptid/98",
+    "TextByLang": {
+      "en": "Likatog"
+    }
+  },
+  "Cryptid/99": {
+    "LocId": "Cryptid/99",
+    "TextByLang": {
+      "en": "Logger"
     }
   },
   "Color/Nil": {
     "LocId": "Color/Nil",
     "TextByLang": {
       "en": "Default"
+    }
+  },
+  "Color/Red": {
+    "LocId": "Color/Red",
+    "TextByLang": {
+      "en": "Red"
+    }
+  },
+  "Color/Green": {
+    "LocId": "Color/Green",
+    "TextByLang": {
+      "en": "Green"
+    }
+  },
+  "Color/Blue": {
+    "LocId": "Color/Blue",
+    "TextByLang": {
+      "en": "Blue"
+    }
+  },
+  "Color/Purple": {
+    "LocId": "Color/Purple",
+    "TextByLang": {
+      "en": "Purple"
+    }
+  },
+  "Color/Orange": {
+    "LocId": "Color/Orange",
+    "TextByLang": {
+      "en": "Orange"
+    }
+  },
+  "Color/White": {
+    "LocId": "Color/White",
+    "TextByLang": {
+      "en": "White"
+    }
+  },
+  "Color/Grey": {
+    "LocId": "Color/Grey",
+    "TextByLang": {
+      "en": "Grey"
+    }
+  },
+  "Color/Black": {
+    "LocId": "Color/Black",
+    "TextByLang": {
+      "en": "Black"
     }
   },
   "Food/BasicRation": {
@@ -591,6 +1263,120 @@
     "LocId": "Day/6",
     "TextByLang": {
       "en": "Sunday"
+    }
+  },
+  "EPrimaryStat/Strength": {
+    "LocId": "EPrimaryStat/Strength",
+    "TextByLang": {
+      "en": "Strength"
+    }
+  },
+  "EPrimaryStat/Speed": {
+    "LocId": "EPrimaryStat/Speed",
+    "TextByLang": {
+      "en": "Speed"
+    }
+  },
+  "EPrimaryStat/Vitality": {
+    "LocId": "EPrimaryStat/Vitality",
+    "TextByLang": {
+      "en": "Vitality"
+    }
+  },
+  "EPrimaryStat/Smarts": {
+    "LocId": "EPrimaryStat/Smarts",
+    "TextByLang": {
+      "en": "Smarts"
+    }
+  },
+  "EPrimaryStat/Skill": {
+    "LocId": "EPrimaryStat/Skill",
+    "TextByLang": {
+      "en": "Skill"
+    }
+  },
+  "EPrimaryStat/Luck": {
+    "LocId": "EPrimaryStat/Luck",
+    "TextByLang": {
+      "en": "Luck"
+    }
+  },
+  "ESecondaryStat/Health": {
+    "LocId": "ESecondaryStat/Health",
+    "TextByLang": {
+      "en": "Health"
+    }
+  },
+  "ESecondaryStat/Renown": {
+    "LocId": "ESecondaryStat/Renown",
+    "TextByLang": {
+      "en": "Renown"
+    }
+  },
+  "ESecondaryStat/Stamina": {
+    "LocId": "ESecondaryStat/Stamina",
+    "TextByLang": {
+      "en": "Stamina"
+    }
+  },
+  "EHiddenStat/Morale": {
+    "LocId": "EHiddenStat/Morale",
+    "TextByLang": {
+      "en": "Morale"
+    }
+  },
+  "EHiddenStat/Lifespan": {
+    "LocId": "EHiddenStat/Lifespan",
+    "TextByLang": {
+      "en": "Lifespan"
+    }
+  },
+  "Stat/Age": {
+    "LocId": "Stat/Age",
+    "TextByLang": {
+      "en": "Age"
+    }
+  },
+  "Training/Sprints": {
+    "LocId": "Training/Sprints",
+    "TextByLang": {
+      "en": "Sprints"
+    }
+  },
+  "Training/Lifting": {
+    "LocId": "Training/Lifting",
+    "TextByLang": {
+      "en": "Lifting"
+    }
+  },
+  "Training/Swimming": {
+    "LocId": "Training/Swimming",
+    "TextByLang": {
+      "en": "Swimming"
+    }
+  },
+  "Training/Reading": {
+    "LocId": "Training/Reading",
+    "TextByLang": {
+      "en": "Reading"
+    }
+  },
+  "Training/MagicTricks": {
+    "LocId": "Training/MagicTricks",
+    "TextByLang": {
+      "en": "Magic Tricks"
+    }
+  },
+  "Training/Cleaning": {
+    "LocId": "Training/Cleaning",
+    "TextByLang": {
+      "en": "Cleaning"
+    }
+  },
+  "Training/Sparring": {
+    "LocId": "Training/Sparring",
+    "TextByLang": {
+      "en": "Sparring"
     }
   }
 }

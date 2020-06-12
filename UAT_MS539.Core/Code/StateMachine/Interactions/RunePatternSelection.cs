@@ -4,15 +4,11 @@ using UAT_MS539.Core.Code.Utility;
 
 namespace UAT_MS539.Core.Code.StateMachine.Interactions
 {
-    public class RunePatternSelection : IInteraction
+    public class RunePatternSelection : BaseSelectionInteraction<RunePattern>
     {
-        public readonly IReadOnlyList<RunePattern> Options;
-        public readonly Action<RunePattern> OptionSelectedHandler;
-
         public RunePatternSelection(IReadOnlyList<RunePattern> options, Action<RunePattern> optionSelectedHandler)
+            : base(options, optionSelectedHandler)
         {
-            Options = options;
-            OptionSelectedHandler = optionSelectedHandler;
         }
     }
 }

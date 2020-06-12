@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace UAT_MS539.Core.Code.StateMachine.Interactions
 {
-    public class BuySellSelection : IInteraction
+    public class BuySellSelection : BaseSelectionInteraction<(Food.Food, uint)>
     {
-        public readonly IReadOnlyList<(Food.Food, uint)> Options;
-        public readonly Action<Food.Food> OptionSelectedHandler;
-
-        public BuySellSelection(IReadOnlyList<(Food.Food, uint)> options, Action<Food.Food> optionSelectedHandler)
+        public BuySellSelection(IReadOnlyList<(Food.Food, uint)> options, Action<(Food.Food, uint)> optionSelectedHandler)
+            : base(options, optionSelectedHandler)
         {
-            Options = options;
-            OptionSelectedHandler = optionSelectedHandler;
         }
     }
 }
