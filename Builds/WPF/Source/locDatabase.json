@@ -485,6 +485,24 @@
       "en": "Nursery"
     }
   },
+  "Tooltip/TrainingBonus": {
+    "LocId": "Tooltip/TrainingBonus",
+    "TextByLang": {
+      "en": "Training Bonus"
+    }
+  },
+  "Tooltip/TrainingMultiplier": {
+    "LocId": "Tooltip/TrainingMultiplier",
+    "TextByLang": {
+      "en": "Training Multiplier"
+    }
+  },
+  "Tooltip/TrainingNoBonus": {
+    "LocId": "Tooltip/TrainingNoBonus",
+    "TextByLang": {
+      "en": "No Training Bonus"
+    }
+  },
   "Cryptid/00": {
     "LocId": "Cryptid/00",
     "TextByLang": {
@@ -1311,6 +1329,12 @@
     "LocId": "EHiddenStat/Lifespan",
     "TextByLang": {
       "en": "Lifespan"
+    }
+  },
+  "Stat/Age": {
+    "LocId": "Stat/Age",
+    "TextByLang": {
+      "en": "Age"
     }
   },
   "Training/Sprints": {
