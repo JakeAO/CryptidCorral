@@ -10,7 +10,6 @@ namespace UAT_MS539.Core.Code.Cryptid
         
         public uint[] PrimaryStats;
         public uint[] PrimaryStatExp;
-        public uint[] SecondaryStats;
         public uint[] HiddenStats;
         
         public uint AgeInDays;
@@ -18,13 +17,16 @@ namespace UAT_MS539.Core.Code.Cryptid
         public uint CurrentHealth;
         public uint CurrentMorale;
         public uint CurrentStamina;
+        public uint CurrentRenown;
 
+        public uint MaxHealth => PrimaryStats[(int) EPrimaryStat.Vitality] * HiddenStats[(int) EHiddenStat.HealthMultiplier];
+        public uint MaxStamina => 2 + PrimaryStats[(int) EPrimaryStat.Vitality] / 100u;
+        
         public Cryptid(string runicHash, SpeciesDefinition species, ColorDefinition color,
-            uint[] primaryStats, uint[] secondaryStats, uint[] hiddenStats)
+            uint[] primaryStats, uint[] hiddenStats)
         {
             Debug.Assert(runicHash.Length == 16);
             Debug.Assert(primaryStats.Length == (int) EPrimaryStat._Count);
-            Debug.Assert(secondaryStats.Length == (int) ESecondaryStat._Count);
             Debug.Assert(hiddenStats.Length == (int) EHiddenStat._Count);
 
             RunicHash = runicHash;
@@ -32,12 +34,11 @@ namespace UAT_MS539.Core.Code.Cryptid
             Color = color;
             PrimaryStats = primaryStats;
             PrimaryStatExp = new uint[(int) EPrimaryStat._Count];
-            SecondaryStats = secondaryStats;
             HiddenStats = hiddenStats;
 
             AgeInDays = 0;
-            CurrentHealth = secondaryStats[(int) ESecondaryStat.Health];
-            CurrentStamina = secondaryStats[(int) ESecondaryStat.Stamina];
+            CurrentHealth = MaxHealth;
+            CurrentStamina = MaxStamina;
             CurrentMorale = hiddenStats[(int) EHiddenStat.Morale];
         }
     }

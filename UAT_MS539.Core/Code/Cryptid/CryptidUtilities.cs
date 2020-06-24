@@ -43,18 +43,6 @@ namespace UAT_MS539.Core.Code.Cryptid
                 primaryStats[i] = species.StartingStatFormulas[(EPrimaryStat) i].Evaluate(statPercent);
             }
 
-            var secondaryStats = new uint[(int) ESecondaryStat._Count];
-
-            // Calculate Secondary Stat (Health)
-            var healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[15]);
-            secondaryStats[(int) ESecondaryStat.Health] = CalculateHealth(primaryStats[(int) EPrimaryStat.Vitality], healthSubstring);
-
-            // Calculate Secondary Stat (Renown)
-            secondaryStats[(int) ESecondaryStat.Renown] = 0u;
-
-            // Calculate Secondary Stat (Stamina)
-            secondaryStats[(int) ESecondaryStat.Stamina] = 2u;
-
             var hiddenStats = new uint[(int) EHiddenStat._Count];
 
             // Calculate Hidden Stat (Morale)
@@ -65,7 +53,11 @@ namespace UAT_MS539.Core.Code.Cryptid
             var lifespanSubstring = string.Join(string.Empty, runicHash[2], runicHash[13]);
             hiddenStats[(int) EHiddenStat.Lifespan] = CalculateLifespan(lifespanSubstring);
 
-            return new Cryptid(runicHash, species, color, primaryStats, secondaryStats, hiddenStats);
+            // Calculate Secondary Stat (Health)
+            var healthSubstring = string.Join(string.Empty, runicHash[0], runicHash[15]);
+            hiddenStats[(int) EHiddenStat.HealthMultiplier] = CalculateHealthMultiplier(healthSubstring);
+
+            return new Cryptid(runicHash, species, color, primaryStats, hiddenStats);
         }
 
         public static Cryptid CreateCryptid(
@@ -98,8 +90,11 @@ namespace UAT_MS539.Core.Code.Cryptid
                 newCryptid.PrimaryStats[i] += (uint) Math.Round(sampleAverage * ROLLOVER_MULTIPLIER);
             }
 
-            var averageRenown = (sampleA.Cryptid.SecondaryStats[(int) ESecondaryStat.Renown] + sampleB.Cryptid.SecondaryStats[(int) ESecondaryStat.Renown]) / 2f;
-            newCryptid.SecondaryStats[(int) ESecondaryStat.Renown] = (uint) Math.Round(averageRenown * ROLLOVER_MULTIPLIER);
+            newCryptid.CurrentHealth = newCryptid.MaxHealth;
+            newCryptid.CurrentStamina = newCryptid.MaxStamina;
+
+            var averageRenown = (sampleA.Cryptid.CurrentRenown + sampleB.Cryptid.CurrentRenown) / 2f;
+            newCryptid.CurrentRenown += (uint) Math.Round(averageRenown * ROLLOVER_MULTIPLIER);
 
             var averageAge = (sampleA.Cryptid.AgeInDays + sampleB.Cryptid.AgeInDays) / 2f;
             newCryptid.HiddenStats[(int) EHiddenStat.Lifespan] += (uint) Math.Round(averageAge * ROLLOVER_MULTIPLIER);
@@ -107,18 +102,17 @@ namespace UAT_MS539.Core.Code.Cryptid
             return newCryptid;
         }
 
-        private static uint CalculateHealth(uint vitalityStat, string healthMultiplierHash)
+        private static uint CalculateHealthMultiplier(string healthMultiplierHash)
         {
             const float MIN_HEALTH_MULTIPLIER = 7f;
             const float MAX_HEALTH_MULTIPLIER = 13f;
 
-            Debug.Assert(vitalityStat > 0);
             Debug.Assert(healthMultiplierHash.Length == 2);
 
             var healthMultiplierKey = NumberEncoder.Decode(healthMultiplierHash, NumberEncoder.Base24Encoding);
             var healthMultiplierPercent = healthMultiplierKey / MAX_STAT_VAL;
             var healthMultiplier = healthMultiplierPercent.Remap(0f, 1f, MIN_HEALTH_MULTIPLIER, MAX_HEALTH_MULTIPLIER);
-            return (uint) Math.Round(vitalityStat * healthMultiplier);
+            return (uint) Math.Round(healthMultiplier);
         }
 
         private static uint CalculateMoral(string moraleHash)
@@ -136,7 +130,7 @@ namespace UAT_MS539.Core.Code.Cryptid
         private static uint CalculateLifespan(string lifespanHash)
         {
             const float MIN_LIFESPAN_DAYS = 5f * 7f;
-            const float MAX_LIFESPAN_DAYS = 15f * 7f;
+            const float MAX_LIFESPAN_DAYS = 10f * 7f;
 
             Debug.Assert(lifespanHash.Length == 2);
 

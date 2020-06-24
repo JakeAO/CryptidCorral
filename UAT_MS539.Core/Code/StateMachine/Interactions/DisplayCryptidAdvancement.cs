@@ -4,16 +4,19 @@
     {
         public readonly Cryptid.Cryptid Cryptid;
         public readonly uint[] PrimaryStatChanges;
-        public readonly uint[] SecondaryStatChanges;
+        public readonly uint HealthChange;
+        public readonly uint StaminaChange;
 
         public DisplayCryptidAdvancement(
             Cryptid.Cryptid cryptid,
             uint[] primaryStatChanges,
-            uint[] secondaryStatChanges)
+            uint healthChange,
+            uint staminaChange)
         {
             Cryptid = cryptid;
             PrimaryStatChanges = primaryStatChanges;
-            SecondaryStatChanges = secondaryStatChanges;
+            HealthChange = healthChange;
+            StaminaChange = staminaChange;
         }
     }
 }

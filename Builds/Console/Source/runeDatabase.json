@@ -2,6 +2,121 @@
   "0": {
     "RuneId": 0,
     "NameId": "Rune/0",
-    "ArtId": "/Source/Art/Rune/0.png"
+    "ArtId": "/Assets/UI/Runes/icon_rune_0.png"
+  },
+  "1": {
+    "RuneId": 1,
+    "NameId": "Rune/1",
+    "ArtId": "/Assets/UI/Runes/icon_rune_1.png"
+  },
+  "2": {
+    "RuneId": 2,
+    "NameId": "Rune/2",
+    "ArtId": "/Assets/UI/Runes/icon_rune_2.png"
+  },
+  "3": {
+    "RuneId": 3,
+    "NameId": "Rune/3",
+    "ArtId": "/Assets/UI/Runes/icon_rune_3.png"
+  },
+  "4": {
+    "RuneId": 4,
+    "NameId": "Rune/4",
+    "ArtId": "/Assets/UI/Runes/icon_rune_4.png"
+  },
+  "5": {
+    "RuneId": 5,
+    "NameId": "Rune/5",
+    "ArtId": "/Assets/UI/Runes/icon_rune_5.png"
+  },
+  "6": {
+    "RuneId": 6,
+    "NameId": "Rune/6",
+    "ArtId": "/Assets/UI/Runes/icon_rune_6.png"
+  },
+  "7": {
+    "RuneId": 7,
+    "NameId": "Rune/7",
+    "ArtId": "/Assets/UI/Runes/icon_rune_7.png"
+  },
+  "8": {
+    "RuneId": 8,
+    "NameId": "Rune/8",
+    "ArtId": "/Assets/UI/Runes/icon_rune_8.png"
+  },
+  "9": {
+    "RuneId": 9,
+    "NameId": "Rune/9",
+    "ArtId": "/Assets/UI/Runes/icon_rune_9.png"
+  },
+  "10": {
+    "RuneId": 10,
+    "NameId": "Rune/A",
+    "ArtId": "/Assets/UI/Runes/icon_rune_A.png"
+  },
+  "11": {
+    "RuneId": 11,
+    "NameId": "Rune/B",
+    "ArtId": "/Assets/UI/Runes/icon_rune_B.png"
+  },
+  "12": {
+    "RuneId": 12,
+    "NameId": "Rune/C",
+    "ArtId": "/Assets/UI/Runes/icon_rune_C.png"
+  },
+  "13": {
+    "RuneId": 13,
+    "NameId": "Rune/D",
+    "ArtId": "/Assets/UI/Runes/icon_rune_D.png"
+  },
+  "14": {
+    "RuneId": 14,
+    "NameId": "Rune/E",
+    "ArtId": "/Assets/UI/Runes/icon_rune_E.png"
+  },
+  "15": {
+    "RuneId": 15,
+    "NameId": "Rune/F",
+    "ArtId": "/Assets/UI/Runes/icon_rune_F.png"
+  },
+  "16": {
+    "RuneId": 16,
+    "NameId": "Rune/G",
+    "ArtId": "/Assets/UI/Runes/icon_rune_G.png"
+  },
+  "17": {
+    "RuneId": 17,
+    "NameId": "Rune/H",
+    "ArtId": "/Assets/UI/Runes/icon_rune_H.png"
+  },
+  "18": {
+    "RuneId": 18,
+    "NameId": "Rune/I",
+    "ArtId": "/Assets/UI/Runes/icon_rune_I.png"
+  },
+  "19": {
+    "RuneId": 19,
+    "NameId": "Rune/J",
+    "ArtId": "/Assets/UI/Runes/icon_rune_J.png"
+  },
+  "20": {
+    "RuneId": 20,
+    "NameId": "Rune/K",
+    "ArtId": "/Assets/UI/Runes/icon_rune_K.png"
+  },
+  "21": {
+    "RuneId": 21,
+    "NameId": "Rune/L",
+    "ArtId": "/Assets/UI/Runes/icon_rune_L.png"
+  },
+  "22": {
+    "RuneId": 22,
+    "NameId": "Rune/M",
+    "ArtId": "/Assets/UI/Runes/icon_rune_M.png"
+  },
+  "23": {
+    "RuneId": 23,
+    "NameId": "Rune/N",
+    "ArtId": "/Assets/UI/Runes/icon_rune_N.png"
   }
 }

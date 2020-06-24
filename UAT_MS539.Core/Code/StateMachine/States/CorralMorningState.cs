@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.Food;
 using UAT_MS539.Core.Code.StateMachine.Interactions;
@@ -58,6 +59,11 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _playerData.FoodInventory.Remove(food);
             trainingData.Food = food;
 
+            _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
+            {
+                new UpdatePlayerData(_playerData)
+            });
+
             ActivityPrompt();
         }
 
@@ -86,9 +92,19 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             if (_playerData.ActiveCryptid != null)
             {
-                // TODO REST STUFF
-                // INCREASE MORALE SOME?
-                // RESTORE HEALTH SOME?
+                // Improve Health
+                _playerData.ActiveCryptid.CurrentHealth += (uint) Math.Round(_playerData.ActiveCryptid.MaxHealth * 0.25f);
+                _playerData.ActiveCryptid.CurrentHealth = (uint) Math.Min(_playerData.ActiveCryptid.MaxHealth, _playerData.ActiveCryptid.CurrentHealth);
+
+                // Improve Morale
+                if (_playerData.ActiveCryptid.CurrentMorale < 10)
+                {
+                    _playerData.ActiveCryptid.CurrentMorale += 10;
+                }
+                else
+                {
+                    _playerData.ActiveCryptid.CurrentMorale += (uint) Math.Round(_playerData.ActiveCryptid.CurrentMorale * 0.1f);
+                }
 
                 _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
                 {

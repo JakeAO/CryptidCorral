@@ -19,7 +19,7 @@
                 <DropShadowEffect/>
             </Rectangle.Effect>
             <Rectangle.Fill>
-                <ImageBrush x:Name="_baseFill" ImageSource="/UAT_MS539.App.WPF;component/Assets/Cryptids/cryptid_67.png" Stretch="Uniform" />
+                <ImageBrush x:Name="_baseFill" ImageSource="../Assets/Cryptids/cryptid_00.png" Stretch="Uniform" />
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle Width="{Binding Width, ElementName=_mainCanvas}" Height="{Binding Height, ElementName=_mainCanvas}" Panel.ZIndex="2">
@@ -27,7 +27,7 @@
                 <SolidColorBrush x:Name="_colorFill" Color="#7F202020"/>
             </Rectangle.Fill>
             <Rectangle.OpacityMask>
-                <ImageBrush x:Name="_colorOpacity" ImageSource="/UAT_MS539.App.WPF;component/Assets/Cryptids/cryptid_67.png" Stretch="Uniform" />
+                <ImageBrush x:Name="_colorOpacity" ImageSource="../Assets/Cryptids/cryptid_00.png" Stretch="Uniform" />
             </Rectangle.OpacityMask>
         </Rectangle>
     </Canvas>

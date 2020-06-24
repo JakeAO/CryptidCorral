@@ -70,7 +70,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                 }
 
                 // Restore (up to) 10% Health
-                var maxHealth = _activeCryptid.SecondaryStats[(int) ESecondaryStat.Health];
+                var maxHealth = _activeCryptid.MaxHealth;
                 if (_activeCryptid.CurrentHealth < maxHealth)
                 {
                     _activeCryptid.CurrentHealth += (uint) Math.Round(maxHealth * 0.1f);
@@ -78,7 +78,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                 }
 
                 // Restore (up to) 3 Stamina
-                var maxStamina = _activeCryptid.SecondaryStats[(int) ESecondaryStat.Stamina];
+                var maxStamina = _activeCryptid.MaxStamina;
                 if (_activeCryptid.CurrentStamina < maxStamina)
                 {
                     _activeCryptid.CurrentStamina += 3u;
@@ -93,15 +93,9 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             _trainingData.CalculateExpIncreases(out var expIncreases, out var moraleIncrease);
 
-            uint staminaIncrease = 0;
-            int skillIndex = (int) EPrimaryStat.Skill;
-            if ((_activeCryptid.PrimaryStats[skillIndex] % 100) > ((_activeCryptid.PrimaryStats[skillIndex] + expIncreases[skillIndex]) % 100))
-            {
-                staminaIncrease = 1;
-                _activeCryptid.SecondaryStats[skillIndex]++;
-                _activeCryptid.CurrentStamina++;
-            }
-
+            uint originalMaxHealth = _activeCryptid.MaxHealth;
+            uint originalMaxStamina = _activeCryptid.MaxStamina;
+            
             var primaryStatIncreases = new uint[(int) EPrimaryStat._Count];
             for (var i = 0; i < (int) EPrimaryStat._Count; i++)
             {
@@ -113,27 +107,30 @@ namespace UAT_MS539.Core.Code.StateMachine.States
                 _activeCryptid.PrimaryStatExp[i] = remainingExp;
             }
 
-            var healthIncrease = primaryStatIncreases[(int) EPrimaryStat.Vitality] * 10;
-            _activeCryptid.SecondaryStats[(int) ESecondaryStat.Health] += healthIncrease;
+            uint healthIncrease = _activeCryptid.MaxHealth - originalMaxHealth;
+            uint staminaIncrease = _activeCryptid.MaxStamina - originalMaxStamina;
+
             _activeCryptid.CurrentHealth += healthIncrease;
-
-            var secondaryStatIncreases = new uint[(int) ESecondaryStat._Count];
-            secondaryStatIncreases[(int) ESecondaryStat.Health] = healthIncrease;
-            secondaryStatIncreases[(int) ESecondaryStat.Stamina] = staminaIncrease;
-
             _activeCryptid.CurrentMorale += moraleIncrease;
 
             _sharedContext.Clear<DailyTrainingData>();
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCryptidAdvancement(_activeCryptid, primaryStatIncreases, secondaryStatIncreases),
+                new DisplayCryptidAdvancement(_activeCryptid, primaryStatIncreases, healthIncrease, staminaIncrease),
                 new Option("Button/EndDay", OnEndDaySelected)
             });
         }
 
         private void OnEndDaySelected()
         {
-            _sharedContext.Get<StateMachine>().ChangeState<CorralMorningState>();
+            if (_activeCryptid.HiddenStats[(int) EHiddenStat.Lifespan] - _activeCryptid.AgeInDays == 0)
+            {
+                _sharedContext.Get<StateMachine>().ChangeState<CorralCryptidEndState>();
+            }
+            else
+            {
+                _sharedContext.Get<StateMachine>().ChangeState<CorralMorningState>();
+            }
         }
 
         private Dialog GetAgeWarning()

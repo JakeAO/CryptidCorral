@@ -16,10 +16,10 @@ namespace UAT_MS539.Components
             _speciesLabel.Content = locDatabase.Localize(cryptid.Species.NameId);
 
             _currentHealthLabel.Content = cryptid.CurrentHealth;
-            _maxHealthLabel.Content = cryptid.SecondaryStats[(int) ESecondaryStat.Health];
+            _maxHealthLabel.Content = cryptid.MaxHealth;
             _currentStaminaLabel.Content = cryptid.CurrentStamina;
-            _maxStaminaLabel.Content = cryptid.SecondaryStats[(int) ESecondaryStat.Stamina];
-            _renownLabel.Content = cryptid.SecondaryStats[(int) ESecondaryStat.Renown];
+            _maxStaminaLabel.Content = cryptid.MaxStamina;
+            _renownLabel.Content = cryptid.CurrentRenown;
             _ageLabel.Content = cryptid.AgeInDays;
 
             _strengthLabel.Content = cryptid.PrimaryStats[(int) EPrimaryStat.Strength];

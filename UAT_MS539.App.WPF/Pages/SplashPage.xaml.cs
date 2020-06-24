@@ -28,16 +28,17 @@ namespace UAT_MS539.Pages
                 switch (interaction)
                 {
                     case Option option:
-                        {
-                            _buttonList.AddButton(
-                                _sharedContext.Get<LocDatabase>().Localize(option.LocId),
-                                () =>
-                                {
-                                    _buttonList.ClearOptions();
-                                    option.ActionHandler?.Invoke();
-                                });
-                            break;
-                        }
+                    {
+                        _buttonList.AddButton(
+                            _sharedContext.Get<LocDatabase>().Localize(option.LocId),
+                            () =>
+                            {
+                                _buttonList.ClearOptions();
+                                _sharedContext.Get<AudioManager>().PlaySound(AudioManager.AudioEvent.Click);
+                                option.ActionHandler?.Invoke();
+                            });
+                        break;
+                    }
                 }
             }
         }

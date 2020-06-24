@@ -93,7 +93,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCryptid(newCryptid),
+                new UpdatePlayerData(playerData),
                 new Dialog("Tutorial/Nursery/4", new KeyValuePair<string, string>("{cryptidSpecies}", cryptidSpeciesName)),
                 new Option("Button/GoHome", OnGoHomeselected)
             });

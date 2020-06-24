@@ -16,7 +16,12 @@ namespace UAT_MS539.Components
             InitializeComponent();
         }
 
-        public void SetCryptid(Cryptid cryptid, LocDatabase locDatabase)
+        public void SetVisibility(bool visible)
+        {
+            _mainCanvas.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
+        }
+        
+        public void SetCryptid(Cryptid cryptid, LocDatabase locDatabase, bool faceRight = true)
         {
             if (cryptid != null)
             {
@@ -34,14 +39,10 @@ namespace UAT_MS539.Components
 
                 _tooltipPanel.SetCryptid(cryptid, locDatabase);
 
-                _cryptidScale.ScaleX = 1; // TODO: Flip horizontally once in a while?
+                _cryptidScale.ScaleX = faceRight ? 1 : -1;
+            }
 
-                _mainCanvas.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                _mainCanvas.Visibility = Visibility.Hidden;
-            }
+            SetVisibility(cryptid != null);
         }
     }
 }

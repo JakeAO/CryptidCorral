@@ -9,8 +9,8 @@
         <Button x:Name="_button" Height="40" Click="OnClick" Width="180">
             <DockPanel Width="175" Height="36">
                 <Image x:Name="_icon" HorizontalAlignment="Left" Source="../Assets/Food/food_grain.png" Height="50" Panel.ZIndex="1" VerticalAlignment="Center" />
-                <Viewbox MaxWidth="140" MaxHeight="30">
-                    <TextBlock x:Name="_label" DockPanel.Dock="Right" HorizontalAlignment="Center" FontSize="20" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" VerticalAlignment="Center" Text="[Button Text]" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                <Viewbox MaxWidth="140" MaxHeight="30" StretchDirection="DownOnly">
+                    <TextBlock x:Name="_label" DockPanel.Dock="Right" HorizontalAlignment="Center" FontSize="20" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" VerticalAlignment="Center" Text="[Button Text]"/>
                 </Viewbox>
             </DockPanel>
             <Button.ToolTip>

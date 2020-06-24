@@ -6,9 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="180">
     <StackPanel x:Name="stackPanel">
-        <Button x:Name="_button" Width="{Binding Width, ElementName=userControl}" Height="{Binding Height, ElementName=userControl}" Click="OnClick">
-            <Viewbox Margin="2" MaxWidth="180" MaxHeight="32">
-                <TextBlock x:Name="_label" FontSize="20" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Text="[Button Text]" />
+        <Button x:Name="_button" Width="180" Height="40" Click="OnClick">
+            <Viewbox Margin="2" MaxWidth="180" MaxHeight="32" StretchDirection="DownOnly">
+                <TextBlock x:Name="_label" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Text="[Button Text]" FontSize="20" />
             </Viewbox>
             <Button.ToolTip>
                 <Label x:Name="_tooltipLabel" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" />

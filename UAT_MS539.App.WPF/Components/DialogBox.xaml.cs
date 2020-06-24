@@ -12,6 +12,7 @@ namespace UAT_MS539.Components
         public void SetLabel(string localizedText)
         {
             _label.Text = localizedText;
+            _scrollViewer.ScrollToTop();
         }
     }
 }

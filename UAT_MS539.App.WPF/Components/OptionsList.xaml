@@ -8,7 +8,7 @@
              d:DesignHeight="200" d:DesignWidth="180">
     <Grid>
         <DockPanel VerticalAlignment="Bottom" LastChildFill="False">
-            <StackPanel x:Name="_stackPanel" Width="{Binding Width, ElementName=userControl}" VerticalAlignment="Bottom" />
+            <StackPanel x:Name="_stackPanel" Width="180" VerticalAlignment="Bottom" />
         </DockPanel>
     </Grid>
 </UserControl>

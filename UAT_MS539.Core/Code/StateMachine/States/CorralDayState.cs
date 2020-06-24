@@ -111,7 +111,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
                 _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
                 {
-                    new DisplayCryptid(_cryptid),
+                    new UpdatePlayerData(_playerData),
                     new DisplayTrainingResults(gainedPoints),
                     new Option("Button/Next", PromptForTraining)
                 });

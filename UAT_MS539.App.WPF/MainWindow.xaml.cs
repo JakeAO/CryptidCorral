@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -30,12 +31,13 @@ namespace UAT_MS539
             {typeof(CorralDayState), typeof(MainPage)},
             {typeof(CorralMorningState), typeof(MainPage)},
             {typeof(CorralNightState), typeof(MainPage)},
+            {typeof(CorralCryptidEndState), typeof(MainPage)},
             {typeof(TownMainState), typeof(MainPage)},
             {typeof(TownLabState), typeof(MainPage)},
             {typeof(TownMarketState), typeof(MainPage)},
             {typeof(TownNurseryState), typeof(MainPage)},
             {typeof(ColiseumMainState), typeof(MainPage)},
-            {typeof(ColiseumBattleState), typeof(MainPage)},
+            {typeof(ColiseumBattleState), typeof(CombatPage)},
             {typeof(ColiseumResultsState), typeof(MainPage)}
         };
 
@@ -53,8 +55,51 @@ namespace UAT_MS539
             var interactionEventRaisedSignal = new InteractionEventRaised();
             interactionEventRaisedSignal.Listen(OnInteractionEventRaised);
 
-            _sharedContext = new Context(stateChangedSignal, interactionEventRaisedSignal);
+            Uri GenerateAbsoluteUri(string relativePath)
+            {
+                return new Uri(
+                    Path.Combine(
+                        new Uri(AppDomain.CurrentDomain.BaseDirectory).PathAndQuery,
+                        relativePath.Remove(0, 1)),
+                    UriKind.Absolute);
+            }
+
+            var audioManager = new AudioManager(
+                (AudioManager.AudioEvent.Click, new[]
+                {
+                    GenerateAbsoluteUri("/Assets/Audio/Click.wav"),
+                }),
+                (AudioManager.AudioEvent.Hit, new[]
+                {
+                    GenerateAbsoluteUri("/Assets/Audio/Hit1.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Hit2.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Hit3.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Hit4.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Hit5.wav"),
+                }),
+                (AudioManager.AudioEvent.CriticalHit, new[]
+                {
+                    GenerateAbsoluteUri("/Assets/Audio/Crit1.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Crit2.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Crit3.wav"),
+                }),
+                (AudioManager.AudioEvent.Miss, new[]
+                {
+                    GenerateAbsoluteUri("/Assets/Audio/Miss1.wav"),
+                    GenerateAbsoluteUri("/Assets/Audio/Miss2.wav"),
+                }),
+                (AudioManager.AudioEvent.Defeat, new[]
+                {
+                    GenerateAbsoluteUri("/Assets/Audio/Defeat.wav"),
+                }));
+
+            _sharedContext = new Context(stateChangedSignal, interactionEventRaisedSignal, audioManager);
             _stateMachine = new StateMachine(_sharedContext);
+        }
+
+        ~MainWindow()
+        {
+            CompositionTarget.Rendering -= OnRenderTick;
         }
 
         private void OnRenderTick(object sender, EventArgs e)

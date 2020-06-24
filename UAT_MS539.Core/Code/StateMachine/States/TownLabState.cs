@@ -52,7 +52,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
                 _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
                 {
-                    new DisplayCryptid(null), 
+                    new UpdatePlayerData(_playerData), 
                     new Dialog("Town/Lab/FreezeResult", new KeyValuePair<string, string>("{species}", _sharedContext.Get<LocDatabase>().Localize(frozenCryptid.Species.NameId))),
                     new Option("Button/Okay", MainPrompt),
                 });
@@ -95,7 +95,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCryptid(cryptid), 
+                new UpdatePlayerData(_playerData), 
                 new Dialog("Town/Lab/ThawResult", new KeyValuePair<string, string>("{species}", _sharedContext.Get<LocDatabase>().Localize(cryptid.Species.NameId))),
                 new Option("Button/Okay", MainPrompt),
             });
@@ -130,7 +130,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCryptid(null),
+                new UpdatePlayerData(_playerData),
                 new Dialog("Town/Lab/RetireResult"),
                 new Option("Button/Okay", MainPrompt),
             });
@@ -182,7 +182,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
                     _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
                     {
-                        new DisplayCryptid(newCryptid), 
+                        new UpdatePlayerData(_playerData), 
                         new Dialog("Town/Lab/FuseResult", new KeyValuePair<string, string>("{species}", _sharedContext.Get<LocDatabase>().Localize(newCryptid.Species.NameId))),
                         new Option("Button/Okay", MainPrompt),
                     });

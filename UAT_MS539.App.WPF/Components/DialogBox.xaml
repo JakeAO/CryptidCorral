@@ -10,11 +10,13 @@
         <Grid.Effect>
             <DropShadowEffect/>
         </Grid.Effect>
-        <TextBlock x:Name="_label" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="22" Foreground="White" Background="#00000000" TextDecorations="{x:Null}" Margin="5" TextWrapping="Wrap">
-            <TextBlock.Effect>
-                <DropShadowEffect/>
-            </TextBlock.Effect>
+        <ScrollViewer x:Name="_scrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <TextBlock x:Name="_label" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="18" Foreground="White" Background="#00000000" TextDecorations="{x:Null}" Margin="5" TextWrapping="Wrap">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect>
             [Dialog Line]
-        </TextBlock>
+            </TextBlock>
+        </ScrollViewer>
     </Grid>
 </UserControl>

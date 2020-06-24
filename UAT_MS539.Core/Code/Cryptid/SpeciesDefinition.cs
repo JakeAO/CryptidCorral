@@ -8,6 +8,7 @@ namespace UAT_MS539.Core.Code.Cryptid
         public string SpeciesId;
         public string NameId;
         public string ArtId;
+        public uint SpawnRate;
         
         public DropCalculation<string> ColorFormula;
         

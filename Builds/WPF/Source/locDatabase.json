@@ -110,7 +110,7 @@
   "Corral/Night/Default": {
     "LocId": "Corral/Night/Default",
     "TextByLang": {
-      "en": "The sun sets on another day at the Corral."
+      "en": "The sun sets on another peaceful day at the Corral."
     }
   },
   "Corral/Night/AgeWarning/FinalDay": {
@@ -167,6 +167,18 @@
       "en": "They look happy to see you."
     }
   },
+  "Corral/Night/End/Goodbye": {
+    "LocId": "Corral/Night/End/Goodbye",
+    "TextByLang": {
+      "en": "It's time...\nYour {species} had a good life, but it can't go on anymore.\nWhen you're ready, the doctor will come and put it to rest."
+    }
+  },
+  "Corral/Night/End/Gone": {
+    "LocId": "Corral/Night/End/Gone",
+    "TextByLang": {
+      "en": "Your {species} was a fine companion that spent their whole life with you, and {age} days is a good lifespan for a {species}.\nNot that it helps, but remember that they'll always live on in your heart and in the fiber of future Cryptids you Fuse from their DNA."
+    }
+  },
   "Town/Welcome": {
     "LocId": "Town/Welcome",
     "TextByLang": {
@@ -194,7 +206,7 @@
   "Town/Nursery/AdoptResult": {
     "LocId": "Town/Nursery/AdoptResult",
     "TextByLang": {
-      "en": "Nice, a new {cryptidSpecies}! It looks healthy, I'll send it back to your corral for you."
+      "en": "Nice, a new {cryptidSpecies}!\nIt looks healthy, I'll send it back to your corral for you."
     }
   },
   "Town/Market/Welcome": {
@@ -302,7 +314,31 @@
   "Coliseum/Welcome": {
     "LocId": "Coliseum/Welcome",
     "TextByLang": {
-      "en": "Hey there, we've got some tough opponents in the fight today. Take your pick and we'll see how tough your little Cryptid is."
+      "en": "Hey there, we've got some tough opponents in the fight today. Take your pick and we'll see how tough your little cryptid is."
+    }
+  },
+  "Coliseum/NoCryptid": {
+    "LocId": "Coliseum/NoCryptid",
+    "TextByLang": {
+      "en": "We've got some tough opponents today, but I wouldn't recommend fighting any of them by yourself. Come back when you have a cryptid by your side."
+    }
+  },
+  "Coliseum/NoHealthCryptid": {
+    "LocId": "Coliseum/NoHealthCryptid",
+    "TextByLang": {
+      "en": "Your cryptid doesn't look healthy enough to fight today, you'll have to wait until next week."
+    }
+  },
+  "Coliseum/Victory": {
+    "LocId": "Coliseum/Victory",
+    "TextByLang": {
+      "en": "Wow what a fight, the crowd will be craving more of that soon!\nRenown +{renown}, Coins +{coins}"
+    }
+  },
+  "Coliseum/Defeat": {
+    "LocId": "Coliseum/Defeat",
+    "TextByLang": {
+      "en": "Oof! Your little guy took a beating out there, what an upset! But every failure is a chance to learn.\nRenown +{renown}, Coins +{coins}"
     }
   },
   "Location/Corral": {
@@ -365,6 +401,12 @@
       "en": "Back"
     }
   },
+  "Button/Skip": {
+    "LocId": "Button/Skip",
+    "TextByLang": {
+      "en": "Skip"
+    }
+  },
   "Button/Cancel": {
     "LocId": "Button/Cancel",
     "TextByLang": {
@@ -375,6 +417,12 @@
     "LocId": "Button/Confirm",
     "TextByLang": {
       "en": "Confirm"
+    }
+  },
+  "Button/Ready": {
+    "LocId": "Button/Ready",
+    "TextByLang": {
+      "en": "I'm Ready"
     }
   },
   "Button/Train": {
@@ -1301,20 +1349,20 @@
       "en": "Luck"
     }
   },
-  "ESecondaryStat/Health": {
-    "LocId": "ESecondaryStat/Health",
+  "Health": {
+    "LocId": "Health",
     "TextByLang": {
       "en": "Health"
     }
   },
-  "ESecondaryStat/Renown": {
-    "LocId": "ESecondaryStat/Renown",
+  "Renown": {
+    "LocId": "Renown",
     "TextByLang": {
       "en": "Renown"
     }
   },
-  "ESecondaryStat/Stamina": {
-    "LocId": "ESecondaryStat/Stamina",
+  "Stamina": {
+    "LocId": "Stamina",
     "TextByLang": {
       "en": "Stamina"
     }

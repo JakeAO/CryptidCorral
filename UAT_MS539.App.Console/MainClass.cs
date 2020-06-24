@@ -42,6 +42,7 @@ namespace UAT_MS539.ConsoleApp
 
             var userPrompts = new List<(string, Action)>(5);
             foreach (var interaction in interactions)
+            {
                 switch (interaction)
                 {
                     case Dialog dialog:
@@ -54,47 +55,16 @@ namespace UAT_MS539.ConsoleApp
                         userPrompts.Add((locDatabase.Localize(option.LocId), option.ActionHandler));
                         break;
                     }
-                    case DisplayCoins displayCoins:
-                    {
-                        Console.WriteLine($"[Coins] {displayCoins.Coins}");
-                        break;
-                    }
-                    case DisplayCryptid displayCryptid:
-                    {
-                        var cryptid = displayCryptid.Cryptid;
-
-                        if (cryptid != null)
-                        {
-                            var sb = new StringBuilder(100);
-                            sb.AppendLine("[Cryptid] = = = = = = = =");
-                            sb.AppendLine($"   Species: {locDatabase.Localize(cryptid.Species.NameId)}");
-                            sb.AppendLine($"   Color: {locDatabase.Localize(cryptid.Color.NameId)}");
-                            sb.AppendLine("   Stats:");
-                            for (var i = 0; i < (int) EPrimaryStat._Count; i++) sb.AppendLine($"      {((EPrimaryStat) i).ToString()}: {cryptid.PrimaryStats[i]} ({cryptid.PrimaryStatExp[i]}/100)");
-                            sb.AppendLine("   Secondary Stats:");
-                            for (var i = 0; i < (int) ESecondaryStat._Count; i++) sb.AppendLine($"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
-                            sb.AppendLine("= = = = = = = = = = = = =");
-
-                            Console.WriteLine(sb);
-                        }
-                        else
-                        {
-                            Console.WriteLine("[Cryptid] None Active");
-                        }
-
-                        break;
-                    }
                     case DisplayCryptidAdvancement cryptidAdvancement:
                     {
                         var cryptid = cryptidAdvancement.Cryptid;
 
                         var sb = new StringBuilder(100);
                         sb.AppendLine("[Cryptid Growth] = = = = = = =");
-                        for (var i = 0; i < (int) ESecondaryStat._Count; i++)
-                            sb.AppendLine(
-                                cryptidAdvancement.SecondaryStatChanges[i] > 0
-                                    ? $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i] - cryptidAdvancement.SecondaryStatChanges[i]} +{cryptidAdvancement.SecondaryStatChanges[i]}"
-                                    : $"      {((ESecondaryStat) i).ToString()}: {cryptid.SecondaryStats[i]}");
+                        if (cryptidAdvancement.HealthChange > 0)
+                            sb.AppendLine($"      Health: {cryptid.MaxHealth - cryptidAdvancement.HealthChange} +{cryptidAdvancement.HealthChange}");
+                        if (cryptidAdvancement.StaminaChange > 0)
+                            sb.AppendLine($"      Stamina: {cryptid.MaxStamina - cryptidAdvancement.StaminaChange} +{cryptidAdvancement.StaminaChange}");
                         for (var i = 0; i < (int) EPrimaryStat._Count; i++)
                             sb.AppendLine(
                                 cryptidAdvancement.PrimaryStatChanges[i] > 0
@@ -113,11 +83,12 @@ namespace UAT_MS539.ConsoleApp
                         {
                             if (trainingResults.TrainingPoints[i] > 0)
                             {
-                                sb.AppendLine($"   {(EPrimaryStat) i}: +{trainingResults.TrainingPoints[i]} exp");
+                                sb.AppendLine($"   {(EPrimaryStat) i}: +{trainingResults.TrainingPoints[i]} tp");
                             }
                         }
+
                         sb.AppendLine("= = = = = = = = = = = = = = = =");
-                        
+
                         Console.WriteLine(sb.ToString());
                         break;
                     }
@@ -190,8 +161,8 @@ namespace UAT_MS539.ConsoleApp
                         {
                             var sb = new StringBuilder(50);
                             sb.Append(locDatabase.Localize(cryptid.Species.NameId));
+                            sb.Append($" HP: {cryptid.MaxHealth}, STA: {cryptid.MaxStamina}");
                             sb.Append($" P[{string.Join(", ", cryptid.PrimaryStats)}]");
-                            sb.Append($" S[{string.Join(", ", cryptid.SecondaryStats)}]");
                             sb.Append($" Age: {cryptid.AgeInDays}");
 
                             userPrompts.Add((sb.ToString(), () => cryptidSelection.OptionSelectedHandler(cryptid)));
@@ -205,8 +176,8 @@ namespace UAT_MS539.ConsoleApp
                         {
                             var sb = new StringBuilder(50);
                             sb.Append(locDatabase.Localize(dnaSample.Cryptid.Species.NameId));
+                            sb.Append($" HP: {dnaSample.Cryptid.MaxHealth}, STA: {dnaSample.Cryptid.MaxStamina}");
                             sb.Append($" P[{string.Join(", ", dnaSample.Cryptid.PrimaryStats)}]");
-                            sb.Append($" S[{string.Join(", ", dnaSample.Cryptid.SecondaryStats)}]");
                             sb.Append($" Hash: {dnaSample.Cryptid.RunicHash}");
 
                             userPrompts.Add((sb.ToString(), () => dnaSampleSelection.OptionSelectedHandler(dnaSample)));
@@ -252,7 +223,13 @@ namespace UAT_MS539.ConsoleApp
 
                         break;
                     }
+                    default:
+                    {
+                        Console.WriteLine($"Unhandled IInteraction type: {interaction.GetType()}");
+                        break;
+                    }
                 }
+            }
 
             if (userPrompts.Count > 0)
             {

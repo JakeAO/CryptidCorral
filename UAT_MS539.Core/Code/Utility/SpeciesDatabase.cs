@@ -22,18 +22,14 @@ namespace UAT_MS539.Core.Code.Utility
             OrderedIds = SpeciesById.Keys.OrderBy(x => x).ToList();
         }
 
-        public SpeciesDatabase(string speciesDataPath, string dropDataPath)
+        public SpeciesDatabase(string speciesDataPath)
         {
             var speciesFilePath = Path.GetFullPath(speciesDataPath);
             var speciesJsonText = File.ReadAllText(speciesFilePath);
 
             SpeciesById = JsonConvert.DeserializeObject<Dictionary<string, SpeciesDefinition>>(speciesJsonText, JsonExtensions.DefaultSettings);
             OrderedIds = SpeciesById.Keys.OrderBy(x => x).ToList();
-
-            var dropFilePath = Path.GetFullPath(dropDataPath);
-            var dropJsonText = File.ReadAllText(dropFilePath);
-
-            DropCalculation = JsonConvert.DeserializeObject<DropCalculation<string>>(dropJsonText, JsonExtensions.DefaultSettings);
+            DropCalculation = new DropCalculation<string>(SpeciesById.Values.Select(x => new DropCalculation<string>.Point(x.SpeciesId, x.SpawnRate)).ToArray());
         }
     }
 }

@@ -57,7 +57,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
         {
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCoins(_playerData.Coins),
+                new UpdatePlayerData(_playerData), 
                 new Dialog("Town/Market/Welcome"),
                 new Option("Button/Buy", OnBuySelected),
                 new Option("Button/Sell", OnSellSelected),
@@ -70,7 +70,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
                 new Dialog("Town/Market/BuyPrompt"),
-                new BuySellSelection(_selectionForDay.Item2, OnBuySelected_FoodSelected),
+                new BuySellSelection(true, _selectionForDay.Item2, OnBuySelected_FoodSelected),
                 new Option("Button/Cancel", MainPrompt),
             });
         }
@@ -85,7 +85,10 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
                 _selectionForDay.Item2.Remove(foodCostPair);
 
-                _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[] {new DisplayCoins(_playerData.Coins)});
+                _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
+                {
+                    new UpdatePlayerData(_playerData),
+                });
             }
 
             OnBuySelected();
@@ -98,7 +101,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
                 new Dialog("Town/Market/SellPrompt"),
-                new BuySellSelection(sellOptions, OnSellSelected_FoodSelected),
+                new BuySellSelection(false, sellOptions, OnSellSelected_FoodSelected),
                 new Option("Button/Cancel", MainPrompt),
             });
         }
@@ -108,7 +111,10 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             _playerData.FoodInventory.Remove(foodCostPair.Item1);
             _playerData.Coins += foodCostPair.Item2;
 
-            _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[] {new DisplayCoins(_playerData.Coins)});
+            _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
+            {
+                new UpdatePlayerData(_playerData),
+            });
 
             OnSellSelected();
         }

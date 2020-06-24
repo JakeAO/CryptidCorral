@@ -8,6 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Assets\Audio\Click.wav" />
+      <None Remove="Assets\Audio\Crit1.wav" />
+      <None Remove="Assets\Audio\Crit2.wav" />
+      <None Remove="Assets\Audio\Crit3.wav" />
+      <None Remove="Assets\Audio\Defeat.wav" />
+      <None Remove="Assets\Audio\Hit1.wav" />
+      <None Remove="Assets\Audio\Hit2.wav" />
+      <None Remove="Assets\Audio\Hit3.wav" />
+      <None Remove="Assets\Audio\Hit4.wav" />
+      <None Remove="Assets\Audio\Hit5.wav" />
+      <None Remove="Assets\Audio\Miss1.wav" />
+      <None Remove="Assets\Audio\Miss2.wav" />
       <None Remove="Assets\Backgrounds\bg_colosseum.jpg" />
       <None Remove="Assets\Backgrounds\bg_corral.jpg" />
       <None Remove="Assets\Backgrounds\bg_town.jpg" />
@@ -147,6 +159,7 @@
       <None Remove="Assets\UI\Runes\icon_rune_L.png" />
       <None Remove="Assets\UI\Runes\icon_rune_M.png" />
       <None Remove="Assets\UI\Runes\icon_rune_N.png" />
+      <None Remove="Assets\UI\SadPumpkinLogo.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -483,6 +496,9 @@
       <Content Include="Assets\Food\food_vegetable.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Assets\UI\SadPumpkinLogo.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Resource Include="Assets\UI\Fonts\font_quicksand.otf">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
@@ -565,6 +581,45 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Assets\UI\Runes\icon_rune_N.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Assets\Audio\Click.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit2.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit3.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Defeat.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit2.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit3.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit4.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit5.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Miss1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Miss2.wav">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

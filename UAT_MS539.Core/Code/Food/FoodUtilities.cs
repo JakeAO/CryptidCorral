@@ -62,6 +62,8 @@ namespace UAT_MS539.Core.Code.Food
                 newFood = CreateFood(_basicRationDefinition);
             } while (newFood.MultipliersByStat.Values.All(x => x == 1f));
 
+            newFood.TotalFoodQuality = 0f;
+            
             return newFood;
         }
 

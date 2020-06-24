@@ -23,7 +23,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             context.Set(new LocDatabase("Source/locDatabase.json"));
             context.Set(new RuneDatabase("Source/runeDatabase.json"));
-            context.Set(new SpeciesDatabase("Source/speciesDatabase.json", "Source/speciesDropTable.json"));
+            context.Set(new SpeciesDatabase("Source/speciesDatabase.json"));
             context.Set(new ColorDatabase("Source/colorDatabase.json"));
             context.Set(new FoodDatabase("Source/foodDatabase.json"));
             context.Set(new TrainingDatabase("Source/trainingDatabase.json"));

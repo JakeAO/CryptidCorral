@@ -90,7 +90,7 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
             _sharedContext.Get<InteractionEventRaised>().Fire(new IInteraction[]
             {
-                new DisplayCryptid(newCryptid),
+                new UpdatePlayerData(_playerData),
                 new Dialog("Town/Nursery/AdoptResult", new KeyValuePair<string, string>("{cryptidSpecies}", cryptidSpeciesName)),
                 new Option("Button/Exit", OnExitSelected)
             });
