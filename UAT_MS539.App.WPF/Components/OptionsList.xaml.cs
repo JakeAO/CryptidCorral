@@ -142,7 +142,7 @@ namespace UAT_MS539.Components
                 newButton.Setup(
                     $"{locDatabase.Localize(regimen.NameId)} ({regimen.StaminaCost})",
                     () => callback(regimen),
-                    string.Join("\n", TooltipUtil.GetTooltipContent(regimen, locDatabase)),
+                    string.Join("\n", TooltipUtil.GetTooltipContent(regimen, foodModifierStats, locDatabase)),
                     highlight);
 
                 newSelectionList.AddSelectable(newButton);

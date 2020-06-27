@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using UAT_MS539.Code;
 using UAT_MS539.Core.Code.Cryptid;
 using UAT_MS539.Core.Code.Utility;
 
@@ -21,18 +22,24 @@ namespace UAT_MS539.Components
             _mainCanvas.Visibility = visible ? Visibility.Visible : Visibility.Hidden;
         }
         
-        public void SetCryptid(Cryptid cryptid, LocDatabase locDatabase, bool faceRight = true)
+        public void SetCryptid(Cryptid cryptid, LocDatabase locDatabase, Logger logger, bool faceRight = true)
         {
             if (cryptid != null)
             {
-                string baseDirectory = new Uri(AppDomain.CurrentDomain.BaseDirectory).PathAndQuery;
+                Uri baseDirectory = new Uri(AppDomain.CurrentDomain.BaseDirectory);
                 string relativePath = cryptid.Species.ArtId.Remove(0, 1);
-                string absolutePath = Path.Combine(baseDirectory, relativePath);
-                Uri speciesArtPath = new Uri(absolutePath, UriKind.Absolute);
-                BitmapImage cryptidImage = new BitmapImage(speciesArtPath);
-
-                _baseFill.ImageSource = cryptidImage;
-                _colorOpacity.ImageSource = cryptidImage;
+                Uri speciesArtPath = new Uri(baseDirectory, relativePath);
+                
+                try
+                {
+                    BitmapImage cryptidImage = new BitmapImage(speciesArtPath);
+                    _baseFill.ImageSource = cryptidImage;
+                    _colorOpacity.ImageSource = cryptidImage;
+                }
+                catch (Exception e)
+                {
+                    logger?.Log(Logger.LogLevel.Exception, $"{e.GetType().Name}: {e.Message} ({speciesArtPath})");
+                }
 
                 ColorDefinition colorDef = cryptid.Color;
                 _colorFill.Color = Color.FromArgb(colorDef.A, colorDef.R, colorDef.G, colorDef.B);

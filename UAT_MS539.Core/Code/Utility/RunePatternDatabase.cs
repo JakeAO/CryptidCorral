@@ -18,7 +18,6 @@ namespace UAT_MS539.Core.Code.Utility
 
         public RunePatternDatabase()
         {
-
             var runePatterns = new List<RunePattern>(1000);
 
             Task.WaitAll(

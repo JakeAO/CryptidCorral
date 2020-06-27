@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,6 +19,7 @@ namespace UAT_MS539
     {
         private readonly Context _sharedContext = null;
         private readonly StateMachine _stateMachine = null;
+        private readonly Logger _logger = null;
 
         private IState _pendingStateChange = null;
         private readonly ConcurrentQueue<IReadOnlyCollection<IInteraction>> _interactionEventBuffer = new ConcurrentQueue<IReadOnlyCollection<IInteraction>>();
@@ -49,6 +51,8 @@ namespace UAT_MS539
 
             CompositionTarget.Rendering += OnRenderTick;
 
+            _logger = new Logger();
+
             var stateChangedSignal = new StateChanged();
             stateChangedSignal.Listen(OnStateChanged);
 
@@ -58,13 +62,11 @@ namespace UAT_MS539
             Uri GenerateAbsoluteUri(string relativePath)
             {
                 return new Uri(
-                    Path.Combine(
-                        new Uri(AppDomain.CurrentDomain.BaseDirectory).PathAndQuery,
-                        relativePath.Remove(0, 1)),
-                    UriKind.Absolute);
+                    new Uri(AppDomain.CurrentDomain.BaseDirectory),
+                    relativePath.Remove(0, 1));
             }
 
-            var audioManager = new AudioManager(
+            var audioManager = new AudioManager(_logger,
                 (AudioManager.AudioEvent.Click, new[]
                 {
                     GenerateAbsoluteUri("/Assets/Audio/Click.wav"),
@@ -93,13 +95,14 @@ namespace UAT_MS539
                     GenerateAbsoluteUri("/Assets/Audio/Defeat.wav"),
                 }));
 
-            _sharedContext = new Context(stateChangedSignal, interactionEventRaisedSignal, audioManager);
+            _sharedContext = new Context(stateChangedSignal, interactionEventRaisedSignal, audioManager, _logger);
             _stateMachine = new StateMachine(_sharedContext);
         }
 
         ~MainWindow()
         {
             CompositionTarget.Rendering -= OnRenderTick;
+            _logger?.Dispose();
         }
 
         private void OnRenderTick(object sender, EventArgs e)
@@ -108,17 +111,24 @@ namespace UAT_MS539
             if (_pendingStateChange != null)
             {
                 Type stateType = _pendingStateChange.GetType();
-                if (_stateTypeToUserControlType.TryGetValue(stateType, out Type userControlType))
+                if (_stateTypeToUserControlType.TryGetValue(stateType, out Type userControlType) &&
+                    userControlType != null &&
+                    _currentControl?.GetType() != userControlType)
                 {
-                    if (_currentControl == null || _currentControl.GetType() != userControlType)
+                    try
                     {
-                        _currentControl = (UserControl)userControlType.GetConstructor(Type.EmptyTypes)?.Invoke(new object[0]);
+                        _currentControl = (UserControl) userControlType.GetConstructor(Type.EmptyTypes)?.Invoke(new object[0]);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger?.Log(Logger.LogLevel.Exception, $"{ex.GetType().Name}: {ex.Message} ({userControlType.Name})");
                     }
                 }
 
                 contentControl.Content = _currentControl;
                 if (_currentControl is IStateChangeHandler stateInjected)
                 {
+                    _logger?.Log(Logger.LogLevel.Debug, $"--> StateChange sent: {stateType.Name} / {stateInjected.GetType().Name}");
                     stateInjected.OnStateChanged(_pendingStateChange, _sharedContext);
                 }
 
@@ -130,6 +140,7 @@ namespace UAT_MS539
             {
                 if (_interactionEventBuffer.TryDequeue(out var interactions))
                 {
+                    _logger?.Log(Logger.LogLevel.Debug, $"--> InteractionEvents sent: {interactionHandler.GetType().Name} / {string.Join(", ", interactions.Select(x => x.GetType().Name))}");
                     interactionHandler.HandleInteraction(interactions);
                 }
             }
@@ -137,11 +148,13 @@ namespace UAT_MS539
 
         private void OnStateChanged(IState newState)
         {
+            _logger?.Log(Logger.LogLevel.Debug, $"<-- StateChange received: {newState.GetType().Name}");
             _pendingStateChange = newState;
         }
 
         private void OnInteractionEventRaised(IReadOnlyCollection<IInteraction> interactions)
         {
+            _logger?.Log(Logger.LogLevel.Debug, $"<-- InteractionEvents received: {string.Join(", ", interactions.Select(x => x.GetType().Name))}");
             _interactionEventBuffer.Enqueue(interactions);
         }
     }

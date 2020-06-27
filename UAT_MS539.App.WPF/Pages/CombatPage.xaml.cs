@@ -23,6 +23,7 @@ namespace UAT_MS539.Pages
 
         private readonly Random _random = new Random();
 
+        private Logger _logger = null;
         private AudioManager _audioManager = null;
         private LocDatabase _locDatabase = null;
         private PlayerData _playerData = null;
@@ -59,6 +60,7 @@ namespace UAT_MS539.Pages
         {
             Debug.Assert(state is ColiseumBattleState);
 
+            _logger = sharedContext.Get<Logger>();
             _audioManager = sharedContext.Get<AudioManager>();
             _locDatabase = sharedContext.Get<LocDatabase>();
             _playerData = sharedContext.Get<PlayerData>();
@@ -89,7 +91,7 @@ namespace UAT_MS539.Pages
             Cryptid playerCombatant = _combatData.Combatants.First(x => x == _playerData.ActiveCryptid);
             _currentHealth1 = _combatData.StartingHealthTotals[playerCombatant];
             _maxHealth1 = playerCombatant.MaxHealth;
-            _cryptidDisplay1.SetCryptid(playerCombatant, _locDatabase, true);
+            _cryptidDisplay1.SetCryptid(playerCombatant, _locDatabase, _logger, true);
             _cryptidHealth1.Maximum = _maxHealth1;
             _cryptidHealth1.Value = _currentHealth1;
             _cryptidDamageIndicator1.Visibility = Visibility.Hidden;
@@ -99,7 +101,7 @@ namespace UAT_MS539.Pages
             Cryptid opponentCombatant = _combatData.Combatants.Where(x => x != _playerData.ActiveCryptid).OrderBy(x => x.CurrentHealth).Reverse().First();
             _currentHealth2 = _combatData.StartingHealthTotals[opponentCombatant];
             _maxHealth2 = opponentCombatant.MaxHealth;
-            _cryptidDisplay2.SetCryptid(opponentCombatant, _locDatabase, false);
+            _cryptidDisplay2.SetCryptid(opponentCombatant, _locDatabase, _logger, false);
             _cryptidHealth2.Maximum = _maxHealth2;
             _cryptidHealth2.Value = _currentHealth2;
             _cryptidDamageIndicator2.Visibility = Visibility.Hidden;

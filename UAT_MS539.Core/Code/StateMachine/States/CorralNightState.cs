@@ -123,7 +123,8 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         private void OnEndDaySelected()
         {
-            if (_activeCryptid.HiddenStats[(int) EHiddenStat.Lifespan] - _activeCryptid.AgeInDays == 0)
+            if (_activeCryptid != null &&
+                _activeCryptid.HiddenStats[(int) EHiddenStat.Lifespan] - _activeCryptid.AgeInDays == 0)
             {
                 _sharedContext.Get<StateMachine>().ChangeState<CorralCryptidEndState>();
             }

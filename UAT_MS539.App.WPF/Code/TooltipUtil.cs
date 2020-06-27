@@ -17,6 +17,7 @@ namespace UAT_MS539.Code
             {
                 tooltipContent.Add($"{locDatabase.Localize(EHiddenStat.Morale)} +{food.MoraleBoost}");
             }
+
             if (food.BoostsByStat.Values.Any(x => x > 0))
             {
                 tooltipContent.Add(locDatabase.Localize("Tooltip/TrainingBonus"));
@@ -28,6 +29,7 @@ namespace UAT_MS539.Code
                     }
                 }
             }
+
             if (food.MultipliersByStat.Values.Any(x => Math.Abs(x - 1f) > 0.01f))
             {
                 tooltipContent.Add(locDatabase.Localize("Tooltip/TrainingMultiplier"));
@@ -39,10 +41,12 @@ namespace UAT_MS539.Code
                     }
                 }
             }
+
             if (tooltipContent.Count == 0)
             {
                 tooltipContent.Add(locDatabase.Localize("Tooltip/TrainingNoBonus"));
             }
+
             return tooltipContent;
         }
 
@@ -53,8 +57,8 @@ namespace UAT_MS539.Code
             tooltipContent.Add($"{locDatabase.Localize("Health")}: {dnaSample.Cryptid.MaxHealth}");
             tooltipContent.Add($"{locDatabase.Localize("Stamina")}: {dnaSample.Cryptid.MaxStamina}");
             tooltipContent.Add($"{locDatabase.Localize("Renown")}: {dnaSample.Cryptid.CurrentRenown}");
-            for (int i = 0; i < (int)EPrimaryStat._Count; i++)
-                tooltipContent.Add($"{locDatabase.Localize((EPrimaryStat)i)}: {dnaSample.Cryptid.PrimaryStats[i]}");
+            for (int i = 0; i < (int) EPrimaryStat._Count; i++)
+                tooltipContent.Add($"{locDatabase.Localize((EPrimaryStat) i)}: {dnaSample.Cryptid.PrimaryStats[i]}");
             return tooltipContent;
         }
 
@@ -66,39 +70,50 @@ namespace UAT_MS539.Code
             tooltipContent.Add($"{locDatabase.Localize("Stamina")}: {cryptid.MaxStamina}");
             tooltipContent.Add($"{locDatabase.Localize("Renown")}: {cryptid.CurrentRenown}");
             tooltipContent.Add($"{locDatabase.Localize("Stat/Age")}: {cryptid.AgeInDays}");
-            for (int i = 0; i < (int)EPrimaryStat._Count; i++)
-                tooltipContent.Add($"{locDatabase.Localize((EPrimaryStat)i)}: {cryptid.PrimaryStats[i]}");
+            for (int i = 0; i < (int) EPrimaryStat._Count; i++)
+                tooltipContent.Add($"{locDatabase.Localize((EPrimaryStat) i)}: {cryptid.PrimaryStats[i]}");
             return tooltipContent;
         }
 
-        public static List<string> GetTooltipContent(TrainingRegimen trainingRegimen, LocDatabase locDatabase)
+        public static List<string> GetTooltipContent(TrainingRegimen trainingRegimen, HashSet<EPrimaryStat> activeFoodModifiers, LocDatabase locDatabase)
         {
             List<string> tooltipContent = new List<string>(6);
             tooltipContent.Add($"{locDatabase.Localize("Stamina")} -{trainingRegimen.StaminaCost}");
-            for (int i = 0; i < (int)EPrimaryStat._Count; i++)
+            for (int i = 0; i < (int) EPrimaryStat._Count; i++)
             {
-                EPrimaryStat enumVal = (EPrimaryStat)i;
+                EPrimaryStat enumVal = (EPrimaryStat) i;
                 uint minGain = 0, maxGain = 0;
 
                 if (trainingRegimen.GuaranteedStatIncrease.TryGetValue(enumVal, out uint guaranteedValue))
                 {
                     minGain = maxGain = guaranteedValue;
                 }
+
                 if (trainingRegimen.RandomStatIncreases.TryGetValue(enumVal, out var randomDropCalculation))
                 {
                     minGain += randomDropCalculation.Points.Min(x => x.Value);
                     maxGain += randomDropCalculation.Points.Max(x => x.Value);
                 }
 
+                if (minGain == maxGain && minGain == 0)
+                    continue;
+
+                string tooltipEntry = $"{locDatabase.Localize(enumVal)} ";
                 if (minGain != maxGain)
                 {
-                    tooltipContent.Add($"{locDatabase.Localize(enumVal)} tp +{minGain}-{maxGain}");
+                    tooltipEntry += $"tp +{minGain}-{maxGain}";
                 }
-                else if (minGain > 0)
+                else
                 {
-                    tooltipContent.Add($"{locDatabase.Localize(enumVal)} tp +{minGain}");
+                    tooltipEntry += $"tp +{minGain}";
                 }
+                if (activeFoodModifiers?.Contains(enumVal) == true)
+                {
+                    tooltipEntry += " (Bonus)";
+                }
+                tooltipContent.Add(tooltipEntry);
             }
+
             return tooltipContent;
         }
     }

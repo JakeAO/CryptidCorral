@@ -68,26 +68,33 @@ namespace UAT_MS539.Core.Code.StateMachine.States
 
         private void OnAdoptRuneSelected(RunePattern runePattern)
         {
-            var newCryptid = CryptidUtilities.CreateCryptid(
-                runePattern.RunicHash,
-                _sharedContext.Get<SpeciesDatabase>(),
-                _sharedContext.Get<ColorDatabase>());
-
-            var playerData = _sharedContext.Get<PlayerData>();
-            playerData.ActiveCryptid = newCryptid;
-            playerData.ConsumedRunePatterns.Add(runePattern.RunicHash);
-
-            var foodDatabase = _sharedContext.Get<FoodDatabase>();
-            var random = new Random();
-            for (var i = 0; i < 7; i++)
+            Cryptid.Cryptid CreateNewCryptid(RunePattern rp, PlayerData pd, SpeciesDatabase sd, ColorDatabase cd)
             {
-                var randomFloat = (float) random.NextDouble();
-                var foodId = foodDatabase.FoodSpawnRate.Evaluate(randomFloat);
-                var foodDefinition = foodDatabase.FoodById[foodId];
-                var newFood = FoodUtilities.CreateFood(foodDefinition);
-                playerData.FoodInventory.Add(newFood);
+                var c = CryptidUtilities.CreateCryptid(rp.RunicHash, sd, cd);
+                pd.ActiveCryptid = c;
+                pd.ConsumedRunePatterns.Add(rp.RunicHash);
+                return c;
             }
 
+            void CreateIntroFood(PlayerData pd, FoodDatabase fd, int c)
+            {
+                var random = new Random();
+                for (var i = 0; i < c; i++)
+                {
+                    var foodId = fd.FoodSpawnRate.Evaluate((float) random.NextDouble());
+                    var newFood = FoodUtilities.CreateFood(fd.FoodById[foodId]);
+                    pd.FoodInventory.Add(newFood);
+                }
+            }
+
+            PlayerData playerData = _sharedContext.Get<PlayerData>();
+            SpeciesDatabase speciesDatabase = _sharedContext.Get<SpeciesDatabase>();
+            ColorDatabase colorDatabase = _sharedContext.Get<ColorDatabase>();
+            FoodDatabase foodDatabase = _sharedContext.Get<FoodDatabase>();
+
+            Cryptid.Cryptid newCryptid = CreateNewCryptid(runePattern, playerData, speciesDatabase, colorDatabase);
+            CreateIntroFood(playerData, foodDatabase, 7);
+            
             var locDatabase = _sharedContext.Get<LocDatabase>();
             var cryptidSpeciesName = locDatabase.Localize(newCryptid.Species.NameId);
 
@@ -95,11 +102,11 @@ namespace UAT_MS539.Core.Code.StateMachine.States
             {
                 new UpdatePlayerData(playerData),
                 new Dialog("Tutorial/Nursery/4", new KeyValuePair<string, string>("{cryptidSpecies}", cryptidSpeciesName)),
-                new Option("Button/GoHome", OnGoHomeselected)
+                new Option("Button/GoHome", OnGoHomeSelected)
             });
         }
 
-        private void OnGoHomeselected()
+        private void OnGoHomeSelected()
         {
             _sharedContext.Get<StateMachine>().ChangeState<CorralNightState>();
         }

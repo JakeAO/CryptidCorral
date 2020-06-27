@@ -19,6 +19,7 @@ namespace UAT_MS539.Pages
     public partial class MainPage : UserControl, IStateChangeHandler, IInteractionHandler
     {
         private Context _sharedContext = null;
+        private Logger _logger = null;
         private LocDatabase _locDatabase = null;
         private AudioManager _audioManager = null;
 
@@ -71,6 +72,7 @@ namespace UAT_MS539.Pages
             _currentState = state;
 
             _sharedContext = sharedContext;
+            _logger = sharedContext.Get<Logger>();
             _locDatabase = sharedContext.Get<LocDatabase>();
             _audioManager = sharedContext.Get<AudioManager>();
 
@@ -79,7 +81,7 @@ namespace UAT_MS539.Pages
             // Update Cryptid
             if (_showCryptidByStateType.TryGetValue(state.GetType(), out bool showCryptid) && showCryptid)
             {
-                _cryptidDisplay.SetCryptid(playerData.ActiveCryptid, _locDatabase);
+                _cryptidDisplay.SetCryptid(playerData.ActiveCryptid, _locDatabase, _logger);
             }
             else
             {
@@ -93,7 +95,14 @@ namespace UAT_MS539.Pages
                 if (!(_backgroundImage.Source is BitmapImage bitmapImage) ||
                     !string.Equals(bitmapImage.BaseUri?.OriginalString, bgImageUri.OriginalString))
                 {
-                    _backgroundImage.Source = new BitmapImage(bgImageUri);
+                    try
+                    {
+                        _backgroundImage.Source = new BitmapImage(bgImageUri);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger?.Log(Logger.LogLevel.Exception, $"{e.GetType().Name}: {e.Message} ({bgImageUri})");
+                    }
                 }
             }
 
@@ -156,7 +165,7 @@ namespace UAT_MS539.Pages
                     }
                     case UpdatePlayerData updatePlayerData:
                     {
-                        _cryptidDisplay.SetCryptid(updatePlayerData.PlayerData?.ActiveCryptid, _locDatabase);
+                        _cryptidDisplay.SetCryptid(updatePlayerData.PlayerData?.ActiveCryptid, _locDatabase, _logger);
                         UpdateHeaderBar(updatePlayerData.PlayerData);
                         break;
                     }

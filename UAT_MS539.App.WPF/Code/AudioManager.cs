@@ -16,6 +16,7 @@ namespace UAT_MS539.Code
             Defeat = 4
         }
 
+        private readonly Logger _logger = null;
         private readonly Random _random = new Random();
         private readonly Queue<MediaPlayer> _mediaPlayerPool = new Queue<MediaPlayer>(10);
         private readonly List<MediaPlayer> _activeMediaPlayers = new List<MediaPlayer>(10);
@@ -29,8 +30,9 @@ namespace UAT_MS539.Code
             set => _volume = Math.Min(Math.Max(value, 0), 1);
         }
 
-        public AudioManager(params (AudioEvent, IReadOnlyList<Uri>)[] knownAudioUris)
+        public AudioManager(Logger logger, params (AudioEvent, IReadOnlyList<Uri>)[] knownAudioUris)
         {
+            _logger = logger;
             _knownAudioUris = knownAudioUris.ToDictionary(x => x.Item1, x => x.Item2);
         }
 
@@ -63,13 +65,18 @@ namespace UAT_MS539.Code
         private void OnMediaEnded(object sender, EventArgs e)
         {
             if (sender is MediaPlayer mediaPlayer)
+            {
                 PoolMediaPlayer(mediaPlayer);
+            }
         }
 
         private void OnMediaFailed(object sender, ExceptionEventArgs e)
         {
             if (sender is MediaPlayer mediaPlayer)
+            {
+                _logger?.Log(Logger.LogLevel.Exception, $"{e.ErrorException.GetType().Name}: {e.ErrorException.Message} ({mediaPlayer.Source})");
                 PoolMediaPlayer(mediaPlayer);
+            }
         }
 
         private void PoolMediaPlayer(MediaPlayer mediaPlayer)

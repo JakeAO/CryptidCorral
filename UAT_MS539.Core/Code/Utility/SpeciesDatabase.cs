@@ -12,7 +12,7 @@ namespace UAT_MS539.Core.Code.Utility
         public readonly IReadOnlyDictionary<string, SpeciesDefinition> SpeciesById;
         public readonly IReadOnlyList<string> OrderedIds;
         public readonly DropCalculation<string> DropCalculation;
-        
+
         public SpeciesDatabase(params SpeciesDefinition[] speciesDefinitions)
         {
             var entryDict = new Dictionary<string, SpeciesDefinition>(speciesDefinitions.Length);
@@ -20,6 +20,7 @@ namespace UAT_MS539.Core.Code.Utility
 
             SpeciesById = entryDict;
             OrderedIds = SpeciesById.Keys.OrderBy(x => x).ToList();
+            DropCalculation = new DropCalculation<string>(SpeciesById.Values.Select(x => new DropCalculation<string>.Point(x.SpeciesId, x.SpawnRate)).ToArray());
         }
 
         public SpeciesDatabase(string speciesDataPath)
