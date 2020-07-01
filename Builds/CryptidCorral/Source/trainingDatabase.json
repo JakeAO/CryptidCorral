@@ -1,0 +1,875 @@
+﻿{
+  "SprintsLow": {
+    "TrainingId": "SprintsLow",
+    "NameId": "Training/Sprints",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Speed": 50
+    },
+    "RandomStatIncreases": {
+      "Speed": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SprintsMid": {
+    "TrainingId": "SprintsMid",
+    "NameId": "Training/Sprints",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Speed": 150
+    },
+    "RandomStatIncreases": {
+      "Speed": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SprintsHigh": {
+    "TrainingId": "SprintsHigh",
+    "NameId": "Training/Sprints",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Speed": 250
+    },
+    "RandomStatIncreases": {
+      "Speed": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "LiftingLow": {
+    "TrainingId": "LiftingLow",
+    "NameId": "Training/Lifting",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Strength": 50
+    },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "LiftingMid": {
+    "TrainingId": "LiftingMid",
+    "NameId": "Training/Lifting",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Strength": 150
+    },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "LiftingHigh": {
+    "TrainingId": "LiftingHigh",
+    "NameId": "Training/Lifting",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Strength": 250
+    },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SwimmingLow": {
+    "TrainingId": "SwimmingLow",
+    "NameId": "Training/Swimming",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Vitality": 50
+    },
+    "RandomStatIncreases": {
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SwimmingMid": {
+    "TrainingId": "SwimmingMid",
+    "NameId": "Training/Swimming",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Vitality": 150
+    },
+    "RandomStatIncreases": {
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SwimmingHigh": {
+    "TrainingId": "SwimmingHigh",
+    "NameId": "Training/Swimming",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Vitality": 250
+    },
+    "RandomStatIncreases": {
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "ReadingLow": {
+    "TrainingId": "ReadingLow",
+    "NameId": "Training/Reading",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Smarts": 50
+    },
+    "RandomStatIncreases": {
+      "Smarts": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "ReadingMid": {
+    "TrainingId": "ReadingMid",
+    "NameId": "Training/Reading",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Smarts": 150
+    },
+    "RandomStatIncreases": {
+      "Smarts": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "ReadingHigh": {
+    "TrainingId": "ReadingHigh",
+    "NameId": "Training/Reading",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Smarts": 250
+    },
+    "RandomStatIncreases": {
+      "Smarts": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "MagicTricksLow": {
+    "TrainingId": "MagicTricksLow",
+    "NameId": "Training/MagicTricks",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Skill": 50
+    },
+    "RandomStatIncreases": {
+      "Skill": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "MagicTricksMid": {
+    "TrainingId": "MagicTricksMid",
+    "NameId": "Training/MagicTricks",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Skill": 150
+    },
+    "RandomStatIncreases": {
+      "Skill": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "MagicTricksHigh": {
+    "TrainingId": "MagicTricksHigh",
+    "NameId": "Training/MagicTricks",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Skill": 250
+    },
+    "RandomStatIncreases": {
+      "Skill": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "CleaningLow": {
+    "TrainingId": "CleaningLow",
+    "NameId": "Training/Cleaning",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": {
+      "Luck": 50
+    },
+    "RandomStatIncreases": {
+      "Luck": {
+        "Points": [
+          {
+            "Value": 10,
+            "Weight": 1
+          },
+          {
+            "Value": 20,
+            "Weight": 2
+          },
+          {
+            "Value": 30,
+            "Weight": 3
+          },
+          {
+            "Value": 40,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "CleaningMid": {
+    "TrainingId": "CleaningMid",
+    "NameId": "Training/Cleaning",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": {
+      "Luck": 150
+    },
+    "RandomStatIncreases": {
+      "Luck": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 25,
+            "Weight": 2
+          },
+          {
+            "Value": 50,
+            "Weight": 3
+          },
+          {
+            "Value": 75,
+            "Weight": 2
+          },
+          {
+            "Value": 100,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "CleaningHigh": {
+    "TrainingId": "CleaningHigh",
+    "NameId": "Training/Cleaning",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": {
+      "Luck": 250
+    },
+    "RandomStatIncreases": {
+      "Luck": {
+        "Points": [
+          {
+            "Value": 0,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SparringLow": {
+    "TrainingId": "SparringLow",
+    "NameId": "Training/Sparring",
+    "StaminaCost": 1,
+    "SpawnRate": 10,
+    "GuaranteedStatIncrease": { },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 25,
+            "Weight": 1
+          },
+          {
+            "Value": 50,
+            "Weight": 2
+          },
+          {
+            "Value": 75,
+            "Weight": 3
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 125,
+            "Weight": 1
+          }
+        ]
+      },
+      "Speed": {
+        "Points": [
+          {
+            "Value": 25,
+            "Weight": 1
+          },
+          {
+            "Value": 50,
+            "Weight": 2
+          },
+          {
+            "Value": 75,
+            "Weight": 3
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 125,
+            "Weight": 1
+          }
+        ]
+      },
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 25,
+            "Weight": 1
+          },
+          {
+            "Value": 50,
+            "Weight": 2
+          },
+          {
+            "Value": 75,
+            "Weight": 3
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 125,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SparringMid": {
+    "TrainingId": "SparringMid",
+    "NameId": "Training/Sparring",
+    "StaminaCost": 2,
+    "SpawnRate": 5,
+    "GuaranteedStatIncrease": { },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 50,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 250,
+            "Weight": 1
+          }
+        ]
+      },
+      "Speed": {
+        "Points": [
+          {
+            "Value": 50,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 250,
+            "Weight": 1
+          }
+        ]
+      },
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 50,
+            "Weight": 1
+          },
+          {
+            "Value": 100,
+            "Weight": 2
+          },
+          {
+            "Value": 150,
+            "Weight": 3
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 250,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  },
+  "SparringHigh": {
+    "TrainingId": "SparringHigh",
+    "NameId": "Training/Sparring",
+    "StaminaCost": 3,
+    "SpawnRate": 1,
+    "GuaranteedStatIncrease": { },
+    "RandomStatIncreases": {
+      "Strength": {
+        "Points": [
+          {
+            "Value": 100,
+            "Weight": 1
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 3
+          },
+          {
+            "Value": 400,
+            "Weight": 2
+          },
+          {
+            "Value": 500,
+            "Weight": 1
+          }
+        ]
+      },
+      "Speed": {
+        "Points": [
+          {
+            "Value": 100,
+            "Weight": 1
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 3
+          },
+          {
+            "Value": 400,
+            "Weight": 2
+          },
+          {
+            "Value": 500,
+            "Weight": 1
+          }
+        ]
+      },
+      "Vitality": {
+        "Points": [
+          {
+            "Value": 100,
+            "Weight": 1
+          },
+          {
+            "Value": 200,
+            "Weight": 2
+          },
+          {
+            "Value": 300,
+            "Weight": 3
+          },
+          {
+            "Value": 400,
+            "Weight": 2
+          },
+          {
+            "Value": 500,
+            "Weight": 1
+          }
+        ]
+      }
+    }
+  }
+}

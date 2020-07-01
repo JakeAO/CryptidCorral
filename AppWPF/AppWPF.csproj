@@ -1,0 +1,679 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Audio\Click.wav" />
+      <None Remove="Assets\Audio\Crit1.wav" />
+      <None Remove="Assets\Audio\Crit2.wav" />
+      <None Remove="Assets\Audio\Crit3.wav" />
+      <None Remove="Assets\Audio\Defeat.wav" />
+      <None Remove="Assets\Audio\Hit1.wav" />
+      <None Remove="Assets\Audio\Hit2.wav" />
+      <None Remove="Assets\Audio\Hit3.wav" />
+      <None Remove="Assets\Audio\Hit4.wav" />
+      <None Remove="Assets\Audio\Hit5.wav" />
+      <None Remove="Assets\Audio\Miss1.wav" />
+      <None Remove="Assets\Audio\Miss2.wav" />
+      <None Remove="Assets\Backgrounds\bg_colosseum.jpg" />
+      <None Remove="Assets\Backgrounds\bg_corral.jpg" />
+      <None Remove="Assets\Backgrounds\bg_town.jpg" />
+      <None Remove="Assets\Cryptids\cryptid_00.png" />
+      <None Remove="Assets\Cryptids\cryptid_01.png" />
+      <None Remove="Assets\Cryptids\cryptid_02.png" />
+      <None Remove="Assets\Cryptids\cryptid_03.png" />
+      <None Remove="Assets\Cryptids\cryptid_04.png" />
+      <None Remove="Assets\Cryptids\cryptid_05.png" />
+      <None Remove="Assets\Cryptids\cryptid_06.png" />
+      <None Remove="Assets\Cryptids\cryptid_07.png" />
+      <None Remove="Assets\Cryptids\cryptid_08.png" />
+      <None Remove="Assets\Cryptids\cryptid_09.png" />
+      <None Remove="Assets\Cryptids\cryptid_10.png" />
+      <None Remove="Assets\Cryptids\cryptid_11.png" />
+      <None Remove="Assets\Cryptids\cryptid_12.png" />
+      <None Remove="Assets\Cryptids\cryptid_13.png" />
+      <None Remove="Assets\Cryptids\cryptid_14.png" />
+      <None Remove="Assets\Cryptids\cryptid_15.png" />
+      <None Remove="Assets\Cryptids\cryptid_16.png" />
+      <None Remove="Assets\Cryptids\cryptid_17.png" />
+      <None Remove="Assets\Cryptids\cryptid_18.png" />
+      <None Remove="Assets\Cryptids\cryptid_19.png" />
+      <None Remove="Assets\Cryptids\cryptid_20.png" />
+      <None Remove="Assets\Cryptids\cryptid_21.png" />
+      <None Remove="Assets\Cryptids\cryptid_22.png" />
+      <None Remove="Assets\Cryptids\cryptid_23.png" />
+      <None Remove="Assets\Cryptids\cryptid_24.png" />
+      <None Remove="Assets\Cryptids\cryptid_25.png" />
+      <None Remove="Assets\Cryptids\cryptid_26.png" />
+      <None Remove="Assets\Cryptids\cryptid_27.png" />
+      <None Remove="Assets\Cryptids\cryptid_28.png" />
+      <None Remove="Assets\Cryptids\cryptid_29.png" />
+      <None Remove="Assets\Cryptids\cryptid_30.png" />
+      <None Remove="Assets\Cryptids\cryptid_31.png" />
+      <None Remove="Assets\Cryptids\cryptid_32.png" />
+      <None Remove="Assets\Cryptids\cryptid_33.png" />
+      <None Remove="Assets\Cryptids\cryptid_34.png" />
+      <None Remove="Assets\Cryptids\cryptid_35.png" />
+      <None Remove="Assets\Cryptids\cryptid_36.png" />
+      <None Remove="Assets\Cryptids\cryptid_37.png" />
+      <None Remove="Assets\Cryptids\cryptid_38.png" />
+      <None Remove="Assets\Cryptids\cryptid_39.png" />
+      <None Remove="Assets\Cryptids\cryptid_40.png" />
+      <None Remove="Assets\Cryptids\cryptid_41.png" />
+      <None Remove="Assets\Cryptids\cryptid_42.png" />
+      <None Remove="Assets\Cryptids\cryptid_43.png" />
+      <None Remove="Assets\Cryptids\cryptid_44.png" />
+      <None Remove="Assets\Cryptids\cryptid_45.png" />
+      <None Remove="Assets\Cryptids\cryptid_46.png" />
+      <None Remove="Assets\Cryptids\cryptid_47.png" />
+      <None Remove="Assets\Cryptids\cryptid_48.png" />
+      <None Remove="Assets\Cryptids\cryptid_49.png" />
+      <None Remove="Assets\Cryptids\cryptid_50.png" />
+      <None Remove="Assets\Cryptids\cryptid_51.png" />
+      <None Remove="Assets\Cryptids\cryptid_52.png" />
+      <None Remove="Assets\Cryptids\cryptid_53.png" />
+      <None Remove="Assets\Cryptids\cryptid_54.png" />
+      <None Remove="Assets\Cryptids\cryptid_55.png" />
+      <None Remove="Assets\Cryptids\cryptid_56.png" />
+      <None Remove="Assets\Cryptids\cryptid_57.png" />
+      <None Remove="Assets\Cryptids\cryptid_58.png" />
+      <None Remove="Assets\Cryptids\cryptid_59.png" />
+      <None Remove="Assets\Cryptids\cryptid_60.png" />
+      <None Remove="Assets\Cryptids\cryptid_61.png" />
+      <None Remove="Assets\Cryptids\cryptid_62.png" />
+      <None Remove="Assets\Cryptids\cryptid_63.png" />
+      <None Remove="Assets\Cryptids\cryptid_64.png" />
+      <None Remove="Assets\Cryptids\cryptid_65.png" />
+      <None Remove="Assets\Cryptids\cryptid_66.png" />
+      <None Remove="Assets\Cryptids\cryptid_67.png" />
+      <None Remove="Assets\Cryptids\cryptid_68.png" />
+      <None Remove="Assets\Cryptids\cryptid_69.png" />
+      <None Remove="Assets\Cryptids\cryptid_70.png" />
+      <None Remove="Assets\Cryptids\cryptid_71.png" />
+      <None Remove="Assets\Cryptids\cryptid_72.png" />
+      <None Remove="Assets\Cryptids\cryptid_73.png" />
+      <None Remove="Assets\Cryptids\cryptid_74.png" />
+      <None Remove="Assets\Cryptids\cryptid_75.png" />
+      <None Remove="Assets\Cryptids\cryptid_76.png" />
+      <None Remove="Assets\Cryptids\cryptid_77.png" />
+      <None Remove="Assets\Cryptids\cryptid_78.png" />
+      <None Remove="Assets\Cryptids\cryptid_79.png" />
+      <None Remove="Assets\Cryptids\cryptid_80.png" />
+      <None Remove="Assets\Cryptids\cryptid_81.png" />
+      <None Remove="Assets\Cryptids\cryptid_82.png" />
+      <None Remove="Assets\Cryptids\cryptid_83.png" />
+      <None Remove="Assets\Cryptids\cryptid_84.png" />
+      <None Remove="Assets\Cryptids\cryptid_85.png" />
+      <None Remove="Assets\Cryptids\cryptid_86.png" />
+      <None Remove="Assets\Cryptids\cryptid_87.png" />
+      <None Remove="Assets\Cryptids\cryptid_88.png" />
+      <None Remove="Assets\Cryptids\cryptid_89.png" />
+      <None Remove="Assets\Cryptids\cryptid_90.png" />
+      <None Remove="Assets\Cryptids\cryptid_91.png" />
+      <None Remove="Assets\Cryptids\cryptid_92.png" />
+      <None Remove="Assets\Cryptids\cryptid_93.png" />
+      <None Remove="Assets\Cryptids\cryptid_94.png" />
+      <None Remove="Assets\Cryptids\cryptid_95.png" />
+      <None Remove="Assets\Cryptids\cryptid_96.png" />
+      <None Remove="Assets\Cryptids\cryptid_97.png" />
+      <None Remove="Assets\Cryptids\cryptid_98.png" />
+      <None Remove="Assets\Cryptids\cryptid_99.png" />
+      <None Remove="Assets\Food\food_basic.png" />
+      <None Remove="Assets\Food\food_dairy.png" />
+      <None Remove="Assets\Food\food_fish.png" />
+      <None Remove="Assets\Food\food_fruit.png" />
+      <None Remove="Assets\Food\food_grain.png" />
+      <None Remove="Assets\Food\food_meat.png" />
+      <None Remove="Assets\Food\food_treat.png" />
+      <None Remove="Assets\Food\food_vegetable.png" />
+      <None Remove="Assets\UI\Fonts\font_quicksand.otf" />
+      <None Remove="Assets\UI\Fonts\font_sketch3d.otf" />
+      <None Remove="Assets\UI\icon_coin.png" />
+      <None Remove="Assets\UI\Runes\icon_bg_rune.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_0.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_1.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_2.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_3.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_4.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_5.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_6.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_7.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_8.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_9.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_A.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_B.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_C.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_D.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_E.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_F.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_G.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_H.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_I.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_J.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_K.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_L.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_M.png" />
+      <None Remove="Assets\UI\Runes\icon_rune_N.png" />
+      <None Remove="Assets\UI\SadPumpkinLogo.png" />
+      <None Remove="Assets\UI\UI_Bar.png" />
+      <None Remove="Assets\UI\UI_Bar_Fill_Green.png" />
+      <None Remove="Assets\UI\UI_Bar_Fill_Orange.png" />
+      <None Remove="Assets\UI\UI_Button_Green.png" />
+      <None Remove="Assets\UI\UI_Button_Grey.png" />
+      <None Remove="Assets\UI\UI_Button_Red.png" />
+      <None Remove="Assets\UI\UI_Misc_Button_Close.png" />
+      <None Remove="Assets\UI\UI_Panel_Window.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Assets\Backgrounds\bg_colosseum.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Backgrounds\bg_corral.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Backgrounds\bg_town.jpg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_00.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_01.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_02.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_03.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_04.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_05.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_06.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_07.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_08.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_09.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_10.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_11.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_12.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_13.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_14.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_15.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_16.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_17.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_18.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_19.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_20.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_21.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_22.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_23.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_24.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_25.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_26.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_27.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_28.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_29.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_30.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_31.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_32.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_33.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_34.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_35.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_36.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_37.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_38.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_39.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_40.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_41.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_42.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_43.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_44.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_45.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_46.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_47.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_48.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_49.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_50.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_51.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_52.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_53.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_54.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_55.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_56.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_57.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_58.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_59.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_60.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_61.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_62.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_63.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_64.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_65.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_66.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_67.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_68.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_69.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_70.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_71.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_72.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_73.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_74.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_75.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_76.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_77.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_78.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_79.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_80.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_81.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_82.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_83.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_84.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_85.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_86.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_87.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_88.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_89.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_90.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_91.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_92.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_93.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_94.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_95.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_96.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_97.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_98.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Cryptids\cryptid_99.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_basic.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_dairy.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_fish.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_fruit.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_grain.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_meat.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_treat.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Food\food_vegetable.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\SadPumpkinLogo.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Bar.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Bar_Fill_Green.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Bar_Fill_Orange.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Button_Green.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Button_Grey.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Button_Red.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Misc_Button_Close.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\UI_Panel_Window.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Resource Include="Assets\UI\Fonts\font_quicksand.otf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Resource Include="Assets\UI\Fonts\font_sketch3d.otf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <Content Include="Assets\UI\icon_coin.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_bg_rune.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_0.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_1.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_2.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_3.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_4.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_5.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_6.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_7.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_8.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_9.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_A.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_B.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_C.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_D.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_E.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_F.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_G.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_H.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_I.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_J.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_K.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_L.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_M.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\UI\Runes\icon_rune_N.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Assets\Audio\Click.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit2.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Crit3.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Defeat.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit2.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit3.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit4.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Hit5.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Miss1.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Assets\Audio\Miss2.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Components\HealthProgressBar.cs">
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Components\HealthProgressBar.xaml">
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+</Project>

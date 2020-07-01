@@ -1,0 +1,20 @@
+﻿<MenuItem x:Class="AppWPF.Components.FoodInventoryMenuItem"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          mc:Ignorable="d" 
+          d:DesignHeight="20" d:DesignWidth="200"
+          FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Foreground="Black" 
+          VerticalContentAlignment="Center" 
+          Height="20" Margin="0">
+    <MenuItem.Header>
+        [FoodName]
+    </MenuItem.Header>
+    <MenuItem.Icon>
+        <Image Name="_icon" Source="/Assets/Food/food_dairy.png" Margin="-10" />
+    </MenuItem.Icon>
+    <MenuItem.ToolTip>
+        <Label x:Name="_tooltip" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" />
+    </MenuItem.ToolTip>
+</MenuItem>

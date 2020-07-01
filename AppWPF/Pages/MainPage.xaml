@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="AppWPF.Pages.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:AppWPF.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Canvas x:Name="canvas" Height="600" Width="800">
+        <Menu x:Name="_headerMenu" Width="{Binding ActualWidth, ElementName=canvas, Mode=OneWay}" Height="30" Background="#7F323232" Visibility="Hidden">
+            <MenuItem x:Name="_locationMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="[Location]" Foreground="White" VerticalContentAlignment="Center" Height="{Binding ActualHeight, ElementName=_headerMenu, Mode=OneWay}" />
+            <Separator Width="10" />
+            <MenuItem x:Name="_dayMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="[Day]" Foreground="White" VerticalContentAlignment="Center" Height="{Binding ActualHeight, ElementName=_headerMenu, Mode=OneWay}" />
+            <Separator Width="10" />
+            <MenuItem x:Name="_coinsMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="[999]" Foreground="White" VerticalContentAlignment="Center" Height="{Binding ActualHeight, ElementName=_headerMenu, Mode=OneWay}">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/UI/icon_coin.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Width="10"/>
+            <MenuItem x:Name="_inventoryMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="Inventory" Foreground="White" VerticalContentAlignment="Center" Height="{Binding ActualHeight, ElementName=_headerMenu, Mode=OneWay}">
+                <MenuItem x:Name="_foodInventoryMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="Food" Foreground="Black" VerticalContentAlignment="Center" Height="20" />
+                <MenuItem x:Name="_cryptidInventoryMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="Frozen" Foreground="Black" VerticalContentAlignment="Center" Height="20" />
+                <MenuItem x:Name="_dnaInventoryMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="DNA" Foreground="Black" VerticalContentAlignment="Center" Height="20" />
+            </MenuItem>
+            <Separator Width="10"/>
+            <MenuItem x:Name="_trainingDataMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="Training" Foreground="White" VerticalContentAlignment="Center" Height="{Binding ActualHeight, ElementName=_headerMenu, Mode=OneWay}" Visibility="Hidden">
+                <MenuItem x:Name="_trainingDataFoodMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="[Food]" Foreground="Black" VerticalContentAlignment="Center" Height="20" />
+                <MenuItem x:Name="_trainingDataPointsMenuItem" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" FontSize="16" Header="Points" Foreground="Black" VerticalContentAlignment="Center" Height="20" />
+            </MenuItem>
+        </Menu>
+        <Image x:Name="_backgroundImage" 
+               HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Source="/Assets/Backgrounds/bg_corral.jpg" 
+               Stretch="Uniform" 
+               DockPanel.Dock="Left" 
+               Width="800" Height="600" 
+               Panel.ZIndex="-5" />
+        <components:CryptidDisplay x:Name="_cryptidDisplay" 
+                                   Width="250" Height="250" 
+                                   Panel.ZIndex="0" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   Canvas.Left="350" Canvas.Top="250" 
+                                   RenderTransformOrigin="0.5,0.5" 
+                                   Visibility="Visible" />
+        <DockPanel Width="800" Height="570" Panel.ZIndex="5" Canvas.Top="30">
+            <DockPanel Width="590" Height="150" VerticalAlignment="Bottom" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <components:DialogBox x:Name="_dialogBox" Margin="10,0,0,0" Height="120" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" Padding="0" Width="590" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="Hidden" />
+            </DockPanel>
+            <DockPanel Width="200" Height="570" VerticalAlignment="Bottom" ScrollViewer.VerticalScrollBarVisibility="Disabled" DockPanel.Dock="Right">
+                <components:OptionsList x:Name="_optionsList" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10" Width="180" Height="560" DockPanel.Dock="Right" FontFamily="/UAT_MS539.App.WPF;component/Assets/UI/Fonts/#Quicksand Book" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </DockPanel>
+        </DockPanel>
+    </Canvas>
+</UserControl>

@@ -1,0 +1,17 @@
+﻿<MenuItem x:Class="AppWPF.Components.CryptidInventoryMenuItem"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          mc:Ignorable="d" 
+          d:DesignHeight="20" d:DesignWidth="200"
+          FontFamily="../Assets/UI/Fonts/#Quicksand Book" FontSize="16" Foreground="Black" 
+          VerticalContentAlignment="Center" 
+          Height="20" Margin="0">
+    <MenuItem.Header>
+        [CryptidName]
+    </MenuItem.Header>
+    <MenuItem.Icon>
+        <Image Name="_icon" Source="../Assets/Cryptids/cryptid_00.png" Margin="-10" />
+    </MenuItem.Icon>
+</MenuItem>

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Source\locDatabase.json" />
+      <EmbeddedResource Include="Source\locDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Source\speciesDatabase.json" />
+      <EmbeddedResource Include="Source\runeDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Source\speciesDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Source\patternDatabase.json" />
+      <None Remove="Source\foodDatabase.json" />
+      <EmbeddedResource Include="Source\foodDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Source\colorDatabase.json" />
+      <EmbeddedResource Include="Source\colorDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Source\speciesDropTable.json" />
+      <None Remove="Source\startingPlayerData.json" />
+      <None Remove="Source\trainingDatabase.json" />
+      <EmbeddedResource Include="Source\trainingDatabase.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>
